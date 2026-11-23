@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Plantilla de diseño del portal EstudiantesNET. Programa de referidos de estudiantes nuevos.">
+  <title>Referidos · EstudiantesNET</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body data-page="referidos">
+  <div id="proto-bar"></div>
+
+  <div class="app-layout">
+    <aside id="sidebar"></aside>
+
+    <div class="app-main">
+      <header id="topbar"></header>
+
+      <main class="page-main">
+        <div class="page-surface">
+          <div id="state-host" hidden></div>
+
+          <div id="page-content">
+            <section class="hero">
+              <div class="hero-row">
+                <div>
+                  <span class="eyebrow">Comunidad educativa · Plan referidos</span>
+                  <h2 class="page-heading">Programa de referidos</h2>
+                  <p class="page-subheading">Registra a un estudiante aspirante, descarga su volante y haz seguimiento al estado de su proceso de matrícula.</p>
+                </div>
+                <div class="hero-actions">
+                  <a class="btn btn-secondary" href="matricula.html">
+                    <i class="ph ph-graduation-cap" aria-hidden="true"></i>
+                    Proceso de matrícula
+                  </a>
+                </div>
+              </div>
+            </section>
+
+            <section class="section section-tight">
+              <div class="alert alert-info" role="status">
+                <i class="ph ph-gift" aria-hidden="true"></i>
+                <div>
+                  <p class="alert-title">Refiere y recibe descuentos</p>
+                  <p class="alert-text">Por cada referido que se matricule en los colegios Minuto de Dios, sumarás descuentos al valor de la pensión. Para más información, comunícate con el agente de admisión de tu colegio.</p>
+                </div>
+              </div>
+            </section>
+
+            <section class="section" id="formulario">
+              <div class="section-head">
+                <div>
+                  <h2 class="section-title">Agregar un referido</h2>
+                  <p class="section-sub">Ingresa los datos del estudiante aspirante. Los campos con <span class="text-red-600">*</span> son obligatorios.</p>
+                </div>
+                <span class="chip chip-accent">Plan referidos estudiantes nuevos</span>
+              </div>
+
+              <form id="referidoForm" class="stack" novalidate>
+                <div class="form-grid form-grid-3">
+                  <div class="field">
+                    <label class="label" for="nombreReferido">Nombre <span class="req" aria-hidden="true">*</span></label>
+                    <input class="input" id="nombreReferido" name="Nombre" type="text" maxlength="60" required placeholder="Nombre del estudiante aspirante">
+                  </div>
+                  <div class="field">
+                    <label class="label" for="gradoReferido">Grado <span class="req" aria-hidden="true">*</span></label>
+                    <input class="input" id="gradoReferido" name="Grado" type="text" maxlength="10" required placeholder="Ej. 6.º" autocomplete="off">
+                  </div>
+                  <div class="field">
+                    <label class="label" for="procedeReferido">Colegio/Jardín de procedencia</label>
+                    <input class="input" id="procedeReferido" name="Procede" type="text" maxlength="60" placeholder="Colegio o jardín de procedencia" autocomplete="off">
+                  </div>
+                  <div class="field">
+                    <label class="label" for="colegioInteres">Colegio de interés <span class="req" aria-hidden="true">*</span></label>
+                    <select class="select" id="colegioInteres" name="ColegioInteres" required>
+                      <option value="">Selecciona un colegio</option>
+                      <option value="01">01 · Colegio Minuto de Dios · Sede Norte</option>
+                      <option value="02">02 · Colegio Minuto de Dios · Sede Centro</option>
+                      <option value="03">03 · Colegio Minuto de Dios · Sede Occidente</option>
+                    </select>
+                  </div>
+                  <div class="field">
+                    <label class="label" for="papasReferido">Nombre de los papás</label>
+                    <input class="input" id="papasReferido" name="Papas" type="text" maxlength="100" placeholder="Nombres de los padres o acudientes" autocomplete="off">
+                  </div>
+                  <div class="field">
+                    <label class="label" for="telefonoReferido">Teléfono <span class="req" aria-hidden="true">*</span></label>
+                    <input class="input" id="telefonoReferido" name="Telefono" type="tel" maxlength="30" required placeholder="+57 300 000 0000" autocomplete="off">
+                  </div>
+                </div>
+
+                <label class="check-row">
+                  <input type="checkbox" id="referidoAutoriza" name="referidoAutoriza" required>
+                  <span>Confirmo que la familia autorizó el registro de sus datos para ser contactada por la institución. <span class="req" aria-hidden="true">*</span></span>
+                </label>
+
+                <div class="form-actions">
+                  <span class="text-[11px] text-slate-500">Al enviar, podrás imprimir el volante para que el referido lo presente al inscribirse.</span>
+                  <div class="form-actions-right">
+                    <button class="btn btn-secondary" type="reset">Limpiar</button>
+                    <button class="btn btn-primary" type="submit">
+                      <i class="ph ph-user-plus" aria-hidden="true"></i>
+                      Enviar referido
+                    </button>
+                  </div>
+                </div>
+              </form>
+
+              <div id="referidoExitoso" class="empty-state" hidden style="border-top:1px solid var(--line);margin-top:20px">
+                <span class="status status-success">Referido registrado</span>
+                <h3>Datos grabados satisfactoriamente</h3>
+                <p>Puedes imprimir el volante para que el referido lo presente al momento de inscribirse.</p>
+                <button class="btn btn-secondary btn-sm" type="button" data-demo="Volante descargado en PDF (demostración)">
+                  <i class="ph ph-file-pdf" aria-hidden="true"></i>
+                  Descargar volante
+                </button>
+              </div>
+            </section>
+
+            <section class="section">
+              <div class="section-head">
+                <div>
+                  <h2 class="section-title">Mis referidos</h2>
+                  <p class="section-sub">Estado de cada referido en el proceso de matrícula.</p>
+                </div>
+                <span class="chip">4 registros</span>
+              </div>
+
+              <div class="table-wrap">
+                <table class="data-table referidos-table">
+                  <caption class="sr-only">Referidos registrados</caption>
+                  <thead>
+                    <tr>
+                      <th scope="col">Fecha Inscripción</th>
+                      <th scope="col">Nombre</th>
+                      <th scope="col">Grado</th>
+                      <th scope="col">Estado en el proceso de matrícula</th>
+                      <th scope="col">Formato</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td class="nowrap muted">10 nov 2026 · 9:24 a. m.</td>
+                      <td class="cell-title">Samuel Torres</td>
+                      <td>4.º</td>
+                      <td><span class="status status-success">PRE-MATRICULADO</span></td>
+                      <td><button class="btn-link" type="button" data-demo="Volante descargado en PDF (demostración)"><i class="ph ph-file-pdf" aria-hidden="true"></i> Volante</button></td>
+                    </tr>
+                    <tr>
+                      <td class="nowrap muted">28 oct 2026 · 3:10 p. m.</td>
+                      <td class="cell-title">Isabela Cárdenas</td>
+                      <td>9.º</td>
+                      <td><span class="status status-warning">EN PROCESO PRE-MATRICULA</span></td>
+                      <td><button class="btn-link" type="button" data-demo="Volante descargado en PDF (demostración)"><i class="ph ph-file-pdf" aria-hidden="true"></i> Volante</button></td>
+                    </tr>
+                    <tr>
+                      <td class="nowrap muted">12 oct 2026 · 11:02 a. m.</td>
+                      <td class="cell-title">Tomás Rojas</td>
+                      <td>6.º</td>
+                      <td><span class="status status-info">ACEPTADO NO HA RECOGIDO PAPELES PARA MATRICULA</span></td>
+                      <td><button class="btn-link" type="button" data-demo="Volante descargado en PDF (demostración)"><i class="ph ph-file-pdf" aria-hidden="true"></i> Volante</button></td>
+                    </tr>
+                    <tr>
+                      <td class="nowrap muted">02 sep 2026 · 8:45 a. m.</td>
+                      <td class="cell-title">Valentina Ruiz</td>
+                      <td>7.º</td>
+                      <td><span class="status status-danger">PROCESO ANULADO</span></td>
+                      <td><button class="btn-link" type="button" data-demo="Volante descargado en PDF (demostración)"><i class="ph ph-file-pdf" aria-hidden="true"></i> Volante</button></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <div class="note mt-5">
+                <strong>Formato:</strong> el volante es válido únicamente en original y solo para referenciados por familias de la institución.
+              </div>
+            </section>
+
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <div id="mobile-overlay" class="overlay"></div>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <script src="assets/js/app.js"></script>
+  <script>
+    (function () {
+      "use strict";
+      var form = document.getElementById("referidoForm");
+      var success = document.getElementById("referidoExitoso");
+
+      if (form && success) {
+        form.addEventListener("submit", function (event) {
+          event.preventDefault();
+          if (!form.checkValidity()) {
+            form.reportValidity();
+            return;
+          }
+          form.hidden = true;
+          success.hidden = false;
+          window.scrollTo({ top: 0, behavior: "smooth" });
+          if (window.EstuNET) window.EstuNET.showToast("Referido registrado (demostración)");
+        });
+      }
+    })();
+  </script>
+</body>
+</html>

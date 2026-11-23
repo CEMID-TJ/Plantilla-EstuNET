@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Plantilla de diseño del portal EstudiantesNET. Proceso de pre-matrícula del año siguiente.">
+  <title>Proceso de matrícula · EstudiantesNET</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body data-page="matricula">
+  <div id="proto-bar"></div>
+
+  <div class="app-layout">
+    <aside id="sidebar"></aside>
+
+    <div class="app-main">
+      <header id="topbar"></header>
+
+      <main class="page-main">
+        <div class="page-surface">
+          <div id="state-host" hidden></div>
+
+          <div id="page-content">
+            <section class="hero">
+              <div class="hero-row">
+                <div>
+                  <span class="eyebrow">Admisiones · Pre-matrícula 2027</span>
+                  <h2 class="page-heading">Proceso de matrícula</h2>
+                  <p class="page-subheading">Completa la actualización de datos, adjunta la documentación y firma digitalmente para oficializar la pre-matrícula del estudiante.</p>
+                </div>
+                <div class="hero-actions">
+                  <button class="btn btn-secondary" type="button" data-demo="Instructivo descargado (demostración)">
+                    <i class="ph ph-download-simple" aria-hidden="true"></i>
+                    Ver instructivo
+                  </button>
+                  <button class="btn btn-primary" type="button" data-modal-open="generarModal">
+                    <i class="ph ph-file-signature" aria-hidden="true"></i>
+                    Generar documentos
+                  </button>
+                </div>
+              </div>
+            </section>
+
+            <section class="section section-tight">
+              <div class="alert alert-warning" role="status">
+                <i class="ph ph-warning" aria-hidden="true"></i>
+                <div>
+                  <p class="alert-title">Faltan firmas para oficializar la pre-matrícula</p>
+                  <p class="alert-text">La firma de la responsable económica y del estudiante está pendiente. La fecha máxima de matrícula es el <strong>15 de diciembre de 2026</strong>.</p>
+                  <div class="alert-actions">
+                    <button class="btn-link" type="button" data-tab-go="firmas">Ver firmas</button>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <section class="section">
+              <div class="section-head">
+                <div>
+                  <h2 class="section-title">Avance de la pre-matrícula</h2>
+                  <p class="section-sub">Grado 11.º · Colegio Minuto de Dios · Año escolar 2027.</p>
+                </div>
+                <span class="chip chip-warning">Acción requerida</span>
+              </div>
+
+              <ol class="stepper" aria-label="Etapas de la pre-matrícula">
+                <li class="step is-done" data-step="1">
+                  <span class="step-title">Actualización de datos</span>
+                  <span class="step-meta">Completado · 10 nov</span>
+                </li>
+                <li class="step is-done" data-step="2">
+                  <span class="step-title">Documentación</span>
+                  <span class="step-meta">Adjuntada · 12 nov</span>
+                </li>
+                <li class="step is-current" data-step="3">
+                  <span class="step-title">Generación de documentos</span>
+                  <span class="step-meta">En curso</span>
+                </li>
+                <li class="step" data-step="4">
+                  <span class="step-title">Firmas</span>
+                  <span class="step-meta">2 de 4 registradas</span>
+                </li>
+              </ol>
+
+              <div class="split mt-6">
+                <div>
+                  <h3 class="section-title" style="font-size:16px">Datos del estudiante</h3>
+                  <dl class="detail-list mt-2">
+                    <div><dt>Estudiante</dt><dd class="strong">Laura Sofía Martínez Gómez</dd></div>
+                    <div><dt>Código</dt><dd class="mono">2026-0042</dd></div>
+                    <div><dt>Grado actual</dt><dd>10.º · Aula 2</dd></div>
+                    <div><dt>Grado a matricular</dt><dd>11.º</dd></div>
+                    <div><dt>FMatri</dt><dd>10 nov 2026</dd></div>
+                    <div><dt>FMaxMatri</dt><dd>15 dic 2026</dd></div>
+                    <div><dt>Correo Estudiante</dt><dd>laura.martinez@correo.com</dd></div>
+                    <div><dt>Celular Estudiante</dt><dd class="mono">300 123 4567</dd></div>
+                  </dl>
+
+                  <div class="section-head mt-6">
+                    <div>
+                      <h3 class="section-title" style="font-size:16px">Documentación adjunta</h3>
+                      <p class="section-sub">Archivos asociados a la base del estudiante.</p>
+                    </div>
+                  </div>
+
+                  <div class="table-wrap" style="border-top:0">
+                    <table class="data-table compact">
+                      <caption class="sr-only">Documentos de la pre-matrícula</caption>
+                      <thead>
+                        <tr>
+                          <th scope="col">Documento</th>
+                          <th scope="col">Campo</th>
+                          <th scope="col">Estado</th>
+                          <th scope="col" class="cell-actions">Acción</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td class="cell-title">Documentación para formalización de la pre-matrícula</td>
+                          <td class="mono">PDFDocBaseE</td>
+                          <td><span class="status status-success">Adjuntado</span><span class="cell-sub">PDF · 4,2 MB · 12 nov 2026</span></td>
+                          <td class="cell-actions"><button class="btn-link" type="button" data-demo="Reemplazar documento (demostración)">Reemplazar</button></td>
+                        </tr>
+                        <tr>
+                          <td class="cell-title">Imagen del estudiante</td>
+                          <td class="mono">imagen</td>
+                          <td><span class="status status-success">Adjuntada</span><span class="cell-sub">JPG · 320 KB · 12 nov 2026</span></td>
+                          <td class="cell-actions"><button class="btn-link" type="button" data-demo="Reemplazar imagen (demostración)">Reemplazar</button></td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+
+                  <div class="note mt-5">
+                    <strong>Contenido del PDF:</strong> fotocopia del documento de identidad del estudiante, certificado de afiliación a la EPS y SIMPADE diligenciado. Un solo PDF no mayor a 10 MB.
+                  </div>
+                </div>
+
+                <aside class="split-aside">
+                  <span class="eyebrow">Generación de documentos</span>
+                  <dl class="detail-list mt-3" style="grid-template-columns:1fr">
+                    <div><dt>FirmaDocumentos</dt><dd>Papá y mamá</dd></div>
+                    <div><dt>AutorizaUsoImagen</dt><dd>Sí · autoriza el uso de imagen sobre fotografías y videos</dd></div>
+                    <div><dt>Estado</dt><dd><span class="status status-warning">Pendiente de generar</span></dd></div>
+                  </dl>
+                  <button class="btn btn-secondary btn-sm mt-5 w-full" type="button" data-modal-open="generarModal">Configurar y generar</button>
+
+                  <div class="note mt-5">
+                    <strong>Recuerda:</strong> la pre-matrícula no se dará por oficializada si falta alguna de las firmas obligatorias.
+                  </div>
+
+                  <div class="info-row mt-4">
+                    <span class="info-label">FMaxMatri</span>
+                    <span class="info-value mono">15 dic 2026</span>
+                  </div>
+                  <div class="info-row">
+                    <span class="info-label">Contacto</span>
+                    <span class="info-value">admisiones@colegio.edu.co</span>
+                  </div>
+                </aside>
+              </div>
+            </section>
+
+            <section class="section" id="firmas">
+              <div class="section-head">
+                <div>
+                  <h2 class="section-title">Firmas digitales</h2>
+                  <p class="section-sub">Registra las firmas requeridas con el código de confirmación enviado al correo o celular.</p>
+                </div>
+                <span class="chip">2 de 4 registradas</span>
+              </div>
+
+              <div class="table-wrap">
+                <table class="data-table firmas-table">
+                  <caption class="sr-only">Estado de las firmas digitales</caption>
+                  <thead>
+                    <tr>
+                      <th scope="col">Firmante</th>
+                      <th scope="col">TipoFirma</th>
+                      <th scope="col">FFirma</th>
+                      <th scope="col">IPFirma</th>
+                      <th scope="col" class="cell-actions">Acción</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td class="cell-title">Firma Mamá</td>
+                      <td class="mono">M</td>
+                      <td><span class="status status-success">Registrada</span><span class="cell-sub">12 nov 2026 · 9:14 a. m.</span></td>
+                      <td class="mono muted">192.168.1.24</td>
+                      <td class="cell-actions"><span class="muted">Completada</span></td>
+                    </tr>
+                    <tr>
+                      <td class="cell-title">Firma Papá</td>
+                      <td class="mono">P</td>
+                      <td><span class="status status-success">Registrada</span><span class="cell-sub">12 nov 2026 · 10:02 a. m.</span></td>
+                      <td class="mono muted">192.168.1.31</td>
+                      <td class="cell-actions"><span class="muted">Completada</span></td>
+                    </tr>
+                    <tr>
+                      <td class="cell-title">Firma Responsable económico</td>
+                      <td class="mono">A</td>
+                      <td><span class="status status-warning">Pendiente</span></td>
+                      <td class="muted">—</td>
+                      <td class="cell-actions"><button class="btn-link" type="button" data-firmar="A" data-nombre="Responsable económico">Firmar</button></td>
+                    </tr>
+                    <tr>
+                      <td class="cell-title">Firma Estudiante</td>
+                      <td class="mono">E</td>
+                      <td><span class="status status-warning">Pendiente</span></td>
+                      <td class="muted">—</td>
+                      <td class="cell-actions"><button class="btn-link" type="button" data-firmar="E" data-nombre="Estudiante">Firmar</button></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <div class="note mt-5">
+                <strong>Código de confirmación:</strong> se registra en el campo <span class="mono">Token</span> junto con la fecha, hora y dirección IP como evidencia de la aceptación del contenido de los documentos.
+              </div>
+            </section>
+
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <div id="mobile-overlay" class="overlay"></div>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <div class="modal" id="generarModal" role="dialog" aria-modal="true" aria-labelledby="generarModalTitle">
+    <div class="modal-panel">
+      <div class="modal-head">
+        <div>
+          <h2 class="modal-title" id="generarModalTitle">Generar documentos</h2>
+          <p class="modal-sub">Se preparan los documentos para la firma digital.</p>
+        </div>
+        <button class="modal-close" type="button" data-modal-close aria-label="Cerrar">
+          <i class="ph ph-x" aria-hidden="true"></i>
+        </button>
+      </div>
+      <form id="generarForm">
+        <div class="modal-body">
+          <div class="field">
+            <label class="label" for="firmaDocumentos">FirmaDocumentos <span class="req" aria-hidden="true">*</span></label>
+            <select class="select" id="firmaDocumentos" name="FirmaDocumentos" required>
+              <option value="">Selecciona quiénes firmarán</option>
+              <option value="1">1 · Papá y mamá</option>
+              <option value="2">2 · Papá</option>
+              <option value="3">3 · Mamá</option>
+              <option value="4">4 · Otro apoderado</option>
+            </select>
+          </div>
+          <div class="field mt-4">
+            <label class="label" for="autorizaUsoImagen">AutorizaUsoImagen <span class="req" aria-hidden="true">*</span></label>
+            <select class="select" id="autorizaUsoImagen" name="AutorizaUsoImagen" required>
+              <option value="">Selecciona una opción</option>
+              <option value="1">Sí · Autorizo el uso de imagen sobre fotografías y videos</option>
+              <option value="0">No · No autorizo el uso de imagen</option>
+            </select>
+          </div>
+          <label class="check-row mt-5">
+            <input type="checkbox" id="aceptaGenerar" name="CheckAceptaGenerarDocumentos" required>
+            <span>Confirmo que los correos y teléfonos están actualizados para recibir los códigos de verificación. <span class="req" aria-hidden="true">*</span></span>
+          </label>
+          <div class="note mt-4">
+            La firma de las personas seleccionadas es obligatoria. La pre-matrícula no se oficializa si falta alguna firma.
+          </div>
+        </div>
+        <div class="modal-foot">
+          <button class="btn btn-secondary" type="button" data-modal-close>Cancelar</button>
+          <button class="btn btn-primary" type="submit">Generar documentos</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="modal" id="firmarModal" role="dialog" aria-modal="true" aria-labelledby="firmarModalTitle">
+    <div class="modal-panel">
+      <div class="modal-head">
+        <div>
+          <h2 class="modal-title" id="firmarModalTitle">Firmar documentos</h2>
+          <p class="modal-sub" id="firmarModalSub">Firma digital · pre-matrícula 2027.</p>
+        </div>
+        <button class="modal-close" type="button" data-modal-close aria-label="Cerrar">
+          <i class="ph ph-x" aria-hidden="true"></i>
+        </button>
+      </div>
+      <form id="firmarForm">
+        <div class="modal-body">
+          <div class="field">
+            <label class="label" for="tipoFirma">TipoFirma</label>
+            <input class="input" id="tipoFirma" name="TipoFirma" type="text" readonly>
+          </div>
+          <div class="field mt-4">
+            <label class="label" for="codigoConfirmacion">Código de confirmación (Token) <span class="req" aria-hidden="true">*</span></label>
+            <input class="input mono" id="codigoConfirmacion" name="CodigoConfirmacion" type="text" inputmode="numeric" pattern="[0-9]{4}" maxlength="4" required placeholder="Código de 4 dígitos">
+            <p class="field-help">Enviado al correo o celular registrado para este firmante.</p>
+          </div>
+          <label class="check-row mt-4">
+            <input type="checkbox" id="aceptaFirma" name="aceptaFirma" required>
+            <span>He leído y acepto el contenido de los documentos de pre-matrícula. <span class="req" aria-hidden="true">*</span></span>
+          </label>
+        </div>
+        <div class="modal-foot">
+          <button class="btn btn-secondary" type="button" data-modal-close>Cancelar</button>
+          <button class="btn btn-primary" type="submit">Registrar firma</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="assets/js/app.js"></script>
+  <script>
+    (function () {
+      "use strict";
+
+      function bindForm(id, modal, message) {
+        var form = document.getElementById(id);
+        if (!form) return;
+        form.addEventListener("submit", function (event) {
+          event.preventDefault();
+          if (!form.checkValidity()) {
+            form.reportValidity();
+            return;
+          }
+          if (window.EstuNET) {
+            window.EstuNET.closeModal(modal);
+            window.EstuNET.showToast(message);
+          }
+        });
+      }
+
+      bindForm("generarForm", "generarModal", "Documentos generados (demostración)");
+      bindForm("firmarForm", "firmarModal", "Firma registrada (demostración)");
+
+      document.addEventListener("click", function (event) {
+        var button = event.target.closest("[data-firmar]");
+        if (!button) return;
+        var tipo = button.getAttribute("data-firmar");
+        var nombre = button.getAttribute("data-nombre");
+        var tipoInput = document.getElementById("tipoFirma");
+        var sub = document.getElementById("firmarModalSub");
+        if (tipoInput) tipoInput.value = tipo;
+        if (sub) sub.textContent = "Firma " + nombre + " · pre-matrícula 2027.";
+        if (window.EstuNET) window.EstuNET.openModal("firmarModal");
+      });
+
+      document.addEventListener("click", function (event) {
+        var button = event.target.closest("[data-tab-go]");
+        if (!button) return;
+        var section = document.getElementById(button.getAttribute("data-tab-go"));
+        if (section) section.scrollIntoView({ behavior: "smooth", block: "start" });
+      });
+    })();
+  </script>
+</body>
+</html>

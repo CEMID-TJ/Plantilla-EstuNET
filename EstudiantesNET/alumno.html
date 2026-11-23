@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Plantilla de diseño del portal EstudiantesNET. Información personal y familiar del alumno registrada en la ficha de matrícula.">
+  <title>Información del alumno · EstudiantesNET</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body data-page="alumno">
+  <div id="proto-bar"></div>
+
+  <div class="app-layout">
+    <aside id="sidebar"></aside>
+
+    <div class="app-main">
+      <header id="topbar"></header>
+
+      <main class="page-main">
+        <div class="page-surface">
+          <div id="state-host" hidden></div>
+
+          <div id="page-content">
+            <section class="hero">
+              <div class="hero-row">
+                <div>
+                  <span class="eyebrow">Año escolar 2026 · Ficha del estudiante</span>
+                  <h2 class="page-heading">Información del alumno</h2>
+                  <p class="page-subheading">Datos personales y de los acudientes registrados en la ficha de matrícula 2026.</p>
+                </div>
+                <div class="hero-actions">
+                  <button class="btn btn-primary" type="button" data-modal-open="actualizarDatosModal">
+                    <i class="ph ph-pencil-simple" aria-hidden="true"></i>
+                    Solicitar actualización
+                  </button>
+                </div>
+              </div>
+            </section>
+
+            <section class="section section-tight">
+              <div class="alert alert-success" role="status">
+                <i class="ph ph-check-circle" aria-hidden="true"></i>
+                <div>
+                  <p class="alert-title">Datos actualizados</p>
+                  <p class="alert-text">La información registrada coincide con la ficha de matrícula 2026. Si encuentras un dato desactualizado, puedes solicitar la corrección.</p>
+                </div>
+              </div>
+            </section>
+
+            <section class="section section-tight">
+              <div class="avatar-row">
+                <span class="avatar avatar-lg">LM</span>
+                <div>
+                  <h3>Laura Sofía Martínez Gómez</h3>
+                  <p>Código 2026-0042 · Grado 10.º A · Jornada mañana</p>
+                </div>
+              </div>
+            </section>
+
+            <section class="section">
+              <div class="section-head">
+                <div>
+                  <h2 class="section-title">Ficha del estudiante</h2>
+                  <p class="section-sub">Selecciona una sección para consultar la información registrada.</p>
+                </div>
+                <span class="chip">Matrícula 2026</span>
+              </div>
+
+              <div data-tabs>
+                <div class="tabs" role="tablist" aria-label="Secciones de la ficha del estudiante">
+                  <button class="tab" type="button" role="tab" id="tab-estudiante" aria-controls="panel-estudiante" aria-selected="true" data-tab="estudiante">Estudiante</button>
+                  <button class="tab" type="button" role="tab" id="tab-padre" aria-controls="panel-padre" aria-selected="false" data-tab="padre">Padre</button>
+                  <button class="tab" type="button" role="tab" id="tab-madre" aria-controls="panel-madre" aria-selected="false" data-tab="madre">Madre</button>
+                </div>
+
+                <div class="tab-panel" id="panel-estudiante" role="tabpanel" aria-labelledby="tab-estudiante" data-tab-panel="estudiante">
+                  <div class="section-head">
+                    <div>
+                      <h3 class="section-title" style="font-size:16px">Datos personales</h3>
+                      <p class="section-sub">Información registrada en la ficha de matrícula.</p>
+                    </div>
+                    <span class="status status-success">Activo</span>
+                  </div>
+                  <dl class="detail-list">
+                    <div><dt>Nombres y apellidos</dt><dd class="strong">Laura Sofía Martínez Gómez</dd></div>
+                    <div><dt>Documento de identidad</dt><dd>Tarjeta de identidad · 1.024.587.963</dd></div>
+                    <div><dt>Fecha de nacimiento</dt><dd>14 de julio de 2010</dd></div>
+                    <div><dt>Lugar de nacimiento</dt><dd>Bogotá D.C. · Cundinamarca</dd></div>
+                    <div><dt>Sexo</dt><dd>Femenino</dd></div>
+                    <div><dt>RH</dt><dd>O+</dd></div>
+                    <div><dt>EPS</dt><dd>Nueva EPS</dd></div>
+                    <div><dt>Fecha de ingreso</dt><dd>28 de enero de 2019</dd></div>
+                    <div><dt>Dirección</dt><dd>Calle 72 Sur # 18-45, interior 3</dd></div>
+                    <div><dt>Barrio</dt><dd>Villa del Sol</dd></div>
+                    <div><dt>Estrato</dt><dd>2</dd></div>
+                    <div><dt>Sisbén</dt><dd>Nivel 2</dd></div>
+                    <div><dt>Teléfono</dt><dd>601 745 2210</dd></div>
+                    <div><dt>Celular</dt><dd>310 458 7721</dd></div>
+                    <div><dt>Correo electrónico</dt><dd>laura.martinez@correo.com</dd></div>
+                    <div><dt>Número de hermanos</dt><dd>2</dd></div>
+                    <div><dt>Hermanos en el colegio</dt><dd>Sí · 1</dd></div>
+                    <div><dt>Credo</dt><dd>Católico</dd></div>
+                  </dl>
+                </div>
+
+                <div class="tab-panel" id="panel-padre" role="tabpanel" aria-labelledby="tab-padre" data-tab-panel="padre" hidden>
+                  <div class="section-head">
+                    <div>
+                      <h3 class="section-title" style="font-size:16px">Datos del padre</h3>
+                      <p class="section-sub">Información registrada en la ficha familiar.</p>
+                    </div>
+                    <span class="chip">Ficha familiar</span>
+                  </div>
+                  <dl class="detail-list">
+                    <div><dt>Nombres y apellidos</dt><dd class="strong">Carlos Andrés Martínez Ríos</dd></div>
+                    <div><dt>Documento</dt><dd>C.C. 79.458.221</dd></div>
+                    <div><dt>Fecha de nacimiento</dt><dd>03 de marzo de 1982</dd></div>
+                    <div><dt>Teléfono</dt><dd>601 745 2210</dd></div>
+                    <div><dt>Celular</dt><dd>310 458 7721</dd></div>
+                    <div><dt>Correo electrónico</dt><dd>carlos.martinez@correo.com</dd></div>
+                    <div><dt>Profesión</dt><dd>Ingeniero de sistemas</dd></div>
+                    <div><dt>Empresa</dt><dd>Soluciones Digitales S.A.S.</dd></div>
+                  </dl>
+                  <div class="note" style="margin-top:18px">
+                    <strong>Nota:</strong> si el padre no es el acudiente principal, los datos de contacto del acudiente se consultan en la ficha familiar del colegio.
+                  </div>
+                </div>
+
+                <div class="tab-panel" id="panel-madre" role="tabpanel" aria-labelledby="tab-madre" data-tab-panel="madre" hidden>
+                  <div class="section-head">
+                    <div>
+                      <h3 class="section-title" style="font-size:16px">Datos de la madre</h3>
+                      <p class="section-sub">Información registrada en la ficha familiar.</p>
+                    </div>
+                    <span class="chip">Ficha familiar</span>
+                  </div>
+                  <dl class="detail-list">
+                    <div><dt>Nombres y apellidos</dt><dd class="strong">Paula Andrea Gómez Salazar</dd></div>
+                    <div><dt>Documento</dt><dd>C.C. 52.874.110</dd></div>
+                    <div><dt>Fecha de nacimiento</dt><dd>21 de septiembre de 1984</dd></div>
+                    <div><dt>Teléfono</dt><dd>601 745 2210</dd></div>
+                    <div><dt>Celular</dt><dd>315 220 8844</dd></div>
+                    <div><dt>Correo electrónico</dt><dd>paula.gomez@correo.com</dd></div>
+                    <div><dt>Profesión</dt><dd>Docente</dd></div>
+                    <div><dt>Empresa</dt><dd>Colegio Distrital San Rafael</dd></div>
+                  </dl>
+                  <div class="note" style="margin-top:18px">
+                    <strong>Nota:</strong> los datos de la madre se actualizan únicamente con la presentación del documento de identidad.
+                  </div>
+                </div>
+
+              </div>
+            </section>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <div id="mobile-overlay" class="overlay"></div>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <div class="modal" id="actualizarDatosModal" role="dialog" aria-modal="true" aria-labelledby="actualizarDatosTitle">
+    <div class="modal-panel">
+      <div class="modal-head">
+        <div>
+          <h2 class="modal-title" id="actualizarDatosTitle">Solicitar actualización de datos</h2>
+          <p class="modal-sub">Los cambios se validan con el colegio antes de aplicarse.</p>
+        </div>
+        <button class="modal-close" type="button" data-modal-close aria-label="Cerrar">
+          <i class="ph ph-x" aria-hidden="true"></i>
+        </button>
+      </div>
+      <form id="actualizarDatosForm">
+        <div class="modal-body">
+          <div class="form-grid">
+            <div class="field span-2">
+              <label class="label" for="actNombre">Estudiante</label>
+              <input class="input" id="actNombre" name="actNombre" type="text" value="Laura Sofía Martínez Gómez" readonly>
+            </div>
+            <div class="field">
+              <label class="label" for="actTelefono">Teléfono <span class="req" aria-hidden="true">*</span></label>
+              <input class="input" id="actTelefono" name="actTelefono" type="tel" value="601 745 2210" required>
+            </div>
+            <div class="field">
+              <label class="label" for="actCelular">Celular <span class="req" aria-hidden="true">*</span></label>
+              <input class="input" id="actCelular" name="actCelular" type="tel" value="310 458 7721" required>
+            </div>
+            <div class="field span-2">
+              <label class="label" for="actCorreo">Correo electrónico <span class="req" aria-hidden="true">*</span></label>
+              <input class="input" id="actCorreo" name="actCorreo" type="email" value="laura.martinez@correo.com" required>
+            </div>
+            <div class="field span-2">
+              <label class="label" for="actDireccion">Dirección <span class="req" aria-hidden="true">*</span></label>
+              <input class="input" id="actDireccion" name="actDireccion" type="text" value="Calle 72 Sur # 18-45, interior 3" required>
+            </div>
+            <div class="field span-2">
+              <label class="check-row">
+                <input type="checkbox" id="actAutorizo" name="actAutorizo" required>
+                <span>Autorizo la actualización de mis datos y confirmo que la información es verídica. <span class="req" aria-hidden="true">*</span></span>
+              </label>
+            </div>
+          </div>
+        </div>
+        <div class="modal-foot">
+          <button class="btn btn-secondary" type="button" data-modal-close>Cancelar</button>
+          <button class="btn btn-primary" type="submit">
+            <i class="ph ph-paper-plane-tilt" aria-hidden="true"></i>
+            Enviar solicitud
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="assets/js/app.js"></script>
+  <script>
+    (function () {
+      "use strict";
+      var form = document.getElementById("actualizarDatosForm");
+      if (!form) return;
+      form.addEventListener("submit", function (event) {
+        event.preventDefault();
+        if (!form.checkValidity()) {
+          form.reportValidity();
+          return;
+        }
+        if (window.EstuNET) {
+          window.EstuNET.closeModal("actualizarDatosModal");
+          window.EstuNET.showToast("Solicitud de actualización enviada (demostración)");
+        }
+        form.reset();
+      });
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Plantilla de diseño del portal EstudiantesNET. Vista de inicio.">
+  <title>Inicio · EstudiantesNET</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body data-page="inicio">
+  <div id="proto-bar"></div>
+
+  <div class="app-layout">
+    <aside id="sidebar"></aside>
+
+    <div class="app-main">
+      <header id="topbar"></header>
+
+      <main class="page-main">
+        <div class="page-surface">
+          <div id="state-host" hidden></div>
+
+          <div id="page-content">
+            <section class="hero">
+              <div class="hero-row">
+                <div>
+                  <span class="eyebrow">Periodo 2026 · Semana 12</span>
+                  <h2 class="page-heading">Hola, Laura</h2>
+                  <p class="page-subheading">Este es el resumen de tu actividad académica y administrativa. Tienes 3 tareas por entregar y una obligación pendiente.</p>
+                </div>
+                <div class="hero-actions">
+                  <a class="btn btn-secondary" href="tareas.html">
+                    <i class="ph ph-list-checks" aria-hidden="true"></i>
+                    Ver tareas
+                  </a>
+                  <a class="btn btn-primary" href="cuenta.html">
+                    <i class="ph ph-credit-card" aria-hidden="true"></i>
+                    Revisar pagos
+                  </a>
+                </div>
+              </div>
+            </section>
+
+            <div class="stat-row" aria-label="Resumen del periodo">
+              <div class="stat">
+                <div class="stat-label">Promedio acumulado</div>
+                <div class="stat-value">4,3 <span class="text-base font-medium text-slate-400">/ 5,0</span></div>
+                <div class="stat-meta is-success">+0,2 frente al periodo anterior</div>
+              </div>
+              <div class="stat">
+                <div class="stat-label">Asistencia</div>
+                <div class="stat-value">96%</div>
+                <div class="stat-meta">38 de 40 jornadas registradas</div>
+              </div>
+              <div class="stat">
+                <div class="stat-label">Tareas pendientes</div>
+                <div class="stat-value">3</div>
+                <div class="stat-meta is-warning">La próxima vence hoy</div>
+              </div>
+            </div>
+
+            <section class="section">
+              <div class="split">
+                <div>
+                  <div class="section-head">
+                    <div>
+                      <h2 class="section-title">Actividad reciente</h2>
+                      <p class="section-sub">Novedades de las últimas dos semanas.</p>
+                    </div>
+                  </div>
+
+                  <div class="table-wrap">
+                    <table class="data-table">
+                      <thead>
+                        <tr>
+                          <th scope="col">Fecha</th>
+                          <th scope="col">Actividad</th>
+                          <th scope="col">Materia</th>
+                          <th scope="col">Estado</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td class="nowrap muted">Hoy</td>
+                          <td>
+                            <span class="cell-title">Taller de análisis literario</span>
+                            <span class="cell-sub">Entrega en plataforma</span>
+                          </td>
+                          <td>Lengua castellana</td>
+                          <td><span class="status status-warning">Pendiente</span></td>
+                        </tr>
+                        <tr>
+                          <td class="nowrap muted">22 nov</td>
+                          <td>
+                            <span class="cell-title">Laboratorio de cinemática</span>
+                            <span class="cell-sub">Informe de prácticas</span>
+                          </td>
+                          <td>Física</td>
+                          <td><span class="status status-success">Entregada</span></td>
+                        </tr>
+                        <tr>
+                          <td class="nowrap muted">20 nov</td>
+                          <td>
+                            <span class="cell-title">Circular de convivencia</span>
+                            <span class="cell-sub">Comunicado institucional</span>
+                          </td>
+                          <td>Rectoría</td>
+                          <td><span class="status status-info">Nueva</span></td>
+                        </tr>
+                        <tr>
+                          <td class="nowrap muted">18 nov</td>
+                          <td>
+                            <span class="cell-title">Evaluación de periodo</span>
+                            <span class="cell-sub">Ciencias sociales</span>
+                          </td>
+                          <td>Ciencias sociales</td>
+                          <td><span class="status status-success">Calificada</span></td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+
+                <aside class="split-aside">
+                  <div class="section-tight">
+                    <div class="section-head" style="margin-bottom:12px">
+                      <div>
+                        <h3 class="section-title" style="font-size:16px">Carnet virtual</h3>
+                        <p class="section-sub">Identificación digital vigente.</p>
+                      </div>
+                    </div>
+
+                    <div class="carnet" style="max-width:none">
+                      <div class="carnet-top">
+                        <span class="carnet-brand">EstudiantesNET</span>
+                        <span class="carnet-year">2026</span>
+                      </div>
+                      <div class="carnet-body">
+                        <div class="carnet-photo">Foto<br>3 × 4</div>
+                        <div>
+                          <h4 class="carnet-name">Laura Sofía<br>Martínez Gómez</h4>
+                          <p class="carnet-meta">Grado 10.º · Aula 2 · Jornada mañana</p>
+                          <div class="carnet-details">
+                            <span>Código</span>
+                            <strong class="mono">2026-0042</strong>
+                            <span>Colegio</span>
+                            <strong>Colegio Minuto de Dios</strong>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="carnet-bottom">
+                        <span class="carnet-code">Carnet virtual · Año 2026</span>
+                        <span class="qr-frame" aria-label="Elemento decorativo del carnet"></span>
+                      </div>
+                    </div>
+
+                    <a class="btn btn-secondary btn-sm w-full mt-4" href="carnet.html">
+                      <i class="ph ph-identification-card" aria-hidden="true"></i>
+                      Ver carnet completo
+                    </a>
+                  </div>
+
+                  <div class="section-tight" style="padding-top:20px">
+                    <div class="section-head" style="margin-bottom:12px">
+                      <div>
+                        <h3 class="section-title" style="font-size:16px">Próximos vencimientos</h3>
+                        <p class="section-sub">Fechas importantes del calendario.</p>
+                      </div>
+                    </div>
+
+                    <div class="info-row">
+                      <div>
+                        <div class="text-[12px] font-semibold text-slate-800">Taller de literatura</div>
+                        <div class="text-[11px] text-slate-500">Hoy · 11:59 p. m.</div>
+                      </div>
+                      <span class="status status-warning">Hoy</span>
+                    </div>
+                    <div class="info-row">
+                      <div>
+                        <div class="text-[12px] font-semibold text-slate-800">Pensión de noviembre</div>
+                        <div class="text-[11px] text-slate-500">25 nov · Pago en línea</div>
+                      </div>
+                      <span class="status status-danger">Vence</span>
+                    </div>
+                    <div class="info-row">
+                      <div>
+                        <div class="text-[12px] font-semibold text-slate-800">Firma de informe</div>
+                        <div class="text-[11px] text-slate-500">29 nov · Acudiente</div>
+                      </div>
+                      <span class="status status-neutral">Próximo</span>
+                    </div>
+                  </div>
+                </aside>
+              </div>
+            </section>
+
+            <section class="section">
+              <div class="section-head">
+                <div>
+                  <h2 class="section-title">Información del estudiante</h2>
+                  <p class="section-sub">Datos generales registrados para el año escolar.</p>
+                </div>
+                <div class="section-actions">
+                  <a class="btn btn-secondary btn-sm" href="alumno.html">
+                    Ver información completa
+                  </a>
+                </div>
+              </div>
+
+              <div class="split">
+                <div>
+                  <div class="avatar-row" style="margin-bottom:8px">
+                    <span class="avatar avatar-lg">LM</span>
+                    <div>
+                      <h3>Laura Martínez</h3>
+                      <p>Matrícula vigente · Año escolar 2026</p>
+                    </div>
+                  </div>
+
+                  <dl class="detail-list" style="margin-top:12px">
+                    <div>
+                      <dt>Código del estudiante</dt>
+                      <dd class="strong mono">2026-0042</dd>
+                    </div>
+                    <div>
+                      <dt>Documento</dt>
+                      <dd>TI ·•• ••• 482</dd>
+                    </div>
+                    <div>
+                      <dt>Director de grupo</dt>
+                      <dd>Claudia Rojas</dd>
+                    </div>
+                    <div>
+                      <dt>Estado académico</dt>
+                      <dd><span class="status status-success">Activo</span></dd>
+                    </div>
+                  </dl>
+                </div>
+
+                <aside class="split-aside">
+                  <span class="eyebrow">Contacto principal</span>
+                  <div class="text-[15px] font-semibold mt-1">María Gómez</div>
+                  <div class="text-[11px] text-slate-500">Madre · Acudiente titular</div>
+
+                  <div class="info-row" style="margin-top:14px">
+                    <span class="info-label">Teléfono</span>
+                    <span class="info-value mono">+57 300 ••• 2145</span>
+                  </div>
+                  <div class="info-row">
+                    <span class="info-label">Correo</span>
+                    <span class="info-value">m.gomez@correo.com</span>
+                  </div>
+                  <div class="info-row">
+                    <span class="info-label">Autorización</span>
+                    <span class="status status-success">Vigente</span>
+                  </div>
+                </aside>
+              </div>
+            </section>
+
+            <section class="section">
+              <div class="section-head">
+                <div>
+                  <h2 class="section-title">Datos del colegio</h2>
+                  <p class="section-sub">Institución y matrícula registradas para el año escolar.</p>
+                </div>
+                <span class="status status-success">Matrícula activa</span>
+              </div>
+
+              <dl class="detail-list">
+                <div><dt>Colegio</dt><dd class="strong">Colegio Minuto de Dios</dd></div>
+                <div><dt>Código del colegio</dt><dd>98</dd></div>
+                <div><dt>Año escolar</dt><dd>2026</dd></div>
+                <div><dt>Jornada</dt><dd>Mañana</dd></div>
+                <div><dt>Grado</dt><dd>10.º</dd></div>
+                <div><dt>Aula</dt><dd>2</dd></div>
+                <div><dt>Fecha de matrícula</dt><dd>15 de enero de 2026</dd></div>
+                <div><dt>Estado de matrícula</dt><dd>Matriculado</dd></div>
+                <div><dt>Correo institucional</dt><dd>secretaria@colegiominutodedios.edu.co</dd></div>
+              </dl>
+            </section>
+
+            <section class="section">
+              <div class="section-head">
+                <div>
+                  <h2 class="section-title">Últimos comunicados</h2>
+                  <p class="section-sub">Circulares publicadas por la institución.</p>
+                </div>
+                <div class="section-actions">
+                  <a class="btn-link" href="circulares.html">Ver todos</a>
+                </div>
+              </div>
+
+              <div class="divide-y divide-slate-100">
+                <article class="py-4 flex items-start justify-between gap-6">
+                  <div>
+                    <div class="text-[10px] font-semibold uppercase tracking-[.08em] text-slate-400">20 nov 2026 · Convivencia</div>
+                    <h3 class="mt-1 text-[14px] font-semibold text-slate-900">Jornada de reflexión y acuerdos de convivencia</h3>
+                    <p class="mt-1 text-[12px] text-slate-500">Actividades programadas para el 27 de noviembre en todas las sedes.</p>
+                  </div>
+                  <a class="btn-link shrink-0" href="circulares.html">Leer</a>
+                </article>
+                <article class="py-4 flex items-start justify-between gap-6">
+                  <div>
+                    <div class="text-[10px] font-semibold uppercase tracking-[.08em] text-slate-400">18 nov 2026 · Académico</div>
+                    <h3 class="mt-1 text-[14px] font-semibold text-slate-900">Entrega de informes del cuarto periodo</h3>
+                    <p class="mt-1 text-[12px] text-slate-500">Consulta el calendario de firmas y la ruta de atención.</p>
+                  </div>
+                  <a class="btn-link shrink-0" href="circulares.html">Leer</a>
+                </article>
+              </div>
+            </section>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <div id="mobile-overlay" class="overlay"></div>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <script src="assets/js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Plantilla de diseño del portal EstudiantesNET. Solicitudes de traslado de colegio.">
+  <title>Traslados de colegio · EstudiantesNET</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body data-page="traslados">
+  <div id="proto-bar"></div>
+
+  <div class="app-layout">
+    <aside id="sidebar"></aside>
+
+    <div class="app-main">
+      <header id="topbar"></header>
+
+      <main class="page-main">
+        <div class="page-surface">
+          <div id="state-host" hidden></div>
+
+          <div id="page-content">
+            <section class="hero">
+              <div class="hero-row">
+                <div>
+                  <span class="eyebrow">Administración · Traslados</span>
+                  <h2 class="page-heading">Traslados de colegio</h2>
+                  <p class="page-subheading">Solicita el traslado a otra institución y consulta el estado de cada una de las instancias que intervienen en el proceso.</p>
+                </div>
+                <div class="hero-actions">
+                  <button class="btn btn-primary" type="button" data-modal-open="trasladoModal">
+                    <i class="ph ph-plus" aria-hidden="true"></i>
+                    Solicitar traslado
+                  </button>
+                </div>
+              </div>
+            </section>
+
+            <section class="section section-tight">
+              <div class="alert alert-warning" role="status">
+                <i class="ph ph-hourglass-medium" aria-hidden="true"></i>
+                <div>
+                  <p class="alert-title">Solicitud en trámite</p>
+                  <p class="alert-text">Tienes una solicitud activa hacia <strong>Colegio Minuto de Dios · Sede Centro</strong>. No puedes radicar otra mientras esté pendiente.</p>
+                  <div class="alert-actions">
+                    <button class="btn-link" type="button" data-tab-go="solicitud-activa">Ver estado de la solicitud</button>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <section class="section" id="solicitud-activa">
+              <div class="section-head">
+                <div>
+                  <h2 class="section-title">Solicitud activa</h2>
+                  <p class="section-sub">Radicada el 12 de noviembre de 2026 para el año actual.</p>
+                </div>
+                <span class="status status-warning">En trámite</span>
+              </div>
+
+              <div class="split">
+                <div>
+                  <h3 class="section-title" style="font-size:16px">Datos de la solicitud</h3>
+                  <dl class="detail-list mt-2">
+                    <div><dt>Código</dt><dd class="mono">2026-0042</dd></div>
+                    <div><dt>Colegio origen</dt><dd>Colegio Minuto de Dios · Sede Norte</dd></div>
+                    <div><dt>Colegio destino</dt><dd class="strong">Colegio Minuto de Dios · Sede Centro</dd></div>
+                    <div><dt>Tipo de traslado</dt><dd>Año actual</dd></div>
+                    <div><dt>Fecha de traslado</dt><dd>12 de noviembre de 2026</dd></div>
+                    <div class="span-2"><dt>Observaciones</dt><dd>Cambio de residencia familiar. Solicito continuar el año escolar en la sede centro.</dd></div>
+                    <div><dt>Acepta condiciones</dt><dd><span class="status status-success">Sí · 12 nov 2026</span></dd></div>
+                    <div><dt>Acepta tratamiento de datos</dt><dd><span class="status status-success">Sí · 12 nov 2026</span></dd></div>
+                  </dl>
+
+                  <div class="section-head mt-6">
+                    <div>
+                      <h3 class="section-title" style="font-size:16px">Estado por instancia</h3>
+                      <p class="section-sub">Cada instancia registra su decisión de forma independiente.</p>
+                    </div>
+                  </div>
+
+                  <div class="table-wrap" style="border-top:0">
+                    <table class="data-table compact">
+                      <caption class="sr-only">Decisiones registradas por instancia</caption>
+                      <thead>
+                        <tr>
+                          <th scope="col">Instancia</th>
+                          <th scope="col">Aceptación</th>
+                          <th scope="col">Acción</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td class="cell-title">Cartera</td>
+                          <td><span class="status status-success">Aceptada</span></td>
+                          <td><span class="status status-success">Aprobada</span></td>
+                        </tr>
+                        <tr>
+                          <td class="cell-title">Colegio de origen</td>
+                          <td><span class="status status-success">Aceptada</span></td>
+                          <td><span class="status status-success">Aprobada</span></td>
+                        </tr>
+                        <tr>
+                          <td class="cell-title">Colegio destino</td>
+                          <td><span class="status status-warning">Pendiente</span></td>
+                          <td><span class="status status-warning">En revisión</span></td>
+                        </tr>
+                        <tr>
+                          <td class="cell-title">Traslado</td>
+                          <td><span class="status status-neutral">—</span></td>
+                          <td><span class="status status-warning">Pendiente</span></td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+
+                  <div class="form-actions">
+                    <span class="text-[11px] text-slate-500">El traslado se oficializa cuando las cuatro instancias registran una acción aprobatoria.</span>
+                    <div class="form-actions-right">
+                      <button class="btn btn-secondary btn-sm" type="button" data-demo="Solicitud descargada en PDF (demostración)">
+                        <i class="ph ph-file-pdf" aria-hidden="true"></i>
+                        Descargar solicitud
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
+                <aside class="split-aside">
+                  <span class="eyebrow">Proceso</span>
+                  <ol class="timeline mt-4">
+                    <li class="is-done">
+                      <div class="timeline-date">12 nov 2026</div>
+                      <div class="timeline-title">Solicitud radicada</div>
+                      <p class="timeline-text">Se registró la solicitud y las autorizaciones del acudiente.</p>
+                    </li>
+                    <li class="is-done">
+                      <div class="timeline-date">13 nov 2026</div>
+                      <div class="timeline-title">Cartera y colegio de origen</div>
+                      <p class="timeline-text">Ambas instancias aprobaron la solicitud.</p>
+                    </li>
+                    <li class="is-current">
+                      <div class="timeline-date">En curso</div>
+                      <div class="timeline-title">Colegio destino</div>
+                      <p class="timeline-text">Revisando la disponibilidad de cupo para el grado solicitado.</p>
+                    </li>
+                    <li>
+                      <div class="timeline-date">Pendiente</div>
+                      <div class="timeline-title">Oficialización del traslado</div>
+                      <p class="timeline-text">Se registra la acción final de traslado.</p>
+                    </li>
+                  </ol>
+
+                  <div class="note mt-6">
+                    <strong>Importante:</strong> si alguna instancia rechaza la solicitud, el proceso se detiene y deberás radicar una nueva solicitud con la documentación actualizada.
+                  </div>
+
+                  <div class="info-row mt-4">
+                    <span class="info-label">Responsable</span>
+                    <span class="info-value">Secretaría académica</span>
+                  </div>
+                  <div class="info-row">
+                    <span class="info-label">Correo</span>
+                    <span class="info-value">secretaria@colegio.edu.co</span>
+                  </div>
+                </aside>
+              </div>
+            </section>
+
+            <section class="section">
+              <div class="section-head">
+                <div>
+                  <h2 class="section-title">Historial de solicitudes</h2>
+                  <p class="section-sub">Últimas solicitudes de traslado registradas.</p>
+                </div>
+                <span class="chip">2 registros</span>
+              </div>
+
+              <div class="table-wrap">
+                <table class="data-table traslados-table">
+                  <caption class="sr-only">Historial de solicitudes de traslado</caption>
+                  <thead>
+                    <tr>
+                      <th scope="col">Fecha traslado</th>
+                      <th scope="col">Colegio destino</th>
+                      <th scope="col">Tipo traslado</th>
+                      <th scope="col">Observaciones</th>
+                      <th scope="col">Acción traslado</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td class="nowrap muted">12 nov 2026</td>
+                      <td>Colegio Minuto de Dios · Sede Centro</td>
+                      <td>Año actual</td>
+                      <td>Cambio de residencia familiar.</td>
+                      <td><span class="status status-warning">En trámite</span></td>
+                    </tr>
+                    <tr>
+                      <td class="nowrap muted">18 ene 2026</td>
+                      <td>Colegio Minuto de Dios · Sede Norte</td>
+                      <td>Año siguiente</td>
+                      <td>Renovación de matrícula en la sede actual.</td>
+                      <td><span class="status status-success">Aprobado</span></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </section>
+
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <div id="mobile-overlay" class="overlay"></div>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <div class="modal" id="trasladoModal" role="dialog" aria-modal="true" aria-labelledby="trasladoModalTitle">
+    <div class="modal-panel">
+      <div class="modal-head">
+        <div>
+          <h2 class="modal-title" id="trasladoModalTitle">Solicitar traslado</h2>
+          <p class="modal-sub">Solo se permite una solicitud activa por estudiante.</p>
+        </div>
+        <button class="modal-close" type="button" data-modal-close aria-label="Cerrar">
+          <i class="ph ph-x" aria-hidden="true"></i>
+        </button>
+      </div>
+      <form id="trasladoForm">
+        <div class="modal-body">
+          <div class="field">
+            <label class="label" for="colegioDestino">Colegio destino <span class="req" aria-hidden="true">*</span></label>
+            <select class="select" id="colegioDestino" name="ColegioDestino" required>
+              <option value="">Selecciona el colegio destino</option>
+              <option value="01">01 · Colegio Minuto de Dios · Sede Centro</option>
+              <option value="02">02 · Colegio Minuto de Dios · Sede Occidente</option>
+              <option value="03">03 · Colegio Minuto de Dios · Sede Sur</option>
+            </select>
+          </div>
+          <div class="field mt-4">
+            <label class="label" for="tipoTraslado">Tipo de traslado <span class="req" aria-hidden="true">*</span></label>
+            <select class="select" id="tipoTraslado" name="TipoTraslado" required>
+              <option value="">Seleccione el periodo del traslado</option>
+              <option value="Año actual">Año actual</option>
+              <option value="Año siguiente">Año siguiente</option>
+            </select>
+          </div>
+          <div class="field mt-4">
+            <label class="label" for="observacionesTraslado">Motivo del traslado <span class="req" aria-hidden="true">*</span></label>
+            <textarea class="textarea" id="observacionesTraslado" name="Observaciones" rows="3" required placeholder="Describa brevemente el motivo por el cual solicita el traslado..."></textarea>
+          </div>
+          <label class="check-row mt-5">
+            <input type="checkbox" id="aceptaCondiciones" name="AceptaCondiciones" value="1" required>
+            <span>Acepto las condiciones de la solicitud de traslado. <span class="req" aria-hidden="true">*</span></span>
+          </label>
+          <label class="check-row mt-3">
+            <input type="checkbox" id="aceptaTratamientoDatos" name="AceptaTratamientoDatos" value="1" required>
+            <span>Autorizo el tratamiento y consulta de mis datos personales para este trámite. <span class="req" aria-hidden="true">*</span></span>
+          </label>
+        </div>
+        <div class="modal-foot">
+          <button class="btn btn-secondary" type="button" data-modal-close>Cancelar</button>
+          <button class="btn btn-primary" type="submit">Radicar solicitud</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="assets/js/app.js"></script>
+  <script>
+    (function () {
+      "use strict";
+
+      var form = document.getElementById("trasladoForm");
+      if (form) {
+        form.addEventListener("submit", function (event) {
+          event.preventDefault();
+          if (!form.checkValidity()) {
+            form.reportValidity();
+            return;
+          }
+          if (window.EstuNET) {
+            window.EstuNET.closeModal("trasladoModal");
+            window.EstuNET.showToast("Solicitud de traslado radicada (demostración)");
+          }
+        });
+      }
+
+      document.addEventListener("click", function (event) {
+        var button = event.target.closest("[data-tab-go]");
+        if (!button) return;
+        var section = document.getElementById(button.getAttribute("data-tab-go"));
+        if (section) section.scrollIntoView({ behavior: "smooth", block: "start" });
+      });
+    })();
+  </script>
+</body>
+</html>

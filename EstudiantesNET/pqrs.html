@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Plantilla de diseño del portal EstudiantesNET. PQRS: peticiones, quejas, reclamos y sugerencias.">
+  <title>PQRS · EstudiantesNET</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body data-page="pqrs">
+  <div id="proto-bar"></div>
+
+  <div class="app-layout">
+    <aside id="sidebar"></aside>
+
+    <div class="app-main">
+      <header id="topbar"></header>
+
+      <main class="page-main">
+        <div class="page-surface">
+          <div id="state-host" hidden></div>
+
+          <div id="page-content">
+            <section class="hero">
+              <div class="hero-row">
+                <div>
+                  <span class="eyebrow">Atención al usuario · Canales oficiales</span>
+                  <h2 class="page-heading">PQRS</h2>
+                  <p class="page-subheading">Radica peticiones, quejas, reclamos, sugerencias, felicitaciones o denuncias. Cada solicitud recibe un número y un plazo de respuesta de 8 días hábiles.</p>
+                </div>
+                <div class="hero-actions">
+                  <button class="btn btn-secondary" type="button" data-demo="Consulta de radicado (demostración)">
+                    <i class="ph ph-magnifying-glass" aria-hidden="true"></i>
+                    Consultar radicado
+                  </button>
+                </div>
+              </div>
+            </section>
+
+            <section class="section">
+              <div data-tabs>
+                <div class="tabs" role="tablist" aria-label="Radicar y consultar PQRS">
+                  <button class="tab" type="button" role="tab" id="tab-radicar" aria-controls="panel-radicar" aria-selected="true" data-tab="radicar">Radicar PQRS</button>
+                  <button class="tab" type="button" role="tab" id="tab-solicitudes" aria-controls="panel-solicitudes" aria-selected="false" data-tab="solicitudes">Mis solicitudes</button>
+                </div>
+
+                <div class="tab-panel" id="panel-radicar" role="tabpanel" aria-labelledby="tab-radicar" data-tab-panel="radicar">
+                  <div class="split">
+                    <div>
+                      <form id="pqrsForm" class="stack">
+                        <div class="form-grid">
+                          <div class="field">
+                            <label class="label" for="pqrsNombre">Nombre</label>
+                            <input class="input" id="pqrsNombre" name="Nombre" type="text" value="Laura Sofía Martínez Gómez" readonly>
+                          </div>
+                          <div class="field">
+                            <label class="label" for="pqrsMail">Correo electrónico</label>
+                            <input class="input" id="pqrsMail" name="Mail" type="email" value="laura.martinez@correo.com" readonly>
+                          </div>
+                        </div>
+
+                        <div class="field">
+                          <label class="label" for="pqrsTipo">Tipo de solicitud <span class="req" aria-hidden="true">*</span></label>
+                          <select class="select" id="pqrsTipo" name="Tipo" required>
+                            <option value="">Selecciona una opción</option>
+                            <option value="Petición">Petición</option>
+                            <option value="Queja">Queja</option>
+                            <option value="Reclamo">Reclamo</option>
+                            <option value="Sugerencia">Sugerencia</option>
+                            <option value="Felicitación">Felicitación</option>
+                            <option value="Denuncia">Denuncia</option>
+                          </select>
+                        </div>
+
+                        <div class="field">
+                          <label class="label" for="pqrsQueja">Descripción de la solicitud <span class="req" aria-hidden="true">*</span></label>
+                          <textarea class="textarea" id="pqrsQueja" name="Queja" rows="6" maxlength="500" required placeholder="Cuéntanos aquí tu solicitud..."></textarea>
+                          <p class="field-help"><span id="pqrsContador">0</span>/500 caracteres · Sé claro y concreto. No incluyas contraseñas ni datos financieros.</p>
+                        </div>
+
+                        <div class="field">
+                          <span class="label">Documentos de apoyo (opcional)</span>
+                          <label class="soft-panel flex items-center justify-between gap-4 cursor-pointer" for="pqrsArchivo" style="border-style:dashed">
+                            <span>
+                              <span class="block text-[12px] font-semibold text-slate-700">Adjunta uno o varios archivos</span>
+                              <span class="block text-[11px] text-slate-500">PDF, JPG o PNG · máximo 5 MB por archivo</span>
+                            </span>
+                            <span class="btn btn-secondary btn-sm shrink-0">Seleccionar</span>
+                          </label>
+                          <input class="sr-only" id="pqrsArchivo" name="archivoInput[]" type="file" accept="application/pdf,image/jpeg,image/png" multiple>
+                          <p class="field-help" id="pqrsArchivosSeleccionados" hidden></p>
+                        </div>
+
+                        <label class="check-row">
+                          <input type="checkbox" id="pqrsAcepta" name="pqrsAcepta" required>
+                          <span>Autorizo el tratamiento de mis datos personales y acepto los términos del canal PQRS. <span class="req" aria-hidden="true">*</span></span>
+                        </label>
+
+                        <div class="form-actions">
+                          <span class="text-[11px] text-slate-500">Recibirás el radicado en tu correo institucional.</span>
+                          <div class="form-actions-right">
+                            <button class="btn btn-secondary" type="reset">Limpiar</button>
+                            <button class="btn btn-primary" type="submit">
+                              <i class="ph ph-paper-plane-tilt" aria-hidden="true"></i>
+                              Radicar solicitud
+                            </button>
+                          </div>
+                        </div>
+                      </form>
+
+                      <div id="pqrsExitoso" class="empty-state" hidden style="border-top:1px solid var(--line);margin-top:20px">
+                        <span class="status status-success">Solicitud radicada</span>
+                        <h3>Tu PQRS fue registrada</h3>
+                        <p>Radicado <strong class="mono text-slate-700">#1048</strong>. Plazo de respuesta: <strong>8 días hábiles</strong>. Podrás consultar la respuesta en este módulo.</p>
+                        <button class="btn btn-secondary btn-sm" type="button" id="nuevaPqrs">Radicar otra solicitud</button>
+                      </div>
+                    </div>
+
+                    <aside class="split-aside">
+                      <span class="eyebrow">Antes de radicar</span>
+                      <ul class="bullet-list mt-3">
+                        <li>Verifica si tu solicitud ya fue respondida en “Mis solicitudes”.</li>
+                        <li>Incluye fechas, nombres y documentos que ayuden a entender el caso.</li>
+                        <li>Usa un lenguaje respetuoso y concreto.</li>
+                        <li>No compartas contraseñas ni datos de tarjetas.</li>
+                      </ul>
+
+                      <div class="divider-label mt-6">Tipos de solicitud</div>
+                      <div class="info-row"><span class="info-label">Petición</span><span class="info-value">Solicitud de información</span></div>
+                      <div class="info-row"><span class="info-label">Queja / Reclamo</span><span class="info-value">Inconformidad</span></div>
+                      <div class="info-row"><span class="info-label">Sugerencia</span><span class="info-value">Propuesta de mejora</span></div>
+                      <div class="info-row"><span class="info-label">Felicitación</span><span class="info-value">Reconocimiento</span></div>
+                      <div class="info-row"><span class="info-label">Denuncia</span><span class="info-value">Reporte de una situación</span></div>
+
+                      <div class="note mt-5">
+                        <strong>¿Es urgente?</strong> Si existe un riesgo para la integridad de una persona, usa el canal de <a class="link" href="bullying.html">reporte de bullying</a> o llama al 123.
+                      </div>
+                    </aside>
+                  </div>
+                </div>
+
+                <div class="tab-panel" id="panel-solicitudes" role="tabpanel" aria-labelledby="tab-solicitudes" data-tab-panel="solicitudes" hidden>
+                  <div class="section-head">
+                    <div>
+                      <h2 class="section-title">Mis solicitudes</h2>
+                      <p class="section-sub">5 radicados · 2 en trámite · 3 respondidas</p>
+                    </div>
+                    <button class="btn btn-secondary btn-sm" type="button" data-demo="Historial descargado (demostración)">
+                      <i class="ph ph-download-simple" aria-hidden="true"></i>
+                      Descargar historial
+                    </button>
+                  </div>
+
+                  <div class="table-wrap" style="border-top:0">
+                    <table class="data-table pqrs-table">
+                      <caption class="sr-only">Solicitudes PQRS radicadas</caption>
+                      <thead>
+                        <tr>
+                          <th scope="col">Número</th>
+                          <th scope="col">Fecha apertura</th>
+                          <th scope="col">Tipo</th>
+                          <th scope="col">Queja</th>
+                          <th scope="col">Estado</th>
+                          <th scope="col" class="cell-actions">Acción</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td class="mono">#1048</td>
+                          <td class="nowrap muted">22 nov 2026</td>
+                          <td>Petición</td>
+                          <td><span class="cell-title">Solicito el certificado de notas del periodo para un trámite externo.</span></td>
+                          <td><span class="status status-warning">En trámite</span></td>
+                          <td class="cell-actions"><button class="btn-link" type="button" data-pqrs-ver data-numero="#1048" data-tipo="Petición" data-fecha="22 nov 2026" data-queja="Solicito el certificado de notas del periodo para un trámite externo." data-estado="En trámite" data-respuesta="">Ver</button></td>
+                        </tr>
+                        <tr>
+                          <td class="mono">#1031</td>
+                          <td class="nowrap muted">14 nov 2026</td>
+                          <td>Reclamo</td>
+                          <td><span class="cell-title">El pago de la pensión de octubre aún no se refleja en el estado de cuenta.</span></td>
+                          <td><span class="status status-warning">En trámite</span></td>
+                          <td class="cell-actions"><button class="btn-link" type="button" data-pqrs-ver data-numero="#1031" data-tipo="Reclamo" data-fecha="14 nov 2026" data-queja="El pago de la pensión de octubre aún no se refleja en el estado de cuenta." data-estado="En trámite" data-respuesta="">Ver</button></td>
+                        </tr>
+                        <tr>
+                          <td class="mono">#0994</td>
+                          <td class="nowrap muted">28 oct 2026</td>
+                          <td>Sugerencia</td>
+                          <td><span class="cell-title">Propongo ampliar el horario de la biblioteca en la semana de evaluaciones.</span></td>
+                          <td><span class="status status-success">Respondida</span></td>
+                          <td class="cell-actions"><button class="btn-link" type="button" data-pqrs-ver data-numero="#0994" data-tipo="Sugerencia" data-fecha="28 oct 2026" data-queja="Propongo ampliar el horario de la biblioteca en la semana de evaluaciones." data-estado="Respondida" data-respuesta="Gracias por la sugerencia. Se amplió el horario de la biblioteca durante la semana de evaluaciones.">Ver</button></td>
+                        </tr>
+                        <tr>
+                          <td class="mono">#0952</td>
+                          <td class="nowrap muted">10 oct 2026</td>
+                          <td>Felicitación</td>
+                          <td><span class="cell-title">Quiero reconocer el acompañamiento del equipo de ciencias en la feria escolar.</span></td>
+                          <td><span class="status status-success">Respondida</span></td>
+                          <td class="cell-actions"><button class="btn-link" type="button" data-pqrs-ver data-numero="#0952" data-tipo="Felicitación" data-fecha="10 oct 2026" data-queja="Quiero reconocer el acompañamiento del equipo de ciencias en la feria escolar." data-estado="Respondida" data-respuesta="Compartimos tu felicitación con el equipo de ciencias. ¡Gracias por reconocer su trabajo!">Ver</button></td>
+                        </tr>
+                        <tr>
+                          <td class="mono">#0887</td>
+                          <td class="nowrap muted">02 sep 2026</td>
+                          <td>Queja</td>
+                          <td><span class="cell-title">Reporto ruido constante en las zonas comunes durante las clases.</span></td>
+                          <td><span class="status status-success">Respondida</span></td>
+                          <td class="cell-actions"><button class="btn-link" type="button" data-pqrs-ver data-numero="#0887" data-tipo="Queja" data-fecha="02 sep 2026" data-queja="Reporto ruido constante en las zonas comunes durante las clases." data-estado="Respondida" data-respuesta="Se reforzó el acompañamiento en las zonas comunes y se ajustaron los protocolos de convivencia.">Ver</button></td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+
+                  <div class="table-footer">
+                    <span>Mostrando 1–5 de 12 solicitudes</span>
+                    <div class="pagination" aria-label="Paginación de PQRS">
+                      <button class="page-btn" type="button" aria-label="Página anterior" disabled><i class="ph ph-caret-left" aria-hidden="true"></i></button>
+                      <button class="page-btn is-active" type="button" data-page-btn="1">1</button>
+                      <button class="page-btn" type="button" data-page-btn="2">2</button>
+                      <button class="page-btn" type="button" data-page-btn="3">3</button>
+                      <button class="page-btn" type="button" aria-label="Página siguiente" data-page-btn="2"><i class="ph ph-caret-right" aria-hidden="true"></i></button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <div id="mobile-overlay" class="overlay"></div>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <div class="modal" id="pqrsDetalleModal" role="dialog" aria-modal="true" aria-labelledby="pqrsDetalleTitle">
+    <div class="modal-panel">
+      <div class="modal-head">
+        <div>
+          <h2 class="modal-title" id="pqrsDetalleTitle">Solicitud <span id="pqrsDetalleNumero">#</span></h2>
+          <p class="modal-sub" id="pqrsDetalleSub">Tipo · Fecha</p>
+        </div>
+        <button class="modal-close" type="button" data-modal-close aria-label="Cerrar">
+          <i class="ph ph-x" aria-hidden="true"></i>
+        </button>
+      </div>
+      <div class="modal-body">
+        <dl class="detail-list">
+          <div><dt>Número</dt><dd class="strong mono" id="pqrsDetalleNum2">#</dd></div>
+          <div><dt>Estado</dt><dd id="pqrsDetalleEstado">En trámite</dd></div>
+          <div><dt>Tipo</dt><dd id="pqrsDetalleTipo">Petición</dd></div>
+          <div><dt>Fecha apertura</dt><dd id="pqrsDetalleFecha">22 nov 2026</dd></div>
+          <div class="span-2"><dt>Queja</dt><dd id="pqrsDetalleQueja">Descripción de la solicitud.</dd></div>
+          <div class="span-2"><dt>Respuesta</dt><dd id="pqrsDetalleRespuesta">Aún no hay respuesta.</dd></div>
+        </dl>
+      </div>
+      <div class="modal-foot">
+        <button class="btn btn-secondary" type="button" data-modal-close>Cerrar</button>
+        <button class="btn btn-primary" type="button" data-demo="Respuesta descargada en PDF (demostración)">
+          <i class="ph ph-file-pdf" aria-hidden="true"></i>
+          Descargar respuesta
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script src="assets/js/app.js"></script>
+  <script>
+    (function () {
+      "use strict";
+
+      var form = document.getElementById("pqrsForm");
+      var success = document.getElementById("pqrsExitoso");
+      var nueva = document.getElementById("nuevaPqrs");
+      var queja = document.getElementById("pqrsQueja");
+      var contador = document.getElementById("pqrsContador");
+      var archivo = document.getElementById("pqrsArchivo");
+      var archivosInfo = document.getElementById("pqrsArchivosSeleccionados");
+
+      if (queja && contador) {
+        queja.addEventListener("input", function () {
+          contador.textContent = String(queja.value.length);
+        });
+      }
+
+      if (archivo && archivosInfo) {
+        archivo.addEventListener("change", function () {
+          var count = archivo.files ? archivo.files.length : 0;
+          if (count > 0) {
+            archivosInfo.textContent = count === 1 ? "1 archivo seleccionado" : count + " archivos seleccionados";
+            archivosInfo.hidden = false;
+          } else {
+            archivosInfo.hidden = true;
+          }
+        });
+      }
+
+      if (form && success) {
+        form.addEventListener("submit", function (event) {
+          event.preventDefault();
+          if (!form.checkValidity()) {
+            form.reportValidity();
+            return;
+          }
+          form.hidden = true;
+          success.hidden = false;
+          window.scrollTo({ top: 0, behavior: "smooth" });
+          if (window.EstuNET) window.EstuNET.showToast("PQRS radicada (demostración)");
+        });
+      }
+
+      if (nueva && form && success) {
+        nueva.addEventListener("click", function () {
+          form.reset();
+          if (contador) contador.textContent = "0";
+          if (archivosInfo) archivosInfo.hidden = true;
+          success.hidden = true;
+          form.hidden = false;
+          form.scrollIntoView({ behavior: "smooth", block: "start" });
+        });
+      }
+
+      document.addEventListener("click", function (event) {
+        var button = event.target.closest("[data-pqrs-ver]");
+        if (!button) return;
+        var set = function (id, value) {
+          var el = document.getElementById(id);
+          if (el) el.textContent = value;
+        };
+        set("pqrsDetalleNumero", button.getAttribute("data-numero"));
+        set("pqrsDetalleNum2", button.getAttribute("data-numero"));
+        set("pqrsDetalleSub", button.getAttribute("data-tipo") + " · " + button.getAttribute("data-fecha"));
+        set("pqrsDetalleTipo", button.getAttribute("data-tipo"));
+        set("pqrsDetalleFecha", button.getAttribute("data-fecha"));
+        set("pqrsDetalleEstado", button.getAttribute("data-estado"));
+        set("pqrsDetalleQueja", button.getAttribute("data-queja"));
+        var respuesta = button.getAttribute("data-respuesta");
+        set("pqrsDetalleRespuesta", respuesta ? respuesta : "Aún no hay respuesta. El plazo es de 8 días hábiles.");
+        if (window.EstuNET) window.EstuNET.openModal("pqrsDetalleModal");
+      });
+    })();
+  </script>
+
+</body>
+</html>

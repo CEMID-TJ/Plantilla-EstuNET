@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Plantilla de diseño del portal EstudiantesNET. Servicio social: programas, inscripción y evaluación.">
+  <title>Servicio social · EstudiantesNET</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body data-page="servicio">
+  <div id="proto-bar"></div>
+
+  <div class="app-layout">
+    <aside id="sidebar"></aside>
+
+    <div class="app-main">
+      <header id="topbar"></header>
+
+      <main class="page-main">
+        <div class="page-surface">
+          <div id="state-host" hidden></div>
+
+          <div id="page-content">
+            <section class="hero">
+              <div class="hero-row">
+                <div>
+                  <span class="eyebrow">Formación integral · Servicio social</span>
+                  <h2 class="page-heading">Servicio social</h2>
+                  <p class="page-subheading">Consulta los programas disponibles, inscríbete y registra la evaluación de tu experiencia. Solo se permite una inscripción activa por estudiante.</p>
+                </div>
+                <div class="hero-actions">
+                  <button class="btn btn-secondary" type="button" data-demo="Instructivo descargado (demostración)">
+                    <i class="ph ph-download-simple" aria-hidden="true"></i>
+                    Instructivo
+                  </button>
+                  <button class="btn btn-primary" type="button" data-tab-go="mi-inscripcion">
+                    <i class="ph ph-user-check" aria-hidden="true"></i>
+                    Mi inscripción
+                  </button>
+                </div>
+              </div>
+            </section>
+
+            <section class="section section-tight">
+              <div class="alert alert-warning" role="status">
+                <i class="ph ph-warning" aria-hidden="true"></i>
+                <div>
+                  <p class="alert-title">Autorización pendiente de firma</p>
+                  <p class="alert-text">Tu inscripción al programa “Apoyo en biblioteca” requiere la firma del acudiente y del estudiante para generar la autorización de asistencia.</p>
+                  <div class="alert-actions">
+                    <button class="btn-link" type="button" data-modal-open="firmaModal">Firmar autorización</button>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <section class="section" id="programas">
+              <div class="section-head">
+                <div>
+                  <h2 class="section-title">Programas disponibles</h2>
+                  <p class="section-sub">3 programas publicados para el año escolar 2026.</p>
+                </div>
+                <span class="chip">1 inscripción activa</span>
+              </div>
+
+              <form class="filter-bar" role="search" id="filtroServicio" style="padding-top:0;border-top:0">
+                <div class="field field-grow">
+                  <label class="label" for="buscarServicio">Buscar</label>
+                  <div class="search-field">
+                    <i class="ph ph-magnifying-glass" aria-hidden="true"></i>
+                    <input class="input input-sm" id="buscarServicio" type="search" placeholder="Buscar por nombre, tipo o funciones" autocomplete="off">
+                  </div>
+                </div>
+                <div class="field">
+                  <label class="label" for="filtroTipoServicio">Tipo</label>
+                  <select class="select input-sm" id="filtroTipoServicio">
+                    <option value="">Todos</option>
+                    <option value="ayudantía">Ayudantía</option>
+                    <option value="proyecto">Proyecto</option>
+                    <option value="campamento">Campamento</option>
+                  </select>
+                </div>
+                <div class="field">
+                  <label class="label" for="filtroAnioServicio">Año</label>
+                  <select class="select input-sm" id="filtroAnioServicio">
+                    <option>2026</option>
+                    <option>2025</option>
+                  </select>
+                </div>
+                <div class="filter-actions">
+                  <button class="btn btn-secondary btn-sm" type="button" id="servicioLimpiar">Limpiar</button>
+                </div>
+              </form>
+
+              <div class="table-wrap">
+                <table class="data-table servicio-table">
+                  <caption class="sr-only">Programas de servicio social</caption>
+                  <thead>
+                    <tr>
+                      <th scope="col">Tipo</th>
+                      <th scope="col">Nombre</th>
+                      <th scope="col">Descripción</th>
+                      <th scope="col">Funciones</th>
+                      <th scope="col">Horario</th>
+                      <th scope="col">Contacto</th>
+                      <th scope="col">Dirección</th>
+                      <th scope="col">Inicia-Fin</th>
+                      <th scope="col">Inscritos</th>
+                    </tr>
+                  </thead>
+                  <tbody id="servicioTbody">
+                    <tr data-tipo="ayudantía" data-text="ayudantía apoyo en biblioteca préstamo organización">
+                      <td class="nowrap">Ayudantía (2026)</td>
+                      <td><span class="cell-title">Apoyo en biblioteca</span></td>
+                      <td>Apoyo en los servicios de préstamo y organización de la biblioteca escolar.</td>
+                      <td>Atender préstamos, organizar estanterías y apoyar jornadas de lectura.</td>
+                      <td class="nowrap">Lun–mié · 7:00 a. m. – 9:00 a. m.</td>
+                      <td>Marcela Ruiz<br><span class="cell-sub">601 555 0101</span></td>
+                      <td>Calle 1 # 2-03<br><span class="cell-sub">serviciosocial@colegio.edu.co</span></td>
+                      <td class="nowrap">Desde 15 ene 2026<br>Hasta 15 dic 2026</td>
+                      <td>
+                        <span class="cell-title">8 de 20</span>
+                        <span class="status status-success block mt-1">Inscrito</span>
+                        <button class="btn-link block mt-1" type="button" data-modal-open="firmaModal">Firmar autorización</button>
+                      </td>
+                    </tr>
+                    <tr data-tipo="proyecto" data-text="proyecto brigada de salud promoción">
+                      <td class="nowrap">Proyecto (2026)</td>
+                      <td><span class="cell-title">Brigada de salud</span></td>
+                      <td>Participación en campañas de promoción y prevención de salud.</td>
+                      <td>Apoyar toma de signos vitales, charlas y jornadas de vacunación.</td>
+                      <td class="nowrap">Viernes · 2:00 p. m. – 5:00 p. m.</td>
+                      <td>Ana Beltrán<br><span class="cell-sub">601 555 0102</span></td>
+                      <td>Carrera 5 # 6-12<br><span class="cell-sub">salud@colegio.edu.co</span></td>
+                      <td class="nowrap">Desde 01 feb 2026<br>Hasta 30 nov 2026</td>
+                      <td>
+                        <span class="cell-title">14 de 20</span>
+                        <button class="btn-link block mt-1" type="button" data-demo="Inscripción registrada (demostración)">Inscribirse</button>
+                      </td>
+                    </tr>
+                    <tr data-tipo="campamento" data-text="campamento guardabosques cuidado ambiental">
+                      <td class="nowrap">Campamento (2026)</td>
+                      <td><span class="cell-title">Guardabosques</span></td>
+                      <td>Cuidado y conservación de áreas verdes de la comunidad educativa.</td>
+                      <td>Siembra, mantenimiento de zonas verdes y sensibilización ambiental.</td>
+                      <td class="nowrap">Sábados · 8:00 a. m. – 12:00 p. m.</td>
+                      <td>Carlos Dulcey<br><span class="cell-sub">601 555 0103</span></td>
+                      <td>Avenida 7 # 8-21<br><span class="cell-sub">ambiente@colegio.edu.co</span></td>
+                      <td class="nowrap">Desde 10 mar 2026<br>Hasta 20 oct 2026</td>
+                      <td>
+                        <span class="cell-title">20 de 20</span>
+                        <span class="status status-neutral block mt-1">Cupos llenos</span>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <div class="table-footer">
+                <span id="servicioResumen">Mostrando 3 programas</span>
+              </div>
+
+              <div class="note mt-5">
+                <strong>Cupos:</strong> el número de inscritos se actualiza al confirmar la inscripción. Si se completa el cupo, el programa se muestra como “Cupos llenos”.
+              </div>
+            </section>
+
+            <section class="section" id="mi-inscripcion">
+              <div class="section-head">
+                <div>
+                  <h2 class="section-title">Mi inscripción</h2>
+                  <p class="section-sub">Estado de la inscripción, la autorización y la evaluación del programa.</p>
+                </div>
+                <span class="status status-warning">Evaluación pendiente</span>
+              </div>
+
+              <div data-tabs>
+                <div class="tabs" role="tablist" aria-label="Detalle de la inscripción">
+                  <button class="tab" type="button" role="tab" id="tab-programa" aria-controls="panel-programa" aria-selected="true" data-tab="programa">Programa</button>
+                  <button class="tab" type="button" role="tab" id="tab-autorizacion" aria-controls="panel-autorizacion" aria-selected="false" data-tab="autorizacion">Autorización</button>
+                  <button class="tab" type="button" role="tab" id="tab-evaluacion" aria-controls="panel-evaluacion" aria-selected="false" data-tab="evaluacion">Evaluación</button>
+                </div>
+
+                <div class="tab-panel" id="panel-programa" role="tabpanel" aria-labelledby="tab-programa" data-tab-panel="programa">
+                  <dl class="detail-list">
+                    <div><dt>Tipo</dt><dd>Ayudantía (2026)</dd></div>
+                    <div><dt>Nombre</dt><dd class="strong">Apoyo en biblioteca</dd></div>
+                    <div><dt>Horario</dt><dd>Lun–mié · 7:00 a. m. – 9:00 a. m.</dd></div>
+                    <div><dt>Inscritos</dt><dd>8 de 20</dd></div>
+                    <div class="span-2"><dt>Descripción</dt><dd>Apoyo en los servicios de préstamo y organización de la biblioteca escolar.</dd></div>
+                    <div class="span-2"><dt>Funciones</dt><dd>Atender préstamos, organizar estanterías y apoyar jornadas de lectura.</dd></div>
+                    <div><dt>Contacto</dt><dd>Marcela Ruiz · 601 555 0101</dd></div>
+                    <div><dt>Dirección</dt><dd>Calle 1 # 2-03 · serviciosocial@colegio.edu.co</dd></div>
+                    <div class="span-2"><dt>Inicia-Fin</dt><dd>Desde 15 ene 2026 Hasta 15 dic 2026</dd></div>
+                  </dl>
+                </div>
+
+                <div class="tab-panel" id="panel-autorizacion" role="tabpanel" aria-labelledby="tab-autorizacion" data-tab-panel="autorizacion" hidden>
+                  <div class="alert alert-warning" role="status">
+                    <i class="ph ph-warning" aria-hidden="true"></i>
+                    <div>
+                      <p class="alert-title">Firmas pendientes</p>
+                      <p class="alert-text">Se requiere la firma del acudiente y del estudiante para generar la autorización de asistencia.</p>
+                    </div>
+                  </div>
+                  <dl class="detail-list mt-5">
+                    <div><dt>Firma acudiente</dt><dd><span class="status status-warning">Pendiente</span></dd></div>
+                    <div><dt>Firma estudiante</dt><dd><span class="status status-warning">Pendiente</span></dd></div>
+                    <div class="span-2"><dt>Autorización de asistencia</dt><dd>Se genera al registrar ambas firmas.</dd></div>
+                  </dl>
+                  <div class="form-actions mt-5">
+                    <span class="text-[11px] text-slate-500">La autorización se descarga en PDF al completar las dos firmas.</span>
+                    <div class="form-actions-right">
+                      <button class="btn btn-primary btn-sm" type="button" data-modal-open="firmaModal">
+                        <i class="ph ph-signature" aria-hidden="true"></i>
+                        Firmar autorización
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="tab-panel" id="panel-evaluacion" role="tabpanel" aria-labelledby="tab-evaluacion" data-tab-panel="evaluacion" hidden>
+                  <dl class="detail-list">
+                    <div><dt>Terminada</dt><dd><span class="status status-warning">No</span></dd></div>
+                    <div><dt>Evaluo</dt><dd><span class="status status-warning">No</span></dd></div>
+                    <div class="span-2"><dt>Desempenio</dt><dd>Aún no se ha registrado el desempeño del estudiante.</dd></div>
+                    <div class="span-2"><dt>ObserEval</dt><dd>Aún no se han registrado observaciones y sugerencias.</dd></div>
+                  </dl>
+                  <div class="form-actions mt-5">
+                    <span class="text-[11px] text-slate-500">La evaluación se habilita al finalizar el programa.</span>
+                    <div class="form-actions-right">
+                      <button class="btn btn-primary btn-sm" type="button" data-modal-open="evaluacionModal">
+                        <i class="ph ph-clipboard-check" aria-hidden="true"></i>
+                        Registrar evaluación
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <div id="mobile-overlay" class="overlay"></div>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <div class="modal" id="firmaModal" role="dialog" aria-modal="true" aria-labelledby="firmaModalTitle">
+    <div class="modal-panel">
+      <div class="modal-head">
+        <div>
+          <h2 class="modal-title" id="firmaModalTitle">Firmar autorización</h2>
+          <p class="modal-sub">Autorización de asistencia a servicio social.</p>
+        </div>
+        <button class="modal-close" type="button" data-modal-close aria-label="Cerrar">
+          <i class="ph ph-x" aria-hidden="true"></i>
+        </button>
+      </div>
+      <form id="firmaForm">
+        <div class="modal-body">
+          <fieldset style="border:0;padding:0;margin:0">
+            <legend class="label">Tipo de firma <span class="req" aria-hidden="true">*</span></legend>
+            <div class="grid gap-2">
+              <label class="check-row" style="padding:11px 12px;border:1px solid var(--line);border-radius:9px">
+                <input type="radio" name="tipoFirma" value="M" checked required>
+                <span><strong class="text-slate-800">Acudiente</strong><br><span class="text-[11px] text-slate-500">Madre, padre o acudiente registrado</span></span>
+              </label>
+              <label class="check-row" style="padding:11px 12px;border:1px solid var(--line);border-radius:9px">
+                <input type="radio" name="tipoFirma" value="E" required>
+                <span><strong class="text-slate-800">Estudiante</strong><br><span class="text-[11px] text-slate-500">Firma del estudiante inscrito</span></span>
+              </label>
+            </div>
+          </fieldset>
+          <div class="field mt-5">
+            <label class="label" for="firmaNombre">Nombre de quien firma <span class="req" aria-hidden="true">*</span></label>
+            <input class="input" id="firmaNombre" name="firmaNombre" type="text" required placeholder="Nombre completo">
+          </div>
+          <label class="check-row mt-4">
+            <input type="checkbox" id="firmaAcepta" name="firmaAcepta" required>
+            <span>Confirmo que autorizo la asistencia del estudiante al programa de servicio social. <span class="req" aria-hidden="true">*</span></span>
+          </label>
+        </div>
+        <div class="modal-foot">
+          <button class="btn btn-secondary" type="button" data-modal-close>Cancelar</button>
+          <button class="btn btn-primary" type="submit">Guardar firma</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="modal" id="evaluacionModal" role="dialog" aria-modal="true" aria-labelledby="evaluacionModalTitle">
+    <div class="modal-panel">
+      <div class="modal-head">
+        <div>
+          <h2 class="modal-title" id="evaluacionModalTitle">Registrar evaluación</h2>
+          <p class="modal-sub">Programa: Apoyo en biblioteca.</p>
+        </div>
+        <button class="modal-close" type="button" data-modal-close aria-label="Cerrar">
+          <i class="ph ph-x" aria-hidden="true"></i>
+        </button>
+      </div>
+      <form id="evaluacionForm">
+        <div class="modal-body">
+          <div class="field">
+            <label class="label" for="desempenio">Desempeño <span class="req" aria-hidden="true">*</span></label>
+            <textarea class="textarea" id="desempenio" name="Desempenio" rows="3" maxlength="200" required placeholder="Describe el desempeño del estudiante"></textarea>
+            <p class="field-help">Máximo 200 caracteres.</p>
+          </div>
+          <div class="field mt-4">
+            <label class="label" for="obserEval">Observaciones y sugerencias <span class="req" aria-hidden="true">*</span></label>
+            <textarea class="textarea" id="obserEval" name="ObserEval" rows="3" maxlength="200" required placeholder="Escribe aquí tus observaciones y sugerencias"></textarea>
+            <p class="field-help">Máximo 200 caracteres.</p>
+          </div>
+          <label class="check-row mt-4">
+            <input type="checkbox" id="evaluacionTerminada" name="Terminada" required>
+            <span>Confirmo que el programa fue terminado. <span class="req" aria-hidden="true">*</span></span>
+          </label>
+        </div>
+        <div class="modal-foot">
+          <button class="btn btn-secondary" type="button" data-modal-close>Cancelar</button>
+          <button class="btn btn-primary" type="submit">Guardar evaluación</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="assets/js/app.js"></script>
+  <script>
+    (function () {
+      "use strict";
+
+      var tbody = document.getElementById("servicioTbody");
+      var buscar = document.getElementById("buscarServicio");
+      var tipo = document.getElementById("filtroTipoServicio");
+      var limpiar = document.getElementById("servicioLimpiar");
+      var resumen = document.getElementById("servicioResumen");
+
+      function filtrar() {
+        if (!tbody) return;
+        var term = buscar ? buscar.value.trim().toLowerCase() : "";
+        var tip = tipo ? tipo.value.toLowerCase() : "";
+        var visible = 0;
+        Array.prototype.forEach.call(tbody.querySelectorAll("tr"), function (row) {
+          var text = row.getAttribute("data-text") || "";
+          var rowTipo = row.getAttribute("data-tipo") || "";
+          var show = true;
+          if (term && text.indexOf(term) === -1) show = false;
+          if (tip && rowTipo !== tip) show = false;
+          row.hidden = !show;
+          if (show) visible += 1;
+        });
+        if (resumen) resumen.textContent = "Mostrando " + visible + " de " + tbody.querySelectorAll("tr").length + " programas";
+      }
+
+      if (buscar) buscar.addEventListener("input", filtrar);
+      if (tipo) tipo.addEventListener("change", filtrar);
+      if (limpiar) limpiar.addEventListener("click", function () {
+        if (buscar) buscar.value = "";
+        if (tipo) tipo.value = "";
+        filtrar();
+      });
+      filtrar();
+
+      function bindForm(id, modal, message) {
+        var form = document.getElementById(id);
+        if (!form) return;
+        form.addEventListener("submit", function (event) {
+          event.preventDefault();
+          if (!form.checkValidity()) {
+            form.reportValidity();
+            return;
+          }
+          if (window.EstuNET) {
+            window.EstuNET.closeModal(modal);
+            window.EstuNET.showToast(message);
+          }
+        });
+      }
+
+      bindForm("firmaForm", "firmaModal", "Firma guardada (demostración)");
+      bindForm("evaluacionForm", "evaluacionModal", "Evaluación guardada (demostración)");
+
+      document.addEventListener("click", function (event) {
+        var button = event.target.closest("[data-tab-go]");
+        if (!button) return;
+        var section = document.getElementById(button.getAttribute("data-tab-go"));
+        if (section) {
+          section.scrollIntoView({ behavior: "smooth", block: "start" });
+          var tabButton = section.querySelector('[data-tab="programa"]');
+          if (tabButton) tabButton.click();
+        }
+      });
+    })();
+  </script>
+</body>
+</html>

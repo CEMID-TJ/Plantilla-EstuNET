@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Plantilla de diseño del portal EstudiantesNET. Carnet virtual del estudiante.">
+  <title>Carnet virtual · EstudiantesNET</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body data-page="carnet">
+  <div id="proto-bar"></div>
+
+  <div class="app-layout">
+    <aside id="sidebar"></aside>
+
+    <div class="app-main">
+      <header id="topbar"></header>
+
+      <main class="page-main">
+        <div class="page-surface">
+          <div id="state-host" hidden></div>
+
+          <div id="page-content">
+            <section class="hero">
+              <div class="hero-row">
+                <div>
+                  <span class="eyebrow">Identificación digital · Año 2026</span>
+                  <h2 class="page-heading">Carnet virtual</h2>
+                  <p class="page-subheading">Presenta este carnet en la entrada del colegio y en las actividades institucionales. La versión digital tiene la misma validez que el carnet físico.</p>
+                </div>
+                <div class="hero-actions">
+                  <button class="btn btn-secondary" type="button" data-demo="Carnet compartido (demostración)">
+                    <i class="ph ph-share-network" aria-hidden="true"></i>
+                    Compartir
+                  </button>
+                  <button class="btn btn-primary" type="button" data-demo="Carnet descargado (demostración)">
+                    <i class="ph ph-download-simple" aria-hidden="true"></i>
+                    Descargar
+                  </button>
+                </div>
+              </div>
+            </section>
+
+            <section class="section">
+              <div class="split">
+                <div>
+                  <div class="section-head">
+                    <div>
+                      <h2 class="section-title">Carnet del estudiante</h2>
+                      <p class="section-sub">Datos tomados de la ficha del estudiante y de la información clínica.</p>
+                    </div>
+                    <span class="status status-success">Matrícula activa</span>
+                  </div>
+
+                  <div class="carnet" style="max-width:430px">
+                    <div class="carnet-top">
+                      <div>
+                        <div class="carnet-brand">EstudiantesNET</div>
+                        <div style="font-size:9px;color:#94a3b8;margin-top:2px">Colegio Minuto de Dios</div>
+                      </div>
+                      <span class="carnet-year">2026</span>
+                    </div>
+                    <div class="carnet-body" style="padding:22px">
+                      <div class="carnet-photo" style="width:92px;height:116px">Foto<br>3 × 4</div>
+                      <div>
+                        <h3 class="carnet-name" style="font-size:19px">Laura Sofía<br>Martínez Gómez</h3>
+                        <p class="carnet-meta">Grado 10.º · Aula 2 · Jornada mañana</p>
+                        <div class="carnet-details">
+                          <span>Código</span>
+                          <strong class="mono" style="font-size:13px">2026-0042</strong>
+                          <span>Colegio</span>
+                          <strong>Colegio Minuto de Dios</strong>
+                          <span>RH / EPS</span>
+                          <strong>O+ · Nueva EPS</strong>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="carnet-bottom" style="padding:0 22px 22px">
+                      <div>
+                        <div class="carnet-code">Carnet virtual · Año 2026</div>
+                        <div class="carnet-code" style="margin-top:3px">Uso personal e intransferible</div>
+                      </div>
+                      <span class="qr-frame" aria-label="Elemento decorativo del carnet"></span>
+                    </div>
+                  </div>
+
+                  <div class="flex items-center gap-3 mt-5">
+                    <button class="btn btn-secondary btn-sm" type="button" id="imprimirCarnet">
+                      <i class="ph ph-printer" aria-hidden="true"></i>
+                      Imprimir
+                    </button>
+                    <button class="btn btn-secondary btn-sm" type="button" data-demo="Carnet enviado al correo (demostración)">
+                      <i class="ph ph-envelope-simple" aria-hidden="true"></i>
+                      Enviar por correo
+                    </button>
+                  </div>
+                </div>
+
+                <aside class="split-aside">
+                  <span class="eyebrow">Datos de validación</span>
+                  <dl class="detail-list wide compact mt-2" style="grid-template-columns:1fr">
+                    <div><dt>Nombre</dt><dd class="strong">Laura Sofía Martínez Gómez</dd></div>
+                    <div><dt>Código</dt><dd class="mono">2026-0042</dd></div>
+                    <div><dt>Grado</dt><dd>10.º</dd></div>
+                    <div><dt>Aula</dt><dd>2</dd></div>
+                    <div><dt>Jornada</dt><dd>Mañana</dd></div>
+                    <div><dt>Colegio</dt><dd>Colegio Minuto de Dios</dd></div>
+                    <div><dt>RH</dt><dd>O+</dd></div>
+                    <div><dt>EPS</dt><dd>Nueva EPS</dd></div>
+                    <div><dt>Estado</dt><dd><span class="status status-success">Activa</span></dd></div>
+                  </dl>
+
+                  <div class="note mt-5">
+                    <strong>Uso del carnet:</strong> es personal e intransferible. Si encuentras un carnet extraviado, entrégalo en la portería de la institución.
+                  </div>
+
+                  <div class="info-row mt-4">
+                    <span class="info-label">¿Problemas con tu carnet?</span>
+                    <span class="info-value"><a class="link" href="pqrs.html">Radica una PQRS</a></span>
+                  </div>
+                </aside>
+              </div>
+            </section>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <div id="mobile-overlay" class="overlay"></div>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <script src="assets/js/app.js"></script>
+  <script>
+    document.getElementById("imprimirCarnet").addEventListener("click", function () {
+      window.print();
+    });
+  </script>
+</body>
+</html>

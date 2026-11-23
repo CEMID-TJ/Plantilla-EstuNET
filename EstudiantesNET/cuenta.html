@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Plantilla de diseño del portal EstudiantesNET. Estado de cuenta del estudiante.">
+  <title>Estado de cuenta · EstudiantesNET</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body data-page="cuenta">
+  <div id="proto-bar"></div>
+
+  <div class="app-layout">
+    <aside id="sidebar"></aside>
+
+    <div class="app-main">
+      <header id="topbar"></header>
+
+      <main class="page-main">
+        <div class="page-surface">
+          <div id="state-host" hidden></div>
+
+          <div id="page-content">
+            <section class="hero">
+              <div class="hero-row">
+                <div>
+                  <span class="eyebrow">Administración · Año escolar 2026</span>
+                  <h2 class="page-heading">Estado de cuenta</h2>
+                  <p class="page-subheading">Consulta las obligaciones, pagos y saldos del estudiante. Los pagos en línea se reflejan en un plazo máximo de 24 horas hábiles.</p>
+                </div>
+                <div class="hero-actions">
+                  <button class="btn btn-secondary" type="button" data-demo="Estado de cuenta descargado (demostración)">
+                    <i class="ph ph-download-simple" aria-hidden="true"></i>
+                    Descargar estado
+                  </button>
+                  <button class="btn btn-success" type="button" data-modal-open="pagoModal">
+                    <i class="ph ph-credit-card" aria-hidden="true"></i>
+                    Pagar en línea
+                  </button>
+                </div>
+              </div>
+            </section>
+
+            <section class="section section-tight">
+              <div class="alert alert-warning" role="status">
+                <i class="ph ph-warning" aria-hidden="true"></i>
+                <div>
+                  <p class="alert-title">Tienes una obligación vencida</p>
+                  <p class="alert-text">La pensión de noviembre venció el 20 de noviembre. Regulariza el pago para evitar recargos por mora.</p>
+                  <div class="alert-actions">
+                    <button class="btn-link" type="button" data-modal-open="pagoModal">Pagar ahora</button>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <div class="stat-row" aria-label="Resumen de cuenta">
+              <div class="stat">
+                <div class="stat-label">Saldo a la fecha</div>
+                <div class="stat-value">$1.240.000</div>
+                <div class="stat-meta is-warning">Incluye 1 obligación vencida</div>
+              </div>
+              <div class="stat">
+                <div class="stat-label">Total pagado</div>
+                <div class="stat-value">$6.200.000</div>
+                <div class="stat-meta">10 pagos registrados</div>
+              </div>
+              <div class="stat">
+                <div class="stat-label">Total cargos</div>
+                <div class="stat-value">$7.440.000</div>
+                <div class="stat-meta">12 obligaciones del año</div>
+              </div>
+            </div>
+
+            <section class="section" id="movimientos">
+              <div class="section-head">
+                <div>
+                  <h2 class="section-title">Movimientos de la cuenta</h2>
+                  <p class="section-sub">Cargos, descuentos y pagos registrados en el año escolar.</p>
+                </div>
+                <span class="chip chip-warning">1 vencida</span>
+              </div>
+
+              <form class="filter-bar" role="search" id="filtroCuenta" style="padding-top:0;border-top:0">
+                <div class="field field-grow">
+                  <label class="label" for="buscarMovimiento">Buscar</label>
+                  <div class="search-field">
+                    <i class="ph ph-magnifying-glass" aria-hidden="true"></i>
+                    <input class="input input-sm" id="buscarMovimiento" type="search" placeholder="Buscar por descripción o tipo" autocomplete="off">
+                  </div>
+                </div>
+                <div class="field">
+                  <label class="label" for="filtroAnio">Año</label>
+                  <select class="select input-sm" id="filtroAnio">
+                    <option>2026</option>
+                    <option>2025</option>
+                  </select>
+                </div>
+                <div class="field">
+                  <label class="label" for="filtroTipoMovimiento">Tipo</label>
+                  <select class="select input-sm" id="filtroTipoMovimiento">
+                    <option value="">Todos</option>
+                    <option value="Pensión">Pensión</option>
+                    <option value="Seguro">Seguro</option>
+                    <option value="Otro">Otro</option>
+                  </select>
+                </div>
+                <div class="filter-actions">
+                  <button class="btn btn-secondary btn-sm" type="button" id="cuentaLimpiar">Limpiar</button>
+                </div>
+              </form>
+
+              <div class="table-wrap">
+                <table class="data-table cuenta-table">
+                  <caption class="sr-only">Movimientos del estado de cuenta</caption>
+                  <thead>
+                    <tr>
+                      <th scope="col">MES</th>
+                      <th scope="col">TIPO</th>
+                      <th scope="col">DESCRIPCIÓN</th>
+                      <th scope="col" class="num">VALOR</th>
+                      <th scope="col" class="num">DESCUENTO</th>
+                      <th scope="col" class="num">PAGOS</th>
+                      <th scope="col" class="num">SALDO</th>
+                    </tr>
+                  </thead>
+                  <tbody id="cuentaTbody">
+                    <tr data-tipo="pensión" data-text="pensión enero 2026">
+                      <td class="nowrap muted">ENE</td>
+                      <td>Pensión</td>
+                      <td><span class="cell-title">Pensión enero 2026</span><button class="btn-link" type="button" data-demo="Comprobante descargado (demostración)">Recibo</button></td>
+                      <td class="num">$620.000</td>
+                      <td class="num">$0</td>
+                      <td class="num">$620.000</td>
+                      <td class="num">$0</td>
+                    </tr>
+                    <tr data-tipo="pensión" data-text="pensión febrero 2026">
+                      <td class="nowrap muted">FEB</td>
+                      <td>Pensión</td>
+                      <td><span class="cell-title">Pensión febrero 2026</span><button class="btn-link" type="button" data-demo="Comprobante descargado (demostración)">Recibo</button></td>
+                      <td class="num">$620.000</td>
+                      <td class="num">$0</td>
+                      <td class="num">$620.000</td>
+                      <td class="num">$0</td>
+                    </tr>
+                    <tr data-tipo="pensión" data-text="pensión marzo 2026">
+                      <td class="nowrap muted">MAR</td>
+                      <td>Pensión</td>
+                      <td><span class="cell-title">Pensión marzo 2026</span><button class="btn-link" type="button" data-demo="Comprobante descargado (demostración)">Recibo</button></td>
+                      <td class="num">$620.000</td>
+                      <td class="num">$0</td>
+                      <td class="num">$620.000</td>
+                      <td class="num">$0</td>
+                    </tr>
+                    <tr data-tipo="pensión" data-text="pensión abril 2026">
+                      <td class="nowrap muted">ABR</td>
+                      <td>Pensión</td>
+                      <td><span class="cell-title">Pensión abril 2026</span><button class="btn-link" type="button" data-demo="Comprobante descargado (demostración)">Recibo</button></td>
+                      <td class="num">$620.000</td>
+                      <td class="num">$0</td>
+                      <td class="num">$620.000</td>
+                      <td class="num">$0</td>
+                    </tr>
+                    <tr data-tipo="pensión" data-text="pensión mayo 2026">
+                      <td class="nowrap muted">MAY</td>
+                      <td>Pensión</td>
+                      <td><span class="cell-title">Pensión mayo 2026</span><button class="btn-link" type="button" data-demo="Comprobante descargado (demostración)">Recibo</button></td>
+                      <td class="num">$620.000</td>
+                      <td class="num">$0</td>
+                      <td class="num">$620.000</td>
+                      <td class="num">$0</td>
+                    </tr>
+                    <tr data-tipo="pensión" data-text="pensión junio 2026">
+                      <td class="nowrap muted">JUN</td>
+                      <td>Pensión</td>
+                      <td><span class="cell-title">Pensión junio 2026</span><button class="btn-link" type="button" data-demo="Comprobante descargado (demostración)">Recibo</button></td>
+                      <td class="num">$620.000</td>
+                      <td class="num">$0</td>
+                      <td class="num">$620.000</td>
+                      <td class="num">$0</td>
+                    </tr>
+                    <tr data-tipo="pensión" data-text="pensión julio 2026">
+                      <td class="nowrap muted">JUL</td>
+                      <td>Pensión</td>
+                      <td><span class="cell-title">Pensión julio 2026</span><button class="btn-link" type="button" data-demo="Comprobante descargado (demostración)">Recibo</button></td>
+                      <td class="num">$620.000</td>
+                      <td class="num">$0</td>
+                      <td class="num">$620.000</td>
+                      <td class="num">$0</td>
+                    </tr>
+                    <tr data-tipo="pensión" data-text="pensión agosto 2026">
+                      <td class="nowrap muted">AGO</td>
+                      <td>Pensión</td>
+                      <td><span class="cell-title">Pensión agosto 2026</span><button class="btn-link" type="button" data-demo="Comprobante descargado (demostración)">Recibo</button></td>
+                      <td class="num">$620.000</td>
+                      <td class="num">$0</td>
+                      <td class="num">$620.000</td>
+                      <td class="num">$0</td>
+                    </tr>
+                    <tr data-tipo="pensión" data-text="pensión septiembre 2026">
+                      <td class="nowrap muted">SEP</td>
+                      <td>Pensión</td>
+                      <td><span class="cell-title">Pensión septiembre 2026</span><button class="btn-link" type="button" data-demo="Comprobante descargado (demostración)">Recibo</button></td>
+                      <td class="num">$620.000</td>
+                      <td class="num">$0</td>
+                      <td class="num">$620.000</td>
+                      <td class="num">$0</td>
+                    </tr>
+                    <tr data-tipo="pensión" data-text="pensión octubre 2026">
+                      <td class="nowrap muted">OCT</td>
+                      <td>Pensión</td>
+                      <td><span class="cell-title">Pensión octubre 2026</span><button class="btn-link" type="button" data-demo="Comprobante descargado (demostración)">Recibo</button></td>
+                      <td class="num">$620.000</td>
+                      <td class="num">$0</td>
+                      <td class="num">$620.000</td>
+                      <td class="num">$0</td>
+                    </tr>
+                    <tr data-tipo="pensión" data-text="pensión noviembre 2026">
+                      <td class="nowrap muted">NOV</td>
+                      <td>Pensión</td>
+                      <td><span class="cell-title">Pensión noviembre 2026</span><button class="btn-link" type="button" data-modal-open="pagoModal">Pagar</button></td>
+                      <td class="num">$620.000</td>
+                      <td class="num">$0</td>
+                      <td class="num">$0</td>
+                      <td class="num grade-low">$620.000</td>
+                    </tr>
+                    <tr data-tipo="pensión" data-text="pensión diciembre 2026">
+                      <td class="nowrap muted">DIC</td>
+                      <td>Pensión</td>
+                      <td><span class="cell-title">Pensión diciembre 2026</span><button class="btn-link" type="button" data-modal-open="pagoModal">Pagar</button></td>
+                      <td class="num">$620.000</td>
+                      <td class="num">$0</td>
+                      <td class="num">$0</td>
+                      <td class="num grade-low">$620.000</td>
+                    </tr>
+                  </tbody>
+                  <tfoot>
+                    <tr class="total-row">
+                      <td colspan="3" class="cell-title">TOTALES</td>
+                      <td class="num cell-title">$7.440.000</td>
+                      <td class="num cell-title">$0</td>
+                      <td class="num cell-title">$6.200.000</td>
+                      <td class="num cell-title">$1.240.000</td>
+                    </tr>
+                    <tr class="total-final">
+                      <td colspan="3" class="cell-title text-right">SALDO A LA FECHA</td>
+                      <td colspan="3"></td>
+                      <td class="num cell-title grade-low">$1.240.000</td>
+                    </tr>
+                  </tfoot>
+                </table>
+              </div>
+
+              <div class="table-footer">
+                <span id="cuentaResumen">Mostrando 12 movimientos</span>
+              </div>
+
+              <div class="note mt-5">
+                <strong>Convención:</strong> el saldo en rojo indica una obligación pendiente o vencida. Los valores están expresados en pesos colombianos.
+              </div>
+            </section>
+
+            <section class="section">
+              <div class="section-head">
+                <div>
+                  <h2 class="section-title">Resumen de pagos</h2>
+                  <p class="section-sub">Historial de pagos registrados durante el año escolar.</p>
+                </div>
+              </div>
+
+              <div class="table-wrap">
+                <table class="data-table compact">
+                  <caption class="sr-only">Resumen de pagos realizados</caption>
+                  <thead>
+                    <tr>
+                      <th scope="col">FECHA</th>
+                      <th scope="col">ENTIDAD</th>
+                      <th scope="col" class="num">VALOR</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td class="nowrap">18 oct 2026</td>
+                      <td>PSE · Davivienda</td>
+                      <td class="num">$620.000</td>
+                    </tr>
+                    <tr>
+                      <td class="nowrap">16 sep 2026</td>
+                      <td>PSE · Davivienda</td>
+                      <td class="num">$620.000</td>
+                    </tr>
+                    <tr>
+                      <td class="nowrap">14 ago 2026</td>
+                      <td>Tarjeta débito · Visa</td>
+                      <td class="num">$620.000</td>
+                    </tr>
+                    <tr>
+                      <td class="nowrap">15 jul 2026</td>
+                      <td>PSE · Davivienda</td>
+                      <td class="num">$620.000</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <div class="note mt-5">
+                <strong>Nota:</strong> se muestran los últimos pagos. Para consultar pagos anteriores, radica una PQRS en la categoría "Certificados y paz y salvo".
+              </div>
+            </section>
+
+            <section class="section section-tight">
+              <div class="split">
+                <div>
+                  <h2 class="section-title" style="font-size:16px">Información de pagos</h2>
+                  <p class="section-sub">Canales habilitados y tiempos de aplicación.</p>
+                </div>
+                <div class="grid grid-3 gap-4">
+                  <div>
+                    <div class="eyebrow">Pago en línea</div>
+                    <p class="text-[12px] text-slate-600 mt-1">PSE o tarjeta débito. Se aplica en un máximo de 24 horas hábiles.</p>
+                  </div>
+                  <div>
+                    <div class="eyebrow">Transferencia</div>
+                    <p class="text-[12px] text-slate-600 mt-1">Usa la referencia de la obligación. Envía el comprobante por PQRS.</p>
+                  </div>
+                  <div>
+                    <div class="eyebrow">Paz y salvo</div>
+                    <p class="text-[12px] text-slate-600 mt-1">Se genera automáticamente al registrar el pago total del año.</p>
+                  </div>
+                </div>
+              </div>
+            </section>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <div id="mobile-overlay" class="overlay"></div>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <div class="modal" id="pagoModal" role="dialog" aria-modal="true" aria-labelledby="pagoModalTitle">
+    <div class="modal-panel">
+      <div class="modal-head">
+        <div>
+          <h2 class="modal-title" id="pagoModalTitle">Pagar obligación</h2>
+          <p class="modal-sub">Pago seguro · plantilla de demostración.</p>
+        </div>
+        <button class="modal-close" type="button" data-modal-close aria-label="Cerrar">
+          <i class="ph ph-x" aria-hidden="true"></i>
+        </button>
+      </div>
+      <form id="pagoForm">
+        <div class="modal-body">
+          <div class="alert alert-info">
+            <i class="ph ph-shield-check" aria-hidden="true"></i>
+            <div>
+              <p class="alert-title">Pago protegido</p>
+              <p class="alert-text">Esta es una representación de diseño. No se realizará ningún cobro real.</p>
+            </div>
+          </div>
+
+          <div class="mt-5">
+            <div class="eyebrow">Obligación seleccionada</div>
+            <div class="mt-2 flex items-start justify-between gap-4">
+              <div>
+                <div class="text-[14px] font-semibold">Pensión noviembre 2026</div>
+                <div class="text-[11px] text-slate-500">Tipo: Pensión · Mes: NOV</div>
+              </div>
+              <div class="text-[18px] font-bold tracking-tight">$620.000</div>
+            </div>
+          </div>
+
+          <fieldset class="mt-5" style="border:0;padding:0;margin-left:0;margin-right:0">
+            <legend class="label">Medio de pago <span class="req" aria-hidden="true">*</span></legend>
+            <div class="grid gap-2">
+              <label class="check-row" style="padding:11px 12px;border:1px solid var(--line);border-radius:9px">
+                <input type="radio" name="medioPago" value="pse" checked required>
+                <span><strong class="text-slate-800">PSE · Débito bancario</strong><br><span class="text-[11px] text-slate-500">Banco Davivienda · cuenta de ahorros</span></span>
+              </label>
+              <label class="check-row" style="padding:11px 12px;border:1px solid var(--line);border-radius:9px">
+                <input type="radio" name="medioPago" value="tarjeta" required>
+                <span><strong class="text-slate-800">Tarjeta débito o crédito</strong><br><span class="text-[11px] text-slate-500">Visa, Mastercard o American Express</span></span>
+              </label>
+            </div>
+          </fieldset>
+
+          <label class="check-row mt-5">
+            <input type="checkbox" id="pagoAcepto" name="pagoAcepto" required>
+            <span>Acepto los términos y condiciones del pago y autorizo el débito del valor seleccionado. <span class="req" aria-hidden="true">*</span></span>
+          </label>
+        </div>
+        <div class="modal-foot">
+          <button class="btn btn-secondary" type="button" data-modal-close>Cancelar</button>
+          <button class="btn btn-success" type="submit">
+            <i class="ph ph-credit-card" aria-hidden="true"></i>
+            Continuar al pago
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="assets/js/app.js"></script>
+  <script>
+    (function () {
+      "use strict";
+
+      var tbody = document.getElementById("cuentaTbody");
+      var buscar = document.getElementById("buscarMovimiento");
+      var tipo = document.getElementById("filtroTipoMovimiento");
+      var limpiar = document.getElementById("cuentaLimpiar");
+      var resumen = document.getElementById("cuentaResumen");
+
+      function filtrar() {
+        if (!tbody) return;
+        var term = buscar ? buscar.value.trim().toLowerCase() : "";
+        var tipoVal = tipo ? tipo.value.toLowerCase() : "";
+        var visible = 0;
+        Array.prototype.forEach.call(tbody.querySelectorAll("tr"), function (row) {
+          var text = row.getAttribute("data-text") || "";
+          var rowTipo = row.getAttribute("data-tipo") || "";
+          var show = true;
+          if (term && text.indexOf(term) === -1) show = false;
+          if (tipoVal && rowTipo !== tipoVal) show = false;
+          row.hidden = !show;
+          if (show) visible += 1;
+        });
+        if (resumen) resumen.textContent = "Mostrando " + visible + " de " + tbody.querySelectorAll("tr").length + " movimientos";
+      }
+
+      if (buscar) buscar.addEventListener("input", filtrar);
+      if (tipo) tipo.addEventListener("change", filtrar);
+      if (limpiar) limpiar.addEventListener("click", function () {
+        if (buscar) buscar.value = "";
+        if (tipo) tipo.value = "";
+        filtrar();
+      });
+
+      var form = document.getElementById("pagoForm");
+      if (form) form.addEventListener("submit", function (event) {
+        event.preventDefault();
+        if (!form.checkValidity()) {
+          form.reportValidity();
+          return;
+        }
+        if (window.EstuNET) {
+          window.EstuNET.closeModal("pagoModal");
+          window.EstuNET.showToast("Pago iniciado correctamente (demostración)");
+        }
+      });
+
+      filtrar();
+    })();
+  </script>
+</body>
+</html>

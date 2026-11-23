@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Plantilla de diseño del portal EstudiantesNET. Canal de reporte de bullying.">
+  <title>Denunciar bullying · EstudiantesNET</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body data-page="bullying">
+  <div id="proto-bar"></div>
+
+  <div class="app-layout">
+    <aside id="sidebar"></aside>
+
+    <div class="app-main">
+      <header id="topbar"></header>
+
+      <main class="page-main">
+        <div class="page-surface">
+          <div id="state-host" hidden></div>
+
+          <div id="page-content">
+            <section class="hero">
+              <div class="hero-row">
+                <div>
+                  <span class="eyebrow">Canal confidencial · Convivencia escolar</span>
+                  <h2 class="page-heading">Denunciar bullying</h2>
+                  <p class="page-subheading">Este es un espacio seguro para reportar situaciones de acoso, exclusión o maltrato. Tu reporte será tratado de forma confidencial por el equipo de convivencia.</p>
+                </div>
+                <div class="hero-actions">
+                  <span class="status status-success">Canal protegido</span>
+                </div>
+              </div>
+            </section>
+
+            <section class="section section-tight">
+              <div class="alert alert-info" role="status">
+                <i class="ph ph-shield-check" aria-hidden="true"></i>
+                <div>
+                  <p class="alert-title">Tu reporte es confidencial</p>
+                  <p class="alert-text">La información será conocida únicamente por el equipo de convivencia. Si estás en peligro inmediato, acude a un adulto de confianza o llama a la línea de emergencia 123.</p>
+                </div>
+              </div>
+            </section>
+
+            <section class="section">
+              <div class="split">
+                <div>
+                  <div class="section-head">
+                    <div>
+                      <h2 class="section-title">Cuéntanos qué sucedió</h2>
+                      <p class="section-sub">Describe la situación con tus propias palabras. No necesitas tener toda la información.</p>
+                    </div>
+                  </div>
+
+                  <form id="reporteForm" class="stack">
+                    <div class="field">
+                      <label class="label" for="denuncia">Denuncia <span class="req" aria-hidden="true">*</span></label>
+                      <textarea class="textarea" id="denuncia" name="Denuncia" rows="8" maxlength="1000" required placeholder="Describe la situación: qué ocurrió, dónde y cuándo, y quiénes estaban involucrados."></textarea>
+                      <p class="field-help"><span id="denunciaContador">0</span>/1000 caracteres · Incluye lo que viste, escuchaste o viviste.</p>
+                    </div>
+
+                    <div class="form-actions">
+                      <span class="text-[11px] text-slate-500">El campo con <span class="text-red-600">*</span> es obligatorio.</span>
+                      <div class="form-actions-right">
+                        <button class="btn btn-secondary" type="reset">Limpiar</button>
+                        <button class="btn btn-primary" type="submit">
+                          <i class="ph ph-paper-plane-tilt" aria-hidden="true"></i>
+                          Enviar reporte confidencial
+                        </button>
+                      </div>
+                    </div>
+                  </form>
+
+                  <div id="reporteExitoso" class="empty-state" hidden style="border-top:1px solid var(--line);margin-top:20px">
+                    <span class="status status-success">Reporte recibido</span>
+                    <h3>Gracias por dar el primer paso</h3>
+                    <p>Tu denuncia fue registrada. El equipo de convivencia la revisará y activará la ruta de atención correspondiente.</p>
+                    <button class="btn btn-secondary btn-sm" type="button" id="nuevoReporte">Enviar otro reporte</button>
+                  </div>
+                </div>
+
+                <aside class="split-aside">
+                  <span class="eyebrow">Qué pasa después</span>
+                  <ol class="timeline mt-4">
+                    <li class="is-done">
+                      <div class="timeline-date">Paso 1</div>
+                      <div class="timeline-title">Recibimos tu reporte</div>
+                      <p class="timeline-text">Se registra la denuncia y se protege la información.</p>
+                    </li>
+                    <li class="is-current">
+                      <div class="timeline-date">Paso 2</div>
+                      <div class="timeline-title">Revisión del equipo</div>
+                      <p class="timeline-text">Orientación escolar valora la situación y define la ruta de atención.</p>
+                    </li>
+                    <li>
+                      <div class="timeline-date">Paso 3</div>
+                      <div class="timeline-title">Acompañamiento</div>
+                      <p class="timeline-text">Se activan medidas de protección y acompañamiento para las personas involucradas.</p>
+                    </li>
+                    <li>
+                      <div class="timeline-date">Paso 4</div>
+                      <div class="timeline-title">Seguimiento</div>
+                      <p class="timeline-text">Se hace seguimiento al caso y se registra la respuesta en este módulo.</p>
+                    </li>
+                  </ol>
+
+                  <div class="note mt-6">
+                    <strong>Importante:</strong> este canal no reemplaza una denuncia penal ni una atención de urgencia. Si hay riesgo para la vida o la integridad, llama al 123 o acude al servicio de salud más cercano.
+                  </div>
+
+                  <div class="mt-5">
+                    <div class="eyebrow">Canales de ayuda</div>
+                    <div class="info-row">
+                      <span class="info-label">Línea de emergencia</span>
+                      <span class="info-value mono">123</span>
+                    </div>
+                    <div class="info-row">
+                      <span class="info-label">Orientación escolar</span>
+                      <span class="info-value">Lun–vie · 7:00 a. m. – 3:00 p. m.</span>
+                    </div>
+                    <div class="info-row">
+                      <span class="info-label">Correo de convivencia</span>
+                      <span class="info-value">convivencia@colegio.edu.co</span>
+                    </div>
+                  </div>
+                </aside>
+              </div>
+            </section>
+
+            <section class="section">
+              <div class="section-head">
+                <div>
+                  <h2 class="section-title">Mis denuncias previas</h2>
+                  <p class="section-sub">Registro de las denuncias que has realizado y su respuesta.</p>
+                </div>
+                <span class="chip">2 registros</span>
+              </div>
+
+              <div class="table-wrap">
+                <table class="data-table bullying-table">
+                  <caption class="sr-only">Denuncias previas de bullying</caption>
+                  <thead>
+                    <tr>
+                      <th scope="col">Fecha Apertura</th>
+                      <th scope="col">Denuncia</th>
+                      <th scope="col">Respuesta</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td class="nowrap muted">14 ago 2026 · 9:12 a. m.</td>
+                      <td><span class="cell-title">Reporté burlas constantes de un compañero durante el descanso.</span></td>
+                      <td><span class="status status-success">Respondida</span><span class="cell-sub">Se realizó acompañamiento y se establecieron acuerdos de convivencia.</span></td>
+                    </tr>
+                    <tr>
+                      <td class="nowrap muted">03 oct 2026 · 2:40 p. m.</td>
+                      <td><span class="cell-title">Reporté mensajes ofensivos en un grupo de chat del curso.</span></td>
+                      <td><span class="status status-warning">En revisión</span><span class="cell-sub">Orientación escolar está valorando la situación.</span></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <div class="note mt-5">
+                <strong>Nota:</strong> la respuesta a cada denuncia queda publicada en este módulo. Si no ves una respuesta, el equipo de convivencia aún está trabajando en el caso.
+              </div>
+            </section>
+
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <div id="mobile-overlay" class="overlay"></div>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <script src="assets/js/app.js"></script>
+  <script>
+    (function () {
+      "use strict";
+      var form = document.getElementById("reporteForm");
+      var success = document.getElementById("reporteExitoso");
+      var nuevo = document.getElementById("nuevoReporte");
+      var denuncia = document.getElementById("denuncia");
+      var contador = document.getElementById("denunciaContador");
+
+      if (denuncia && contador) {
+        denuncia.addEventListener("input", function () {
+          contador.textContent = String(denuncia.value.length);
+        });
+      }
+
+      if (form && success) {
+        form.addEventListener("submit", function (event) {
+          event.preventDefault();
+          if (!form.checkValidity()) {
+            form.reportValidity();
+            return;
+          }
+          form.hidden = true;
+          success.hidden = false;
+          window.scrollTo({ top: 0, behavior: "smooth" });
+          if (window.EstuNET) window.EstuNET.showToast("Reporte confidencial registrado (demostración)");
+        });
+      }
+
+      if (nuevo && form && success) {
+        nuevo.addEventListener("click", function () {
+          form.reset();
+          if (contador) contador.textContent = "0";
+          success.hidden = true;
+          form.hidden = false;
+          form.scrollIntoView({ behavior: "smooth", block: "start" });
+        });
+      }
+    })();
+  </script>
+
+</body>
+</html>

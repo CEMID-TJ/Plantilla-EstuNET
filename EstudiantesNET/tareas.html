@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Plantilla de diseño del portal EstudiantesNET. Consulta de tareas.">
+  <title>Consulta de tareas · EstudiantesNET</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body data-page="tareas">
+  <div id="proto-bar"></div>
+
+  <div class="app-layout">
+    <aside id="sidebar"></aside>
+
+    <div class="app-main">
+      <header id="topbar"></header>
+
+      <main class="page-main">
+        <div class="page-surface">
+          <div id="state-host" hidden></div>
+
+          <div id="page-content">
+            <section class="hero">
+              <div class="hero-row">
+                <div>
+                  <span class="eyebrow">Periodo 2026 · Cuarto periodo</span>
+                  <h2 class="page-heading">Consulta de tareas</h2>
+                  <p class="page-subheading">Revisa las tareas, guías y recuperaciones asignadas. Las entregas se registran automáticamente en la plataforma.</p>
+                </div>
+                <div class="hero-actions">
+                  <button class="btn btn-secondary" type="button" data-demo="Listado de tareas descargado (demostración)">
+                    <i class="ph ph-download-simple" aria-hidden="true"></i>
+                    Descargar listado
+                  </button>
+                </div>
+              </div>
+            </section>
+
+            <section class="section section-tight">
+              <div class="alert alert-warning" role="status">
+                <i class="ph ph-clock" aria-hidden="true"></i>
+                <div>
+                  <p class="alert-title">Tienes una entrega que vence hoy</p>
+                  <p class="alert-text">El taller de análisis literario cierra hoy a las 11:59 p. m. Asegúrate de adjuntar el archivo antes de la hora límite.</p>
+                  <div class="alert-actions">
+                    <a class="btn-link" href="#tareas-tabla">Ver tarea</a>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <section class="section" id="tareas-tabla">
+              <div class="section-head">
+                <div>
+                  <h2 class="section-title">Tareas asignadas</h2>
+                  <p class="section-sub">8 registros · 3 pendientes · 1 vencida</p>
+                </div>
+                <div class="section-actions">
+                  <span class="status status-warning">3 pendientes</span>
+                </div>
+              </div>
+
+              <div class="filter-bar" style="border-top:0;padding-top:0">
+                <div class="field field-grow">
+                  <label class="label" for="buscarTarea">Buscar</label>
+                  <div class="search-field">
+                    <i class="ph ph-magnifying-glass" aria-hidden="true"></i>
+                    <input class="input input-sm" id="buscarTarea" type="search" placeholder="Buscar por título, materia o descripción" autocomplete="off">
+                  </div>
+                </div>
+                <div class="field">
+                  <label class="label" for="filtroMateria">Materia</label>
+                  <select class="select input-sm" id="filtroMateria">
+                    <option value="">Todas las materias</option>
+                    <option value="Lengua castellana">Lengua castellana</option>
+                    <option value="Matemáticas">Matemáticas</option>
+                    <option value="Física">Física</option>
+                    <option value="Ciencias sociales">Ciencias sociales</option>
+                    <option value="Biología">Biología</option>
+                    <option value="Filosofía">Filosofía</option>
+                    <option value="Inglés">Inglés</option>
+                  </select>
+                </div>
+                <div class="field">
+                  <label class="label" for="filtroTipoTarea">Tipo</label>
+                  <select class="select input-sm" id="filtroTipoTarea">
+                    <option value="">Todos los tipos</option>
+                    <option value="TAREA">TAREA</option>
+                    <option value="GUIA-M.TRABAJO">GUIA-M.TRABAJO</option>
+                    <option value="RECUPERACION">RECUPERACION</option>
+                    <option value="REQUERIMIEN_OBS">REQUERIMIEN_OBS</option>
+                  </select>
+                </div>
+                <div class="filter-actions">
+                  <button class="btn btn-secondary btn-sm" type="button" id="tareasLimpiar">Limpiar</button>
+                </div>
+              </div>
+
+              <div class="table-wrap">
+                <table class="data-table">
+                  <thead>
+                    <tr>
+                      <th scope="col">F.Apertura</th>
+                      <th scope="col">Tipo</th>
+                      <th scope="col">Materia</th>
+                      <th scope="col">Título</th>
+                      <th scope="col">Descripción</th>
+                      <th scope="col">F.Entrega</th>
+                    </tr>
+                  </thead>
+                  <tbody id="tareasTbody">
+                    <tr data-materia="lengua castellana" data-tipo="tarea" data-text="taller de análisis literario lengua castellana">
+                      <td class="nowrap muted">18 nov 2026</td>
+                      <td>TAREA</td>
+                      <td>Lengua castellana</td>
+                      <td class="cell-title">Taller de análisis literario</td>
+                      <td>Archivo PDF · máximo 5 páginas</td>
+                      <td class="nowrap">
+                        <span class="status status-warning">Hoy · 11:59 p. m.</span>
+                        <button class="btn-link block mt-1" type="button" data-demo="Entrega de tarea (demostración)">Entregar</button>
+                      </td>
+                    </tr>
+                    <tr data-materia="física" data-tipo="tarea" data-text="laboratorio de cinemática física">
+                      <td class="nowrap muted">20 nov 2026</td>
+                      <td>TAREA</td>
+                      <td>Física</td>
+                      <td class="cell-title">Laboratorio de cinemática</td>
+                      <td>Informe de prácticas · adjunto</td>
+                      <td class="nowrap">
+                        <span class="status status-neutral">22 nov · 6:00 p. m.</span>
+                        <button class="btn-link block mt-1" type="button" data-demo="Detalle de la tarea (demostración)">Ver</button>
+                      </td>
+                    </tr>
+                    <tr data-materia="matemáticas" data-tipo="guia-m.trabajo" data-text="guía de derivadas matemáticas">
+                      <td class="nowrap muted">21 nov 2026</td>
+                      <td>GUIA-M.TRABAJO</td>
+                      <td>Matemáticas</td>
+                      <td class="cell-title">Guía de derivadas</td>
+                      <td>Ejercicios 1 al 18</td>
+                      <td class="nowrap">
+                        <span class="status status-warning">27 nov · 7:00 a. m.</span>
+                        <button class="btn-link block mt-1" type="button" data-demo="Entrega de tarea (demostración)">Entregar</button>
+                      </td>
+                    </tr>
+                    <tr data-materia="ciencias sociales" data-tipo="tarea" data-text="mapa político de europa ciencias sociales">
+                      <td class="nowrap muted">19 nov 2026</td>
+                      <td>TAREA</td>
+                      <td>Ciencias sociales</td>
+                      <td class="cell-title">Mapa político de Europa</td>
+                      <td>Actividad en clase</td>
+                      <td class="nowrap">
+                        <span class="status status-warning">24 nov · 2:00 p. m.</span>
+                        <button class="btn-link block mt-1" type="button" data-demo="Entrega de tarea (demostración)">Entregar</button>
+                      </td>
+                    </tr>
+                    <tr data-materia="filosofía" data-tipo="recuperacion" data-text="ensayo sobre identidad filosofía">
+                      <td class="nowrap muted">15 nov 2026</td>
+                      <td>RECUPERACION</td>
+                      <td>Filosofía</td>
+                      <td class="cell-title">Ensayo sobre identidad</td>
+                      <td>Texto argumentativo · 800 palabras</td>
+                      <td class="nowrap">
+                        <span class="status status-danger">Vencida · 20 nov</span>
+                        <button class="btn-link block mt-1" type="button" data-demo="Solicitud de prórroga (demostración)">Solicitar prórroga</button>
+                      </td>
+                    </tr>
+                    <tr data-materia="inglés" data-tipo="requerimien_obs" data-text="listening exercise unit 4 inglés">
+                      <td class="nowrap muted">17 nov 2026</td>
+                      <td>REQUERIMIEN_OBS</td>
+                      <td>Inglés</td>
+                      <td class="cell-title">Listening exercise · Unit 4</td>
+                      <td>Cuestionario en línea</td>
+                      <td class="nowrap">
+                        <span class="status status-success">Entregada · 19 nov</span>
+                        <button class="btn-link block mt-1" type="button" data-demo="Detalle de la tarea (demostración)">Ver</button>
+                      </td>
+                    </tr>
+                    <tr data-materia="biología" data-tipo="tarea" data-text="maqueta de la célula biología">
+                      <td class="nowrap muted">12 nov 2026</td>
+                      <td>TAREA</td>
+                      <td>Biología</td>
+                      <td class="cell-title">Maqueta de la célula</td>
+                      <td>Trabajo grupal · 3 integrantes</td>
+                      <td class="nowrap">
+                        <span class="status status-success">Entregada · 26 nov</span>
+                        <button class="btn-link block mt-1" type="button" data-demo="Detalle de la tarea (demostración)">Ver</button>
+                      </td>
+                    </tr>
+                    <tr data-materia="lengua castellana" data-tipo="guia-m.trabajo" data-text="bitácora de lectura unidad 3 lengua castellana">
+                      <td class="nowrap muted">10 nov 2026</td>
+                      <td>GUIA-M.TRABAJO</td>
+                      <td>Lengua castellana</td>
+                      <td class="cell-title">Bitácora de lectura · Unidad 3</td>
+                      <td>Registro semanal</td>
+                      <td class="nowrap">
+                        <span class="status status-neutral">15 nov · 11:59 p. m.</span>
+                        <button class="btn-link block mt-1" type="button" data-demo="Detalle de la tarea (demostración)">Ver</button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <div class="table-footer">
+                <span id="tareasResumen">Mostrando 8 tareas</span>
+                <div class="pagination" aria-label="Paginación de tareas">
+                  <button class="page-btn" type="button" aria-label="Página anterior" disabled><i class="ph ph-caret-left" aria-hidden="true"></i></button>
+                  <button class="page-btn is-active" type="button" data-page-btn="1">1</button>
+                  <button class="page-btn" type="button" data-page-btn="2">2</button>
+                  <button class="page-btn" type="button" data-page-btn="3">3</button>
+                  <button class="page-btn" type="button" aria-label="Página siguiente" data-page-btn="2"><i class="ph ph-caret-right" aria-hidden="true"></i></button>
+                </div>
+              </div>
+            </section>
+
+            <section class="section section-tight">
+              <div class="split">
+                <div>
+                  <h2 class="section-title" style="font-size:16px">Antes de entregar</h2>
+                  <p class="section-sub">Recomendaciones para que tu entrega quede registrada correctamente.</p>
+                </div>
+                <div class="grid grid-3 gap-4">
+                  <div>
+                    <div class="eyebrow">01 · Formato</div>
+                    <p class="text-[12px] text-slate-600 mt-1">Nombra el archivo con tu código y la actividad. Usa PDF cuando sea posible.</p>
+                  </div>
+                  <div>
+                    <div class="eyebrow">02 · Tiempo</div>
+                    <p class="text-[12px] text-slate-600 mt-1">La plataforma cierra automáticamente a la hora indicada. No se aceptan envíos por correo.</p>
+                  </div>
+                  <div>
+                    <div class="eyebrow">03 · Soporte</div>
+                    <p class="text-[12px] text-slate-600 mt-1">Si tienes dificultades, radica una PQRS con el asunto "Soporte de entrega".</p>
+                  </div>
+                </div>
+              </div>
+            </section>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <div id="mobile-overlay" class="overlay"></div>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <script src="assets/js/app.js"></script>
+  <script>
+    (function () {
+      "use strict";
+      var tbody = document.getElementById("tareasTbody");
+      var buscar = document.getElementById("buscarTarea");
+      var materia = document.getElementById("filtroMateria");
+      var tipo = document.getElementById("filtroTipoTarea");
+      var limpiar = document.getElementById("tareasLimpiar");
+      var resumen = document.getElementById("tareasResumen");
+
+      function filtrar() {
+        if (!tbody) return;
+        var term = buscar ? buscar.value.trim().toLowerCase() : "";
+        var mat = materia ? materia.value.toLowerCase() : "";
+        var tip = tipo ? tipo.value.toLowerCase() : "";
+        var visible = 0;
+        Array.prototype.forEach.call(tbody.querySelectorAll("tr"), function (row) {
+          var text = row.getAttribute("data-text") || "";
+          var rowMat = row.getAttribute("data-materia") || "";
+          var rowTip = row.getAttribute("data-tipo") || "";
+          var show = true;
+          if (term && text.indexOf(term) === -1) show = false;
+          if (mat && rowMat !== mat) show = false;
+          if (tip && rowTip !== tip) show = false;
+          row.hidden = !show;
+          if (show) visible += 1;
+        });
+        if (resumen) resumen.textContent = "Mostrando " + visible + " de " + tbody.querySelectorAll("tr").length + " tareas";
+      }
+
+      if (buscar) buscar.addEventListener("input", filtrar);
+      if (materia) materia.addEventListener("change", filtrar);
+      if (tipo) tipo.addEventListener("change", filtrar);
+      if (limpiar) limpiar.addEventListener("click", function () {
+        if (buscar) buscar.value = "";
+        if (materia) materia.value = "";
+        if (tipo) tipo.value = "";
+        filtrar();
+      });
+
+      filtrar();
+    })();
+  </script>
+</body>
+</html>

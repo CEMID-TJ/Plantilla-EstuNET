@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Plantilla de diseño del portal EstudiantesNET. Vista del modal de firma.">
+  <title>Modal de firma · EstudiantesNET</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body class="modal-backdrop-page">
+  <a class="preview-back" href="informe.html"><i class="ph ph-arrow-left" aria-hidden="true"></i> Volver al informe</a>
+
+  <div class="modal-panel" role="dialog" aria-modal="true" aria-labelledby="firmaModalTitle">
+    <div class="modal-head">
+      <div>
+        <h2 class="modal-title" id="firmaModalTitle">Firmar constancia</h2>
+        <p class="modal-sub">Confirma que recibiste y leíste el informe del periodo.</p>
+      </div>
+      <a class="modal-close" href="informe.html" aria-label="Cerrar">
+        <i class="ph ph-x" aria-hidden="true"></i>
+      </a>
+    </div>
+    <div class="modal-body">
+      <div class="alert alert-info">
+        <i class="ph ph-info" aria-hidden="true"></i>
+        <div>
+          <p class="alert-title">Constancia de recibido</p>
+          <p class="alert-text">Esta firma no modifica las notas. Solo deja constancia de que el acudiente consultó el informe académico.</p>
+        </div>
+      </div>
+
+      <dl class="detail-list mt-5">
+        <div>
+          <dt>Estudiante</dt>
+          <dd class="strong">Laura Sofía Martínez Gómez</dd>
+        </div>
+        <div>
+          <dt>Periodo</dt>
+          <dd>Cuarto · 2026</dd>
+        </div>
+        <div>
+          <dt>Acudiente</dt>
+          <dd>María Fernanda Gómez</dd>
+        </div>
+        <div>
+          <dt>Fecha</dt>
+          <dd>23 de noviembre de 2026</dd>
+        </div>
+      </dl>
+
+      <div class="mt-5">
+        <label class="label" for="nombreFirma">Nombre completo del acudiente</label>
+        <input class="input" id="nombreFirma" type="text" value="María Fernanda Gómez">
+        <p class="field-help">Al firmar aceptas el registro de la constancia en el historial del estudiante.</p>
+      </div>
+
+      <label class="check-row mt-5">
+        <input type="checkbox" checked>
+        <span>Confirmo que recibí el informe académico del cuarto periodo y que tuve la oportunidad de revisar las observaciones.</span>
+      </label>
+    </div>
+    <div class="modal-foot">
+      <a class="btn btn-secondary" href="informe.html">Cancelar</a>
+      <a class="btn btn-primary" href="informe.html">
+        <i class="ph ph-signature" aria-hidden="true"></i>
+        Firmar constancia
+      </a>
+    </div>
+  </div>
+
+  <script src="assets/js/app.js"></script>
+</body>
+</html>

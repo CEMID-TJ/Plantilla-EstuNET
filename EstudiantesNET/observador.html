@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Plantilla de diseño del portal EstudiantesNET. Observador del alumno con seguimiento por período.">
+  <title>Observador del alumno · EstudiantesNET</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body data-page="observador">
+  <div id="proto-bar"></div>
+
+  <div class="app-layout">
+    <aside id="sidebar"></aside>
+
+    <div class="app-main">
+      <header id="topbar"></header>
+
+      <main class="page-main">
+        <div class="page-surface">
+          <div id="state-host" hidden></div>
+
+          <div id="page-content">
+            <section class="hero">
+              <div class="hero-row">
+                <div>
+                  <span class="eyebrow">Año escolar 2026 · Seguimiento convivencial</span>
+                  <h2 class="page-heading">Observador del alumno</h2>
+                  <p class="page-subheading">Anotaciones académicas y de convivencia, descargos, acciones pedagógicas y firmas del acudiente y del estudiante.</p>
+                </div>
+                <div class="hero-actions">
+                  <button class="btn btn-secondary" type="button" data-demo="Observador descargado en PDF (demostración)">
+                    <i class="ph ph-download-simple" aria-hidden="true"></i>
+                    Descargar observador
+                  </button>
+                  <button class="btn btn-primary" type="button" data-modal-open="observacionModal">
+                    <i class="ph ph-plus" aria-hidden="true"></i>
+                    Registrar anotación
+                  </button>
+                </div>
+              </div>
+            </section>
+
+            <section class="section section-tight">
+              <div class="alert alert-warning" role="status" id="alertaFirmas">
+                <i class="ph ph-warning-circle" aria-hidden="true"></i>
+                <div>
+                  <p class="alert-title">Firmas pendientes</p>
+                  <p class="alert-text" id="textoFirmas">Hay anotaciones pendientes de firma. El acudiente y el estudiante deben firmar para oficializar el registro.</p>
+                </div>
+              </div>
+            </section>
+
+            <section class="section section-tight">
+              <div class="split">
+                <div>
+                  <div class="avatar-row">
+                    <span class="avatar avatar-lg">LM</span>
+                    <div>
+                      <h3>Laura Sofía Martínez Gómez</h3>
+                      <p>Código 2026-0042 · Curso 10.º A · Jornada mañana</p>
+                    </div>
+                  </div>
+                </div>
+                <aside class="split-aside">
+                  <dl class="detail-list compact">
+                    <div>
+                      <dt>Total de anotaciones</dt>
+                      <dd class="strong" id="totalAnotaciones">0</dd>
+                    </div>
+                    <div>
+                      <dt>Pendientes de firma</dt>
+                      <dd class="strong" id="totalPendientes">0</dd>
+                    </div>
+                    <div>
+                      <dt>Período actual</dt>
+                      <dd>Período III</dd>
+                    </div>
+                    <div>
+                      <dt>Director de grupo</dt>
+                      <dd>Docente de área</dd>
+                    </div>
+                  </dl>
+                </aside>
+              </div>
+            </section>
+
+            <section class="section">
+              <div class="section-head">
+                <div>
+                  <h2 class="section-title">Registro de seguimiento</h2>
+                  <p class="section-sub">Las columnas conservan la estructura del observador original.</p>
+                </div>
+                <span class="chip">7 columnas</span>
+              </div>
+
+              <form class="filter-bar" role="search" id="filtroObservador">
+                <div class="field field-grow">
+                  <label class="label" for="obsBuscar">Buscar</label>
+                  <div class="search-field">
+                    <i class="ph ph-magnifying-glass" aria-hidden="true"></i>
+                    <input class="input input-sm" id="obsBuscar" type="search" placeholder="Tipo, descripción o responsable" autocomplete="off">
+                  </div>
+                </div>
+                <div class="field">
+                  <label class="label" for="obsPer">Per</label>
+                  <select class="select input-sm" id="obsPer">
+                    <option value="">Todos</option>
+                    <option value="1">Período 1</option>
+                    <option value="2">Período 2</option>
+                    <option value="3">Período 3</option>
+                  </select>
+                </div>
+                <div class="field">
+                  <label class="label" for="obsTipo">Tipo</label>
+                  <select class="select input-sm" id="obsTipo">
+                    <option value="">Todos</option>
+                    <option value="Académica">Académica</option>
+                    <option value="Convivencia">Convivencia</option>
+                  </select>
+                </div>
+                <div class="field">
+                  <label class="label" for="obsFirma">Firma</label>
+                  <select class="select input-sm" id="obsFirma">
+                    <option value="">Todas</option>
+                    <option value="pendiente">Pendientes</option>
+                    <option value="firmada">Firmadas</option>
+                  </select>
+                </div>
+                <div class="filter-actions">
+                  <button class="btn btn-secondary btn-sm" type="button" id="obsLimpiar">Limpiar</button>
+                </div>
+              </form>
+
+              <div class="table-wrap">
+                <table class="data-table observer-table">
+                  <caption class="sr-only">Anotaciones del observador del alumno</caption>
+                  <thead>
+                    <tr>
+                      <th scope="col">Per</th>
+                      <th scope="col">Tipo-Descripción</th>
+                      <th scope="col">Fecha</th>
+                      <th scope="col">Descargos-Acción</th>
+                      <th scope="col">Anota</th>
+                      <th scope="col">Firma Acudiente</th>
+                      <th scope="col">Firma Estudiante</th>
+                    </tr>
+                  </thead>
+                  <tbody id="obsTbody"></tbody>
+                </table>
+              </div>
+
+              <div class="table-footer">
+                <span id="obsResumen">Mostrando 0 anotaciones</span>
+                <div class="pagination" aria-label="Paginación de anotaciones">
+                  <button class="page-btn" type="button" disabled aria-label="Página anterior"><i class="ph ph-caret-left" aria-hidden="true"></i></button>
+                  <button class="page-btn is-active" type="button" data-page-btn="1" aria-current="page">1</button>
+                  <button class="page-btn" type="button" data-page-btn="2">2</button>
+                  <button class="page-btn" type="button" data-page-btn="3">3</button>
+                  <button class="page-btn" type="button" data-page-btn="siguiente" aria-label="Página siguiente"><i class="ph ph-caret-right" aria-hidden="true"></i></button>
+                </div>
+              </div>
+            </section>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <div id="mobile-overlay" class="overlay"></div>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <div class="modal" id="observacionModal" role="dialog" aria-modal="true" aria-labelledby="observacionModalTitle">
+    <div class="modal-panel modal-lg">
+      <div class="modal-head">
+        <div>
+          <h2 class="modal-title" id="observacionModalTitle">Detalle de la anotación</h2>
+          <p class="modal-sub" id="observacionModalSub">Período 1 · Académica</p>
+        </div>
+        <button class="modal-close" type="button" data-modal-close aria-label="Cerrar">
+          <i class="ph ph-x" aria-hidden="true"></i>
+        </button>
+      </div>
+      <div class="modal-body">
+        <dl class="detail-list" id="observacionDetalle">
+          <div><dt>Período</dt><dd class="strong">1</dd></div>
+          <div><dt>Fecha</dt><dd>12 mar 2026</dd></div>
+          <div class="span-2"><dt>Tipo · Descripción</dt><dd class="strong">Académica · Reconocimiento por participación</dd></div>
+          <div class="span-2"><dt>Descargos</dt><dd>La estudiante manifestó que organizó el material del laboratorio y apoyó a sus compañeras.</dd></div>
+          <div class="span-2"><dt>Acción pedagógica</dt><dd>Se reconoce el liderazgo y se invita a continuar apoyando los procesos del grupo.</dd></div>
+          <div><dt>Anota</dt><dd>Docente de área</dd></div>
+          <div><dt>Firma acudiente</dt><dd class="strong">Firmada · 13 mar 2026</dd></div>
+          <div><dt>Firma estudiante</dt><dd class="strong">Firmada · 13 mar 2026</dd></div>
+        </dl>
+      </div>
+      <div class="modal-foot">
+        <button class="btn btn-secondary" type="button" data-modal-close>Cerrar</button>
+        <button class="btn btn-primary" type="button" data-demo="Anotación enviada a impresión (demostración)">
+          <i class="ph ph-printer" aria-hidden="true"></i>
+          Imprimir
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal" id="firmaObsModal" role="dialog" aria-modal="true" aria-labelledby="firmaObsTitle">
+    <div class="modal-panel modal-sm">
+      <div class="modal-head">
+        <div>
+          <h2 class="modal-title" id="firmaObsTitle">Firmar anotación</h2>
+          <p class="modal-sub">Confirma la firma para oficializar el registro.</p>
+        </div>
+        <button class="modal-close" type="button" data-modal-close aria-label="Cerrar">
+          <i class="ph ph-x" aria-hidden="true"></i>
+        </button>
+      </div>
+      <form id="firmaObsForm">
+        <div class="modal-body">
+          <input type="hidden" id="firmaObsIndex" name="firmaObsIndex">
+          <input type="hidden" id="firmaObsRol" name="firmaObsRol">
+          <div class="stack-sm">
+            <p class="small muted" id="firmaObsTexto">Vas a firmar como acudiente la anotación seleccionada.</p>
+            <label class="check-row">
+              <input type="checkbox" id="firmaObsAcepto" name="firmaObsAcepto" required>
+              <span>Confirmo que leí la anotación y que la firma corresponde a mi rol. <span class="req" aria-hidden="true">*</span></span>
+            </label>
+            <div class="field">
+              <label class="label" for="firmaObsCodigo">Código de verificación <span class="req" aria-hidden="true">*</span></label>
+              <input class="input" id="firmaObsCodigo" name="firmaObsCodigo" type="text" inputmode="numeric" pattern="[0-9]{6}" maxlength="6" placeholder="6 dígitos" required>
+              <p class="field-help">Código enviado al correo registrado.</p>
+            </div>
+          </div>
+        </div>
+        <div class="modal-foot">
+          <button class="btn btn-secondary" type="button" data-modal-close>Cancelar</button>
+          <button class="btn btn-primary" type="submit">
+            <i class="ph ph-signature" aria-hidden="true"></i>
+            Firmar
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="assets/js/app.js"></script>
+  <script>
+    (function () {
+      "use strict";
+
+      var OBSERVACIONES = [
+        {
+          per: "1",
+          tipo: "Académica",
+          descripcion: "Reconocimiento por participación",
+          fecha: "12 mar 2026",
+          descargos: "La estudiante manifestó que organizó el material del laboratorio y apoyó a sus compañeras.",
+          accion: "Se reconoce el liderazgo y se invita a continuar apoyando los procesos del grupo.",
+          anota: "Docente de área",
+          acudiente: { estado: "firmada", fecha: "13 mar 2026" },
+          estudiante: { estado: "firmada", fecha: "13 mar 2026" }
+        },
+        {
+          per: "1",
+          tipo: "Convivencia",
+          descripcion: "Llamado de atención verbal",
+          fecha: "02 abr 2026",
+          descargos: "Se dialoga con la estudiante sobre el uso del celular durante la clase. Ella reconoce la falta y se compromete a guardarlo.",
+          accion: "Llamado de atención verbal y compromiso escrito en el observador.",
+          anota: "Coordinación de convivencia",
+          acudiente: { estado: "firmada", fecha: "03 abr 2026" },
+          estudiante: { estado: "pendiente", fecha: "" }
+        },
+        {
+          per: "2",
+          tipo: "Académica",
+          descripcion: "Entrega extemporánea de taller",
+          fecha: "21 may 2026",
+          descargos: "La estudiante explicó que tuvo dificultades de conexión y presentó el taller al día siguiente.",
+          accion: "Se acuerda nueva fecha de entrega y acompañamiento del docente de área.",
+          anota: "Docente de área",
+          acudiente: { estado: "pendiente", fecha: "" },
+          estudiante: { estado: "pendiente", fecha: "" }
+        },
+        {
+          per: "2",
+          tipo: "Convivencia",
+          descripcion: "Reconocimiento por trabajo colaborativo",
+          fecha: "05 jun 2026",
+          descargos: "Sus compañeras destacan el apoyo prestado durante la preparación de la izada de bandera.",
+          accion: "Felicitación pública y registro en el observador.",
+          anota: "Dirección de grupo",
+          acudiente: { estado: "firmada", fecha: "06 jun 2026" },
+          estudiante: { estado: "firmada", fecha: "06 jun 2026" }
+        },
+        {
+          per: "3",
+          tipo: "Académica",
+          descripcion: "Plan de refuerzo de Matemáticas",
+          fecha: "14 ago 2026",
+          descargos: "La estudiante solicita apoyo para fortalecer la resolución de problemas con números racionales.",
+          accion: "Se asigna plan de refuerzo y se cita a encuentro con el docente de área.",
+          anota: "Docente de área",
+          acudiente: { estado: "firmada", fecha: "15 ago 2026" },
+          estudiante: { estado: "pendiente", fecha: "" }
+        },
+        {
+          per: "3",
+          tipo: "Convivencia",
+          descripcion: "Descargos por desacuerdo en el aula",
+          fecha: "02 sep 2026",
+          descargos: "La estudiante presentó sus descargos y se escucharon las versiones de las personas involucradas.",
+          accion: "Se establecen acuerdos de convivencia y seguimiento por orientación.",
+          anota: "Orientación escolar",
+          acudiente: { estado: "pendiente", fecha: "" },
+          estudiante: { estado: "pendiente", fecha: "" }
+        }
+      ];
+
+      var tbody = document.getElementById("obsTbody");
+      var resumen = document.getElementById("obsResumen");
+      var totalAnotaciones = document.getElementById("totalAnotaciones");
+      var totalPendientes = document.getElementById("totalPendientes");
+      var alerta = document.getElementById("alertaFirmas");
+      var textoFirmas = document.getElementById("textoFirmas");
+      var buscar = document.getElementById("obsBuscar");
+      var filtroPer = document.getElementById("obsPer");
+      var filtroTipo = document.getElementById("obsTipo");
+      var filtroFirma = document.getElementById("obsFirma");
+      var limpiar = document.getElementById("obsLimpiar");
+
+      function firmaMarkup(item, rol, index) {
+        var data = item[rol];
+        if (data.estado === "firmada") {
+          return '<span class="status status-success">Firmada</span><span class="cell-sub">' + data.fecha + "</span>";
+        }
+        return '<span class="status status-warning">Pendiente</span><button class="btn-link" type="button" data-firmar="' + rol + '" data-index="' + index + '">Firmar</button>';
+      }
+
+      function rowMarkup(item, index) {
+        return '<tr data-per="' + item.per + '" data-tipo="' + item.tipo.toLowerCase() + '" data-firma="' + (item.acudiente.estado === "firmada" && item.estudiante.estado === "firmada" ? "firmada" : "pendiente") + '" data-text="' + (item.tipo + " " + item.descripcion + " " + item.anota).toLowerCase() + '">' +
+          '<td><span class="chip">Per ' + item.per + "</span></td>" +
+          '<td><span class="cell-title">' + item.tipo + '</span><span class="cell-sub">' + item.descripcion + '</span><button class="btn-link" type="button" data-ver="' + index + '">Ver detalle</button></td>' +
+          '<td class="nowrap">' + item.fecha + "</td>" +
+          '<td><span class="cell-sub"><strong>Descargos:</strong> ' + item.descargos + '</span><span class="cell-sub"><strong>Acción:</strong> ' + item.accion + "</span></td>" +
+          '<td>' + item.anota + "</td>" +
+          "<td>" + firmaMarkup(item, "acudiente", index) + "</td>" +
+          "<td>" + firmaMarkup(item, "estudiante", index) + "</td>" +
+          "</tr>";
+      }
+
+      function getFiltered() {
+        var term = buscar ? buscar.value.trim().toLowerCase() : "";
+        var per = filtroPer ? filtroPer.value : "";
+        var tipo = filtroTipo ? filtroTipo.value.toLowerCase() : "";
+        var firma = filtroFirma ? filtroFirma.value : "";
+        return OBSERVACIONES.map(function (item, index) { return { item: item, index: index }; }).filter(function (entry) {
+          var item = entry.item;
+          var firmaEstado = item.acudiente.estado === "firmada" && item.estudiante.estado === "firmada" ? "firmada" : "pendiente";
+          if (per && item.per !== per) return false;
+          if (tipo && item.tipo.toLowerCase() !== tipo) return false;
+          if (firma && firmaEstado !== firma) return false;
+          if (term.length) {
+            var text = (item.tipo + " " + item.descripcion + " " + item.anota + " " + item.descargos).toLowerCase();
+            if (text.indexOf(term) === -1) return false;
+          }
+          return true;
+        });
+      }
+
+      function render() {
+        var filtered = getFiltered();
+        if (tbody) tbody.innerHTML = filtered.map(function (entry) { return rowMarkup(entry.item, entry.index); }).join("");
+        if (resumen) resumen.textContent = "Mostrando " + filtered.length + " de " + OBSERVACIONES.length + " anotaciones";
+        var pendientes = OBSERVACIONES.filter(function (item) {
+          return item.acudiente.estado !== "firmada" || item.estudiante.estado !== "firmada";
+        }).length;
+        if (totalAnotaciones) totalAnotaciones.textContent = String(OBSERVACIONES.length);
+        if (totalPendientes) totalPendientes.textContent = String(pendientes);
+        if (alerta) alerta.hidden = pendientes === 0;
+        if (textoFirmas) {
+          textoFirmas.textContent = pendientes === 0
+            ? "Todas las anotaciones se encuentran firmadas."
+            : "Hay " + pendientes + " anotación(es) pendiente(s) de firma. El acudiente y el estudiante deben firmar para oficializar el registro.";
+        }
+      }
+
+      function abrirDetalle(index) {
+        var item = OBSERVACIONES[index];
+        if (!item) return;
+        var set = function (selector, value) {
+          var el = document.querySelector(selector);
+          if (el) el.textContent = value;
+        };
+        set("#observacionModalSub", "Período " + item.per + " · " + item.tipo);
+        var detalle = document.getElementById("observacionDetalle");
+        if (detalle) {
+          detalle.innerHTML =
+            '<div><dt>Período</dt><dd class="strong">' + item.per + "</dd></div>" +
+            '<div><dt>Fecha</dt><dd>' + item.fecha + "</dd></div>" +
+            '<div class="span-2"><dt>Tipo · Descripción</dt><dd class="strong">' + item.tipo + " · " + item.descripcion + "</dd></div>" +
+            '<div class="span-2"><dt>Descargos</dt><dd>' + item.descargos + "</dd></div>" +
+            '<div class="span-2"><dt>Acción pedagógica</dt><dd>' + item.accion + "</dd></div>" +
+            '<div><dt>Anota</dt><dd>' + item.anota + "</dd></div>" +
+            '<div><dt>Firma acudiente</dt><dd class="strong">' + (item.acudiente.estado === "firmada" ? "Firmada · " + item.acudiente.fecha : "Pendiente") + "</dd></div>" +
+            '<div><dt>Firma estudiante</dt><dd class="strong">' + (item.estudiante.estado === "firmada" ? "Firmada · " + item.estudiante.fecha : "Pendiente") + "</dd></div>";
+        }
+        if (window.EstuNET) window.EstuNET.openModal("observacionModal");
+      }
+
+      function abrirFirma(index, rol) {
+        var item = OBSERVACIONES[index];
+        if (!item) return;
+        var indexField = document.getElementById("firmaObsIndex");
+        var rolField = document.getElementById("firmaObsRol");
+        var texto = document.getElementById("firmaObsTexto");
+        if (indexField) indexField.value = String(index);
+        if (rolField) rolField.value = rol;
+        if (texto) texto.textContent = "Vas a firmar como " + (rol === "acudiente" ? "acudiente" : "estudiante") + " la anotación \"" + item.descripcion + "\".";
+        var form = document.getElementById("firmaObsForm");
+        if (form) form.reset();
+        if (indexField) indexField.value = String(index);
+        if (rolField) rolField.value = rol;
+        if (window.EstuNET) window.EstuNET.openModal("firmaObsModal");
+      }
+
+      if (tbody) {
+        tbody.addEventListener("click", function (event) {
+          var ver = event.target.closest("[data-ver]");
+          if (ver) {
+            abrirDetalle(Number(ver.getAttribute("data-ver")));
+            return;
+          }
+          var firmar = event.target.closest("[data-firmar]");
+          if (firmar) abrirFirma(Number(firmar.getAttribute("data-index")), firmar.getAttribute("data-firmar"));
+        });
+      }
+
+      [buscar, filtroPer, filtroTipo, filtroFirma].forEach(function (control) {
+        if (control) control.addEventListener(control.tagName === "INPUT" ? "input" : "change", render);
+      });
+
+      if (limpiar) limpiar.addEventListener("click", function () {
+        if (buscar) buscar.value = "";
+        if (filtroPer) filtroPer.value = "";
+        if (filtroTipo) filtroTipo.value = "";
+        if (filtroFirma) filtroFirma.value = "";
+        render();
+      });
+
+      var firmaForm = document.getElementById("firmaObsForm");
+      if (firmaForm) firmaForm.addEventListener("submit", function (event) {
+        event.preventDefault();
+        if (!firmaForm.checkValidity()) {
+          firmaForm.reportValidity();
+          return;
+        }
+        var index = Number(document.getElementById("firmaObsIndex").value);
+        var rol = document.getElementById("firmaObsRol").value;
+        if (OBSERVACIONES[index] && OBSERVACIONES[index][rol]) {
+          OBSERVACIONES[index][rol].estado = "firmada";
+          OBSERVACIONES[index][rol].fecha = "23 nov 2026";
+          render();
+        }
+        if (window.EstuNET) {
+          window.EstuNET.closeModal("firmaObsModal");
+          window.EstuNET.showToast("Firma registrada correctamente (demostración)");
+        }
+      });
+
+      render();
+    })();
+  </script>
+</body>
+</html>

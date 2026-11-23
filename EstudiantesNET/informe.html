@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Plantilla de diseño del portal EstudiantesNET. Informe académico con sábana de notas por período.">
+  <title>Informe académico · EstudiantesNET</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body data-page="informe">
+  <div id="proto-bar"></div>
+
+  <div class="app-layout">
+    <aside id="sidebar"></aside>
+
+    <div class="app-main">
+      <header id="topbar"></header>
+
+      <main class="page-main">
+        <div class="page-surface">
+          <div id="state-host" hidden></div>
+
+          <div id="page-content">
+            <section class="hero">
+              <div class="hero-row">
+                <div>
+                  <span class="eyebrow">Año escolar 2026 · Sábana de notas</span>
+                  <h2 class="page-heading">Informe académico</h2>
+                  <p class="page-subheading">Notas por período, consolidado del año y descripción de la evaluación registrada por cada docente.</p>
+                </div>
+                <div class="hero-actions">
+                  <button class="btn btn-secondary" type="button" data-demo="Informe descargado en PDF (demostración)">
+                    <i class="ph ph-download-simple" aria-hidden="true"></i>
+                    Descargar informe
+                  </button>
+                  <button class="btn btn-primary" type="button" data-modal-open="firmaModal">
+                    <i class="ph ph-signature" aria-hidden="true"></i>
+                    Firmar constancia
+                  </button>
+                </div>
+              </div>
+            </section>
+
+            <section class="section section-tight">
+              <div class="alert alert-success" role="status">
+                <i class="ph ph-seal-check" aria-hidden="true"></i>
+                <div>
+                  <p class="alert-title">Informe disponible</p>
+                  <p class="alert-text">La sábana de notas del año 2026 está publicada. Las firmas del acudiente y del estudiante se encuentran al día.</p>
+                </div>
+              </div>
+            </section>
+
+            <section class="section section-tight">
+              <div class="split">
+                <div>
+                  <div class="avatar-row">
+                    <span class="avatar avatar-lg">LM</span>
+                    <div>
+                      <h3>Laura Sofía Martínez Gómez</h3>
+                      <p>Código 2026-0042 · Curso 10.º A · Jornada mañana</p>
+                    </div>
+                  </div>
+                </div>
+                <aside class="split-aside">
+                  <dl class="detail-list compact">
+                    <div>
+                      <dt>Curso</dt>
+                      <dd class="strong">10.º A</dd>
+                    </div>
+                    <div>
+                      <dt>Año escolar</dt>
+                      <dd>2026</dd>
+                    </div>
+                    <div>
+                      <dt>Director de grupo</dt>
+                      <dd>Docente de área</dd>
+                    </div>
+                    <div>
+                      <dt>Promedio general</dt>
+                      <dd class="strong">4,4 / 5,0</dd>
+                    </div>
+                  </dl>
+                </aside>
+              </div>
+            </section>
+
+            <section class="section">
+              <div class="section-head">
+                <div>
+                  <h2 class="section-title">Sábana de notas</h2>
+                  <p class="section-sub">22 asignaturas · Escala institucional de 1,0 a 5,0.</p>
+                </div>
+                <span class="chip chip-success">Publicada</span>
+              </div>
+
+              <div class="grid grid-4 gap-3" aria-label="Escala de desempeño">
+                <div class="flex items-center gap-2 text-[11px] text-slate-600"><span class="status status-success">Superior</span><span class="muted">4,6 – 5,0</span></div>
+                <div class="flex items-center gap-2 text-[11px] text-slate-600"><span class="status status-info">Alto</span><span class="muted">4,0 – 4,5</span></div>
+                <div class="flex items-center gap-2 text-[11px] text-slate-600"><span class="status status-warning">Básico</span><span class="muted">3,5 – 3,9</span></div>
+                <div class="flex items-center gap-2 text-[11px] text-slate-600"><span class="status status-danger">Bajo</span><span class="muted">1,0 – 3,4</span></div>
+                <div class="flex items-center gap-2 text-[11px] text-slate-600"><span class="status status-danger">RECUPERACIÓN</span><span class="muted">9</span></div>
+              </div>
+
+              <div class="filter-bar" role="search">
+                <div class="field field-grow">
+                  <label class="label" for="filtroInforme">Buscar materia</label>
+                  <div class="search-field">
+                    <i class="ph ph-magnifying-glass" aria-hidden="true"></i>
+                    <input class="input input-sm" id="filtroInforme" type="search" placeholder="Ej. Matemáticas, Inglés, Convivencia" autocomplete="off">
+                  </div>
+                </div>
+                <div class="filter-actions">
+                  <button class="btn btn-secondary btn-sm" type="button" id="limpiarFiltroInforme">Limpiar</button>
+                </div>
+              </div>
+
+              <div data-tabs>
+                <div class="tabs" role="tablist" aria-label="Períodos académicos">
+                  <button class="tab" type="button" role="tab" id="tab-p1" aria-controls="panel-p1" aria-selected="true" data-tab="p1">Período I</button>
+                  <button class="tab" type="button" role="tab" id="tab-p2" aria-controls="panel-p2" aria-selected="false" data-tab="p2">Período II</button>
+                  <button class="tab" type="button" role="tab" id="tab-p3" aria-controls="panel-p3" aria-selected="false" data-tab="p3">Período III</button>
+                  <button class="tab" type="button" role="tab" id="tab-consolidado" aria-controls="panel-consolidado" aria-selected="false" data-tab="consolidado">Consolidado</button>
+                </div>
+
+                <div class="tab-panel" id="panel-p1" role="tabpanel" aria-labelledby="tab-p1" data-tab-panel="p1">
+                  <div class="table-wrap">
+                    <table class="data-table" aria-label="Notas del período I">
+                      <thead>
+                        <tr>
+                          <th scope="col">N°</th>
+                          <th scope="col">Materia</th>
+                          <th scope="col" class="num">CM</th>
+                          <th scope="col" class="num">P1</th>
+                          <th scope="col" class="num">P2</th>
+                          <th scope="col" class="num">P3</th>
+                          <th scope="col" class="num">P4</th>
+                        </tr>
+                      </thead>
+                      <tbody id="tbody-p1"></tbody>
+                    </table>
+                  </div>
+                </div>
+
+                <div class="tab-panel" id="panel-p2" role="tabpanel" aria-labelledby="tab-p2" data-tab-panel="p2" hidden>
+                  <div class="table-wrap">
+                    <table class="data-table" aria-label="Notas del período II">
+                      <thead>
+                        <tr>
+                          <th scope="col">N°</th>
+                          <th scope="col">Materia</th>
+                          <th scope="col" class="num">CM</th>
+                          <th scope="col" class="num">P1</th>
+                          <th scope="col" class="num">P2</th>
+                          <th scope="col" class="num">P3</th>
+                          <th scope="col" class="num">P4</th>
+                        </tr>
+                      </thead>
+                      <tbody id="tbody-p2"></tbody>
+                    </table>
+                  </div>
+                </div>
+
+                <div class="tab-panel" id="panel-p3" role="tabpanel" aria-labelledby="tab-p3" data-tab-panel="p3" hidden>
+                  <div class="table-wrap">
+                    <table class="data-table" aria-label="Notas del período III">
+                      <thead>
+                        <tr>
+                          <th scope="col">N°</th>
+                          <th scope="col">Materia</th>
+                          <th scope="col" class="num">CM</th>
+                          <th scope="col" class="num">P1</th>
+                          <th scope="col" class="num">P2</th>
+                          <th scope="col" class="num">P3</th>
+                          <th scope="col" class="num">P4</th>
+                        </tr>
+                      </thead>
+                      <tbody id="tbody-p3"></tbody>
+                    </table>
+                  </div>
+                </div>
+
+                <div class="tab-panel" id="panel-consolidado" role="tabpanel" aria-labelledby="tab-consolidado" data-tab-panel="consolidado" hidden>
+                  <div class="alert alert-info" role="note">
+                    <i class="ph ph-info" aria-hidden="true"></i>
+                    <div>
+                      <p class="alert-title">Cómo leer el consolidado</p>
+                      <p class="alert-text"><strong>CM1, CM2 y CM3</strong> son los conceptos de materia de cada período. <strong>C.D.</strong> es el concepto definitivo y <strong>C.A.</strong> el concepto final del área.</p>
+                    </div>
+                  </div>
+                  <div class="table-wrap">
+                    <table class="data-table" aria-label="Consolidado anual de notas">
+                      <thead>
+                        <tr>
+                          <th scope="col">N°</th>
+                          <th scope="col">Área</th>
+                          <th scope="col">Materia</th>
+                          <th scope="col" class="num">CM1</th>
+                          <th scope="col" class="num">CM2</th>
+                          <th scope="col" class="num">CM3</th>
+                          <th scope="col" class="num">C.D.</th>
+                          <th scope="col" class="num">C.A.</th>
+                          <th scope="col">Desempeño</th>
+                        </tr>
+                      </thead>
+                      <tbody id="tbody-consolidado"></tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <section class="section">
+              <div class="section-head">
+                <div>
+                  <h2 class="section-title">Descripción de la evaluación</h2>
+                  <p class="section-sub">Logros e indicadores evaluados por asignatura en cada período.</p>
+                </div>
+                <span class="chip">Registro docente</span>
+              </div>
+
+              <div data-tabs>
+                <div class="tabs" role="tablist" aria-label="Descripción por período">
+                  <button class="tab" type="button" role="tab" id="tab-desc-p1" aria-controls="panel-desc-p1" aria-selected="true" data-tab="desc-p1">Período I</button>
+                  <button class="tab" type="button" role="tab" id="tab-desc-p2" aria-controls="panel-desc-p2" aria-selected="false" data-tab="desc-p2">Período II</button>
+                  <button class="tab" type="button" role="tab" id="tab-desc-p3" aria-controls="panel-desc-p3" aria-selected="false" data-tab="desc-p3">Período III</button>
+                </div>
+
+                <div class="tab-panel" id="panel-desc-p1" role="tabpanel" aria-labelledby="tab-desc-p1" data-tab-panel="desc-p1">
+                  <div class="table-wrap">
+                    <table class="data-table desc-table" aria-label="Descripción de la evaluación del período I">
+                      <thead>
+                        <tr>
+                          <th scope="col">Materia</th>
+                          <th scope="col" class="num">CM</th>
+                          <th scope="col">Logro 1</th>
+                          <th scope="col">Logro 2</th>
+                          <th scope="col">Logro 3</th>
+                          <th scope="col">Logro 4</th>
+                        </tr>
+                      </thead>
+                      <tbody id="tbody-desc-p1"></tbody>
+                    </table>
+                  </div>
+                </div>
+
+                <div class="tab-panel" id="panel-desc-p2" role="tabpanel" aria-labelledby="tab-desc-p2" data-tab-panel="desc-p2" hidden>
+                  <div class="table-wrap">
+                    <table class="data-table desc-table" aria-label="Descripción de la evaluación del período II">
+                      <thead>
+                        <tr>
+                          <th scope="col">Materia</th>
+                          <th scope="col" class="num">CM</th>
+                          <th scope="col">Logro 1</th>
+                          <th scope="col">Logro 2</th>
+                          <th scope="col">Logro 3</th>
+                          <th scope="col">Logro 4</th>
+                        </tr>
+                      </thead>
+                      <tbody id="tbody-desc-p2"></tbody>
+                    </table>
+                  </div>
+                </div>
+
+                <div class="tab-panel" id="panel-desc-p3" role="tabpanel" aria-labelledby="tab-desc-p3" data-tab-panel="desc-p3" hidden>
+                  <div class="table-wrap">
+                    <table class="data-table desc-table" aria-label="Descripción de la evaluación del período III">
+                      <thead>
+                        <tr>
+                          <th scope="col">Materia</th>
+                          <th scope="col" class="num">CM</th>
+                          <th scope="col">Logro 1</th>
+                          <th scope="col">Logro 2</th>
+                          <th scope="col">Logro 3</th>
+                          <th scope="col">Logro 4</th>
+                        </tr>
+                      </thead>
+                      <tbody id="tbody-desc-p3"></tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </section>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <div id="mobile-overlay" class="overlay"></div>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <div class="modal" id="firmaModal" role="dialog" aria-modal="true" aria-labelledby="firmaModalTitle">
+    <div class="modal-panel">
+      <div class="modal-head">
+        <div>
+          <h2 class="modal-title" id="firmaModalTitle">Firmar constancia</h2>
+          <p class="modal-sub">Registra la firma del acudiente y del estudiante para el informe 2026.</p>
+        </div>
+        <button class="modal-close" type="button" data-modal-close aria-label="Cerrar">
+          <i class="ph ph-x" aria-hidden="true"></i>
+        </button>
+      </div>
+      <form id="firmaForm">
+        <div class="modal-body">
+          <div class="form-grid">
+            <div class="field span-2">
+              <label class="label" for="firmaNombre">Nombre del acudiente <span class="req" aria-hidden="true">*</span></label>
+              <input class="input" id="firmaNombre" name="firmaNombre" type="text" autocomplete="name" required>
+            </div>
+            <div class="field">
+              <label class="label" for="firmaDocumento">Documento <span class="req" aria-hidden="true">*</span></label>
+              <input class="input" id="firmaDocumento" name="firmaDocumento" type="text" inputmode="numeric" minlength="6" required>
+            </div>
+            <div class="field">
+              <label class="label" for="firmaCodigo">Código de verificación <span class="req" aria-hidden="true">*</span></label>
+              <input class="input" id="firmaCodigo" name="firmaCodigo" type="text" inputmode="numeric" pattern="[0-9]{6}" maxlength="6" placeholder="6 dígitos" required>
+              <p class="field-help">Se envía al correo registrado del acudiente.</p>
+            </div>
+            <div class="field span-2">
+              <label class="check-row">
+                <input type="checkbox" id="firmaAcepto" name="firmaAcepto" required>
+                <span>Confirmo que revisé el informe académico y autorizo la firma digital de la constancia. <span class="req" aria-hidden="true">*</span></span>
+              </label>
+            </div>
+          </div>
+        </div>
+        <div class="modal-foot">
+          <button class="btn btn-secondary" type="button" data-modal-close>Cancelar</button>
+          <button class="btn btn-primary" type="submit">
+            <i class="ph ph-signature" aria-hidden="true"></i>
+            Firmar constancia
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="assets/js/app.js"></script>
+  <script>
+    (function () {
+      "use strict";
+
+      var SUBJECTS = [
+        { n: "12", name: "Ciencias Naturales", area: "Ciencias Naturales y Educación Ambiental", p1: [4.6, 4.4, 4.5, 4.7], p2: [4.5, 4.6, 4.5, 4.7], p3: [4.7, 4.6, 4.5, 4.8] },
+        { n: "18", name: "Proceso de pensamiento STEM", area: "Ciencias Naturales y Educación Ambiental", p1: [4.3, 4.5, 4.4, 4.6], p2: [4.4, 4.5, 4.6, 4.7], p3: [4.5, 4.6, 4.6, 4.7] },
+        { n: "21", name: "Ciencias Sociales", area: "Ciencias Sociales", p1: [4.4, 4.3, 4.5, 4.6], p2: [4.5, 4.4, 4.6, 4.7], p3: [4.6, 4.5, 4.7, 4.8] },
+        { n: "21", name: "Emprendiendo Paz", area: "Ciencias Sociales", p1: [4.2, 4.4, 4.3, 4.5], p2: [4.3, 4.4, 4.5, 4.6], p3: [4.4, 4.5, 4.6, 4.7] },
+        { n: "24", name: "Conexión MD (Ética y Religión)", area: "Educación Ética y Valores", p1: [4.7, 4.6, 4.8, 4.7], p2: [4.8, 4.7, 4.8, 4.9], p3: [4.8, 4.8, 4.9, 4.9] },
+        { n: "25", name: "Artes", area: "Educación Artística", p1: [4.5, 4.7, 4.6, 4.8], p2: [4.6, 4.7, 4.8, 4.8], p3: [4.7, 4.8, 4.8, 4.9] },
+        { n: "26", name: "Danza", area: "Educación Artística", p1: [4.8, 4.9, 4.7, 4.9], p2: [4.8, 4.9, 4.8, 4.9], p3: [4.9, 4.9, 4.8, 5.0] },
+        { n: "27", name: "Música", area: "Educación Artística", p1: [4.6, 4.5, 4.7, 4.8], p2: [4.7, 4.6, 4.8, 4.8], p3: [4.8, 4.7, 4.8, 4.9] },
+        { n: "29", name: "Educación Física", area: "Educación Física", p1: [4.7, 4.6, 4.8, 4.9], p2: [4.7, 4.7, 4.8, 4.9], p3: [4.8, 4.8, 4.9, 5.0] },
+        { n: "33", name: "Lengua Castellana", area: "Humanidades y Lengua Castellana", p1: [4.1, 4.4, 4.3, 4.4], p2: [4.2, 4.4, 4.4, 4.5], p3: [4.3, 4.5, 4.4, 4.6] },
+        { n: "34", name: "Taller de Lectura", area: "Humanidades y Lengua Castellana", p1: [4.4, 4.5, 4.4, 4.6], p2: [4.5, 4.5, 4.6, 4.6], p3: [4.5, 4.6, 4.6, 4.7] },
+        { n: "35", name: "Taller de escritura", area: "Humanidades y Lengua Castellana", p1: [4.2, 4.3, 4.5, 4.5], p2: [4.3, 4.4, 4.5, 4.6], p3: [4.4, 4.5, 4.6, 4.7] },
+        { n: "36", name: "Inglés", area: "Humanidades e Idiomas", p1: [4.0, 4.2, 4.3, 4.4], p2: [4.1, 4.3, 4.4, 4.5], p3: [4.2, 4.4, 4.5, 4.6] },
+        { n: "37", name: "Taller de Inglés", area: "Humanidades e Idiomas", p1: [4.1, 4.0, 4.2, 4.3], p2: [4.2, 4.1, 4.3, 4.4], p3: [4.3, 4.2, 4.4, 4.5] },
+        { n: "39", name: "Matemáticas", area: "Matemáticas", p1: [4.5, 4.4, 4.6, 4.7], p2: [4.6, 4.5, 4.6, 4.8], p3: [4.6, 4.6, 4.7, 4.8] },
+        { n: "40", name: "Taller de Matemáticas", area: "Matemáticas", p1: [4.3, 4.2, 4.4, 4.5], p2: [4.3, 4.3, 4.5, 4.6], p3: [4.4, 4.4, 4.6, 4.6] },
+        { n: "41", name: "Cátedra Empresarial", area: "Ciencias Económicas y Políticas", p1: [4.4, 4.5, 4.3, 4.6], p2: [4.5, 4.5, 4.4, 4.6], p3: [4.6, 4.5, 4.5, 4.7] },
+        { n: "41", name: "Tecnodigital STEM", area: "Tecnología e Informática", p1: [4.2, 4.3, 4.4, 4.5], p2: [4.3, 4.4, 4.4, 4.6], p3: [4.4, 4.5, 4.5, 4.6] },
+        { n: "42", name: "Filosofía", area: "Ciencias Sociales", p1: [3.8, 4.0, 4.1, 4.2], p2: [3.9, 4.1, 4.1, 4.3], p3: [4.0, 4.2, 4.2, 4.4] },
+        { n: "43", name: "Proceso de pensamiento (verbal)", area: "Humanidades y Lengua Castellana", p1: [4.0, 4.1, 4.2, 4.3], p2: [4.1, 4.2, 4.3, 4.4], p3: [4.2, 4.3, 4.4, 4.5] },
+        { n: "44", name: "Proceso de pensamiento (lógico)", area: "Matemáticas", p1: [4.1, 4.2, 4.3, 4.4], p2: [4.2, 4.3, 4.4, 4.5], p3: [4.3, 4.4, 4.5, 4.6] },
+        { n: "50", name: "Convivencia", area: "Convivencia Escolar", p1: [4.9, 4.8, 4.9, 5.0], p2: [4.9, 4.9, 5.0, 5.0], p3: [5.0, 4.9, 5.0, 5.0] }
+      ];
+
+      var LOGROS = [
+        [
+          "Identifica y describe los conceptos fundamentales de {materia}.",
+          "Aplica procedimientos de {materia} en situaciones del contexto.",
+          "Argumenta sus respuestas con evidencias y lenguaje propio del área.",
+          "Propone soluciones y evalúa resultados en ejercicios de {materia}."
+        ],
+        [
+          "Relaciona los conceptos de {materia} con situaciones de la vida cotidiana.",
+          "Resuelve problemas de {materia} siguiendo procedimientos adecuados.",
+          "Comunica sus ideas con claridad y utiliza el vocabulario del área.",
+          "Trabaja colaborativamente y sustenta sus conclusiones."
+        ],
+        [
+          "Aplica los aprendizajes de {materia} en nuevos contextos.",
+          "Analiza información y establece relaciones entre conceptos.",
+          "Presenta argumentos estructurados y coherentes.",
+          "Evalúa su propio proceso y plantea metas de mejora."
+        ]
+      ];
+
+      function formatGrade(value) {
+        if (value === 9) return "9";
+        return value.toFixed(1).replace(".", ",");
+      }
+
+      function average(values) {
+        var total = values.reduce(function (sum, value) { return sum + value; }, 0);
+        return total / values.length;
+      }
+
+      function performance(value) {
+        if (value === 9) return { label: "RECUPERACIÓN", cls: "status-danger" };
+        if (value >= 4.6) return { label: "Superior", cls: "status-success" };
+        if (value >= 4.0) return { label: "Alto", cls: "status-info" };
+        if (value >= 3.5) return { label: "Básico", cls: "status-warning" };
+        return { label: "Bajo", cls: "status-danger" };
+      }
+
+      function gradeCell(value) {
+        var low = value < 3.5 ? " grade-low" : "";
+        return '<td class="num"><span class="grade' + low + '">' + formatGrade(value) + "</span></td>";
+      }
+
+      function cmCell(value) {
+        var perf = performance(value);
+        return '<td class="num"><span class="status ' + perf.cls + '" title="' + perf.label + '">' + formatGrade(value) + "</span></td>";
+      }
+
+      function subjectCell(subject) {
+        return '<td><span class="cell-title">' + subject.name + '</span><span class="cell-sub">Docente de área</span></td>';
+      }
+
+      function renderPeriod(period, targetId) {
+        var target = document.getElementById(targetId);
+        if (!target) return;
+        target.innerHTML = SUBJECTS.map(function (subject) {
+          var grades = subject[period];
+          var cm = average(grades);
+          return "<tr data-name=\"" + subject.name.toLowerCase() + "\">" +
+            '<td class="muted">' + subject.n + "</td>" +
+            subjectCell(subject) +
+            cmCell(cm) +
+            grades.map(gradeCell).join("") +
+            "</tr>";
+        }).join("");
+      }
+
+      function renderConsolidado() {
+        var target = document.getElementById("tbody-consolidado");
+        if (!target) return;
+        target.innerHTML = SUBJECTS.map(function (subject) {
+          var cm1 = average(subject.p1);
+          var cm2 = average(subject.p2);
+          var cm3 = average(subject.p3);
+          var cd = (cm1 + cm2 + cm3) / 3;
+          var ca = cd;
+          var perf = performance(cd);
+          return "<tr data-name=\"" + subject.name.toLowerCase() + "\">" +
+            '<td class="muted">' + subject.n + "</td>" +
+            '<td class="tiny muted">' + subject.area + "</td>" +
+            '<td><span class="cell-title">' + subject.name + '</span><span class="cell-sub">Docente de área</span></td>' +
+            cmCell(cm1) + cmCell(cm2) + cmCell(cm3) + cmCell(cd) + cmCell(ca) +
+            '<td><span class="status ' + perf.cls + '">' + perf.label + "</span></td>" +
+            "</tr>";
+        }).join("");
+      }
+
+      function descriptionCell(text, grade) {
+        var low = grade < 3.5 ? " is-low" : "";
+        return '<td><span class="desc-text">' + text + '</span><span class="desc-grade' + low + '">' + formatGrade(grade) + "</span></td>";
+      }
+
+      function renderDescriptions(period, index, targetId) {
+        var target = document.getElementById(targetId);
+        if (!target) return;
+        target.innerHTML = SUBJECTS.map(function (subject) {
+          var grades = subject[period];
+          var cm = average(grades);
+          var texts = LOGROS[index].map(function (text) {
+            return text.replace("{materia}", subject.name.toLowerCase());
+          });
+          return "<tr data-name=\"" + subject.name.toLowerCase() + "\">" +
+            '<td><span class="cell-title">' + subject.name + '</span><span class="cell-sub">Docente de área</span></td>' +
+            cmCell(cm) +
+            texts.map(function (text, i) { return descriptionCell(text, grades[i]); }).join("") +
+            "</tr>";
+        }).join("");
+      }
+
+      function filterRows() {
+        var input = document.getElementById("filtroInforme");
+        if (!input) return;
+        var term = input.value.trim().toLowerCase();
+        document.querySelectorAll("#page-content tbody tr").forEach(function (row) {
+          var name = row.getAttribute("data-name") || "";
+          row.hidden = term.length > 0 && name.indexOf(term) === -1;
+        });
+      }
+
+      renderPeriod("p1", "tbody-p1");
+      renderPeriod("p2", "tbody-p2");
+      renderPeriod("p3", "tbody-p3");
+      renderConsolidado();
+      renderDescriptions("p1", 0, "tbody-desc-p1");
+      renderDescriptions("p2", 1, "tbody-desc-p2");
+      renderDescriptions("p3", 2, "tbody-desc-p3");
+
+      var input = document.getElementById("filtroInforme");
+      if (input) input.addEventListener("input", filterRows);
+      var clear = document.getElementById("limpiarFiltroInforme");
+      if (clear) clear.addEventListener("click", function () {
+        if (input) input.value = "";
+        filterRows();
+        if (input) input.focus();
+      });
+
+      var form = document.getElementById("firmaForm");
+      if (form) form.addEventListener("submit", function (event) {
+        event.preventDefault();
+        if (!form.checkValidity()) {
+          form.reportValidity();
+          return;
+        }
+        if (window.EstuNET) {
+          window.EstuNET.closeModal("firmaModal");
+          window.EstuNET.showToast("Constancia firmada correctamente (demostración)");
+        }
+        form.reset();
+      });
+    })();
+  </script>
+</body>
+</html>

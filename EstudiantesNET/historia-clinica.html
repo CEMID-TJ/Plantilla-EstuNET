@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Plantilla de diseño del portal EstudiantesNET. Historia clínica del estudiante.">
+  <title>Historia clínica · EstudiantesNET</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body data-page="historia">
+  <div id="proto-bar"></div>
+
+  <div class="app-layout">
+    <aside id="sidebar"></aside>
+
+    <div class="app-main">
+      <header id="topbar"></header>
+
+      <main class="page-main">
+        <div class="page-surface">
+          <div id="state-host" hidden></div>
+
+          <div id="page-content">
+            <section class="hero">
+              <div class="hero-row">
+                <div>
+                  <span class="eyebrow">Año escolar 2026 · Bienestar estudiantil</span>
+                  <h2 class="page-heading">Historia clínica</h2>
+                  <p class="page-subheading">Afiliación en salud, contacto de emergencia, antecedentes y valoraciones registradas por el colegio.</p>
+                </div>
+                <div class="hero-actions">
+                  <button class="btn btn-secondary" type="button" data-demo="Historia clínica enviada a impresión (demostración)">
+                    <i class="ph ph-printer" aria-hidden="true"></i>
+                    Imprimir
+                  </button>
+                  <button class="btn btn-primary" type="button" data-modal-open="historiaModal">
+                    <i class="ph ph-pencil-simple" aria-hidden="true"></i>
+                    Solicitar actualización
+                  </button>
+                </div>
+              </div>
+            </section>
+
+            <section class="section section-tight">
+              <div class="alert alert-info" role="note">
+                <i class="ph ph-shield-check" aria-hidden="true"></i>
+                <div>
+                  <p class="alert-title">Información confidencial</p>
+                  <p class="alert-text">La historia clínica se usa para atender emergencias y apoyar el bienestar del estudiante. Solo el personal autorizado puede consultarla.</p>
+                </div>
+              </div>
+            </section>
+
+            <section class="section section-tight">
+              <div class="split">
+                <div>
+                  <div class="avatar-row">
+                    <span class="avatar avatar-lg">LM</span>
+                    <div>
+                      <h3>Laura Sofía Martínez Gómez</h3>
+                      <p>Código 2026-0042 · Grado 10.º A · Jornada mañana</p>
+                    </div>
+                  </div>
+                </div>
+                <aside class="split-aside">
+                  <dl class="detail-list compact">
+                    <div><dt>Grupo sanguíneo</dt><dd class="strong">O+</dd></div>
+                    <div><dt>EPS</dt><dd>Nueva EPS</dd></div>
+                    <div><dt>Otra EPS</dt><dd>No registra</dd></div>
+                    <div><dt>Última valoración</dt><dd>12 feb 2026</dd></div>
+                  </dl>
+                </aside>
+              </div>
+            </section>
+
+            <section class="section">
+              <div class="section-head">
+                <div>
+                  <h2 class="section-title">Datos clínicos</h2>
+                  <p class="section-sub">La información se organiza en las mismas secciones de la ficha original.</p>
+                </div>
+                <span class="chip chip-success">Actualizada</span>
+              </div>
+
+              <div data-tabs>
+                <div class="tabs" role="tablist" aria-label="Secciones de la historia clínica">
+                  <button class="tab" type="button" role="tab" id="tab-afiliacion" aria-controls="panel-afiliacion" aria-selected="true" data-tab="afiliacion">Afiliación</button>
+                  <button class="tab" type="button" role="tab" id="tab-emergencia" aria-controls="panel-emergencia" aria-selected="false" data-tab="emergencia">Contacto y emergencia</button>
+                  <button class="tab" type="button" role="tab" id="tab-antecedentes" aria-controls="panel-antecedentes" aria-selected="false" data-tab="antecedentes">Antecedentes</button>
+                  <button class="tab" type="button" role="tab" id="tab-valoraciones" aria-controls="panel-valoraciones" aria-selected="false" data-tab="valoraciones">Valoraciones</button>
+                </div>
+
+                <div class="tab-panel" id="panel-afiliacion" role="tabpanel" aria-labelledby="tab-afiliacion" data-tab-panel="afiliacion">
+                  <div class="split">
+                    <div>
+                      <h3 class="section-title" style="font-size:16px">Afiliación en salud</h3>
+                      <p class="section-sub">Datos de la EPS y del cotizante registrados en la matrícula.</p>
+                      <dl class="detail-list" style="margin-top:16px">
+                        <div><dt>Grupo sanguíneo</dt><dd class="strong">O</dd></div>
+                        <div><dt>RH</dt><dd class="strong">+</dd></div>
+                        <div><dt>EPS</dt><dd>Nueva EPS</dd></div>
+                        <div><dt>Otra EPS</dt><dd>No registra</dd></div>
+                        <div><dt>Nombre del cotizante</dt><dd>Carlos Andrés Martínez Ríos</dd></div>
+                        <div><dt>Documento del cotizante</dt><dd>C.C. 79.458.221</dd></div>
+                      </dl>
+                    </div>
+                    <aside class="split-aside">
+                      <div class="soft-panel">
+                        <div class="avatar-row">
+                          <span class="avatar">NE</span>
+                          <div>
+                            <h3>Nueva EPS</h3>
+                            <p>EPS registrada</p>
+                          </div>
+                        </div>
+                        <div class="info-row" style="margin-top:14px">
+                          <span class="info-label">Otra EPS</span>
+                          <span class="info-value">No registra</span>
+                        </div>
+                        <div class="info-row">
+                          <span class="info-label">Cotizante</span>
+                          <span class="info-value">Carlos Andrés Martínez Ríos</span>
+                        </div>
+                        <div class="info-row">
+                          <span class="info-label">Documento</span>
+                          <span class="info-value">C.C. 79.458.221</span>
+                        </div>
+                      </div>
+                    </aside>
+                  </div>
+                </div>
+
+                <div class="tab-panel" id="panel-emergencia" role="tabpanel" aria-labelledby="tab-emergencia" data-tab-panel="emergencia" hidden>
+                  <h3 class="section-title" style="font-size:16px">Contacto de emergencia</h3>
+                  <p class="section-sub">Persona a quien se contacta en caso de una emergencia.</p>
+                  <dl class="detail-list" style="margin-top:16px">
+                    <div><dt>Nombre</dt><dd class="strong">Paula Andrea Gómez Salazar</dd></div>
+                    <div><dt>Teléfono</dt><dd>601 745 2210</dd></div>
+                    <div><dt>Celular</dt><dd>315 220 8844</dd></div>
+                    <div><dt>Dirección</dt><dd>Calle 72 Sur # 18-45, interior 3</dd></div>
+                    <div><dt>Correo electrónico</dt><dd>paula.gomez@correo.com</dd></div>
+                    <div><dt>Correo de la madre</dt><dd>paula.gomez@correo.com</dd></div>
+                    <div><dt>Correo del padre</dt><dd>carlos.martinez@correo.com</dd></div>
+                  </dl>
+                  <div class="alert alert-warning" role="note" style="margin-top:18px">
+                    <i class="ph ph-phone-call" aria-hidden="true"></i>
+                    <div>
+                      <p class="alert-title">Verifica tus contactos</p>
+                      <p class="alert-text">Mantener actualizados el teléfono y el correo permite una atención oportuna ante cualquier emergencia.</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="tab-panel" id="panel-antecedentes" role="tabpanel" aria-labelledby="tab-antecedentes" data-tab-panel="antecedentes" hidden>
+                  <div class="grid grid-2 gap-5">
+                    <div>
+                      <h3 class="section-title" style="font-size:16px">Antecedentes médicos</h3>
+                      <dl class="detail-list wide compact" style="margin-top:10px">
+                        <div><dt>Antecedentes</dt><dd>Asma leve diagnosticada a los 7 años.</dd></div>
+                        <div><dt>Alergias</dt><dd>Alergia al polvo y a los ácaros.</dd></div>
+                        <div><dt>Cirugías</dt><dd>Ninguna registrada.</dd></div>
+                        <div><dt>Traumas recientes</dt><dd>Ninguno registrado.</dd></div>
+                        <div><dt>Medicamentos</dt><dd>Salbutamol inhalado, solo cuando presenta crisis.</dd></div>
+                      </dl>
+                    </div>
+                    <div>
+                      <h3 class="section-title" style="font-size:16px">Recomendaciones</h3>
+                      <ul class="check-list" style="margin-top:10px">
+                        <li><i class="ph ph-check-circle" aria-hidden="true"></i> Informar al docente de Educación Física sobre el asma leve.</li>
+                        <li><i class="ph ph-check-circle" aria-hidden="true"></i> Mantener el inhalador en la enfermería del colegio.</li>
+                        <li><i class="ph ph-check-circle" aria-hidden="true"></i> Evitar la exposición prolongada al polvo.</li>
+                        <li class="is-pending"><i class="ph ph-clock" aria-hidden="true"></i> Actualizar la autorización de atención médica cada año.</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="tab-panel" id="panel-valoraciones" role="tabpanel" aria-labelledby="tab-valoraciones" data-tab-panel="valoraciones" hidden>
+                  <h3 class="section-title" style="font-size:16px">Valoraciones registradas</h3>
+                  <p class="section-sub">Peso, talla, agudeza visual e higiene oral.</p>
+                  <div class="table-wrap" style="margin-top:14px">
+                    <table class="data-table compact">
+                      <caption class="sr-only">Valoraciones de la historia clínica</caption>
+                      <thead>
+                        <tr>
+                          <th scope="col">Valoración</th>
+                          <th scope="col">Fecha</th>
+                          <th scope="col">Resultado</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr><td class="cell-title">Peso</td><td>12 feb 2026</td><td>48 kg</td></tr>
+                        <tr><td class="cell-title">Talla</td><td>12 feb 2026</td><td>1,58 m</td></tr>
+                        <tr><td class="cell-title">Agudeza visual</td><td>12 feb 2026</td><td>20/20 en ambos ojos</td></tr>
+                        <tr><td class="cell-title">Higiene oral</td><td>12 feb 2026</td><td>Buena · sin caries visible</td></tr>
+                      </tbody>
+                    </table>
+                  </div>
+                  <div class="note" style="margin-top:16px">
+                    <strong>Nota:</strong> las valoraciones son registradas por el personal de enfermería del colegio y no reemplazan un diagnóstico médico.
+                  </div>
+                </div>
+              </div>
+            </section>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <div id="mobile-overlay" class="overlay"></div>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <div class="modal" id="historiaModal" role="dialog" aria-modal="true" aria-labelledby="historiaModalTitle">
+    <div class="modal-panel modal-lg">
+      <div class="modal-head">
+        <div>
+          <h2 class="modal-title" id="historiaModalTitle">Solicitar actualización de la historia clínica</h2>
+          <p class="modal-sub">Los cambios serán validados por enfermería antes de aplicarse.</p>
+        </div>
+        <button class="modal-close" type="button" data-modal-close aria-label="Cerrar">
+          <i class="ph ph-x" aria-hidden="true"></i>
+        </button>
+      </div>
+      <form id="historiaForm">
+        <div class="modal-body">
+          <h3 class="section-title" style="font-size:14px">Afiliación</h3>
+          <div class="form-grid" style="margin-top:12px">
+            <div class="field">
+              <label class="label" for="histTipo">Grupo sanguíneo <span class="req" aria-hidden="true">*</span></label>
+              <select class="select" id="histTipo" name="Tipo" required>
+                <option value="">Selecciona</option>
+                <option value="A">A</option>
+                <option value="B">B</option>
+                <option value="AB">AB</option>
+                <option value="O" selected>O</option>
+              </select>
+            </div>
+            <div class="field">
+              <label class="label" for="histRH">RH <span class="req" aria-hidden="true">*</span></label>
+              <select class="select" id="histRH" name="RH" required>
+                <option value="">Selecciona</option>
+                <option value="+">Positivo (+)</option>
+                <option value="-">Negativo (−)</option>
+              </select>
+            </div>
+            <div class="field span-2">
+              <label class="label" for="histEPS">EPS <span class="req" aria-hidden="true">*</span></label>
+              <input class="input" id="histEPS" name="EPS" type="text" value="Nueva EPS" required>
+            </div>
+            <div class="field">
+              <label class="label" for="histNomCotizante">Nombre del cotizante <span class="req" aria-hidden="true">*</span></label>
+              <input class="input" id="histNomCotizante" name="NomCotizante" type="text" value="Carlos Andrés Martínez Ríos" required>
+            </div>
+            <div class="field">
+              <label class="label" for="histDocCotizante">Documento del cotizante <span class="req" aria-hidden="true">*</span></label>
+              <input class="input" id="histDocCotizante" name="DocCotizante" type="text" value="79.458.221" required>
+            </div>
+          </div>
+
+          <h3 class="section-title" style="font-size:14px;margin-top:24px">Contacto de emergencia</h3>
+          <div class="form-grid" style="margin-top:12px">
+            <div class="field">
+              <label class="label" for="histNomEmer">Nombre <span class="req" aria-hidden="true">*</span></label>
+              <input class="input" id="histNomEmer" name="NomEmer" type="text" value="Paula Andrea Gómez Salazar" required>
+            </div>
+            <div class="field">
+              <label class="label" for="histTelEmer">Teléfono <span class="req" aria-hidden="true">*</span></label>
+              <input class="input" id="histTelEmer" name="TelEmer" type="tel" value="601 745 2210" required>
+            </div>
+            <div class="field">
+              <label class="label" for="histCelularEmer">Celular</label>
+              <input class="input" id="histCelularEmer" name="CelularEmer" type="tel" value="315 220 8844">
+            </div>
+            <div class="field">
+              <label class="label" for="histDirEmer">Dirección</label>
+              <input class="input" id="histDirEmer" name="DirEmer" type="text" value="Calle 72 Sur # 18-45, interior 3">
+            </div>
+            <div class="field span-2">
+              <label class="label" for="histMail">Correo electrónico <span class="req" aria-hidden="true">*</span></label>
+              <input class="input" id="histMail" name="Mail" type="email" value="paula.gomez@correo.com" required>
+            </div>
+          </div>
+
+          <h3 class="section-title" style="font-size:14px;margin-top:24px">Antecedentes</h3>
+          <div class="form-grid" style="margin-top:12px">
+            <div class="field span-2">
+              <label class="label" for="histAlergias">Alergias</label>
+              <textarea class="textarea" id="histAlergias" name="Alergias" rows="2">Alergia al polvo y a los ácaros.</textarea>
+            </div>
+            <div class="field span-2">
+              <label class="label" for="histMedicamentos">Medicamentos</label>
+              <textarea class="textarea" id="histMedicamentos" name="Medicamentos" rows="2">Salbutamol inhalado, solo cuando presenta crisis.</textarea>
+            </div>
+            <div class="field span-2">
+              <label class="check-row">
+                <input type="checkbox" id="histAutorizo" name="histAutorizo" required>
+                <span>Autorizo la actualización de la historia clínica y confirmo que la información es verídica. <span class="req" aria-hidden="true">*</span></span>
+              </label>
+            </div>
+          </div>
+        </div>
+        <div class="modal-foot">
+          <button class="btn btn-secondary" type="button" data-modal-close>Cancelar</button>
+          <button class="btn btn-primary" type="submit">
+            <i class="ph ph-paper-plane-tilt" aria-hidden="true"></i>
+            Enviar solicitud
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="assets/js/app.js"></script>
+  <script>
+    (function () {
+      "use strict";
+      var form = document.getElementById("historiaForm");
+      if (!form) return;
+      form.addEventListener("submit", function (event) {
+        event.preventDefault();
+        if (!form.checkValidity()) {
+          form.reportValidity();
+          return;
+        }
+        if (window.EstuNET) {
+          window.EstuNET.closeModal("historiaModal");
+          window.EstuNET.showToast("Solicitud de actualización enviada a enfermería (demostración)");
+        }
+      });
+    })();
+  </script>
+</body>
+</html>

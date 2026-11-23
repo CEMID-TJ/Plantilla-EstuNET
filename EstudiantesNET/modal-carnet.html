@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Plantilla de diseño del portal EstudiantesNET. Vista del modal de carnet.">
+  <title>Modal de carnet · EstudiantesNET</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body class="modal-backdrop-page">
+  <a class="preview-back" href="index.html"><i class="ph ph-arrow-left" aria-hidden="true"></i> Volver al portal</a>
+
+  <div class="modal-panel" role="dialog" aria-modal="true" aria-labelledby="carnetModalTitle">
+    <div class="modal-head">
+      <div>
+        <h2 class="modal-title" id="carnetModalTitle">Carnet virtual</h2>
+        <p class="modal-sub">Identificación digital vigente para el año escolar 2026.</p>
+      </div>
+      <a class="modal-close" href="index.html" aria-label="Cerrar">
+        <i class="ph ph-x" aria-hidden="true"></i>
+      </a>
+    </div>
+    <div class="modal-body">
+      <div class="carnet mx-auto">
+        <div class="carnet-top">
+          <span class="carnet-brand">EstudiantesNET</span>
+          <span class="carnet-year">2026</span>
+        </div>
+        <div class="carnet-body">
+          <div class="carnet-photo">Foto<br>3 × 4</div>
+          <div>
+            <h3 class="carnet-name">Laura Sofía<br>Martínez Gómez</h3>
+            <p class="carnet-meta">Grado 10.º · Aula 2 · Jornada mañana</p>
+            <div class="carnet-details">
+              <span>Código</span>
+              <strong class="mono">2026-0042</strong>
+              <span>Colegio</span>
+              <strong>Colegio Minuto de Dios</strong>
+              <span>RH / EPS</span>
+              <strong>O+ · Nueva EPS</strong>
+            </div>
+          </div>
+        </div>
+        <div class="carnet-bottom">
+          <span class="carnet-code">Carnet virtual · Año 2026</span>
+          <span class="qr-frame" aria-label="Elemento decorativo del carnet"></span>
+        </div>
+      </div>
+
+      <dl class="detail-list mt-6">
+        <div>
+          <dt>Nombre</dt>
+          <dd class="strong">Laura Sofía Martínez Gómez</dd>
+        </div>
+        <div>
+          <dt>Código</dt>
+          <dd class="mono">2026-0042</dd>
+        </div>
+        <div>
+          <dt>Grado y aula</dt>
+          <dd>10.º · Aula 2</dd>
+        </div>
+        <div>
+          <dt>Jornada</dt>
+          <dd>Mañana</dd>
+        </div>
+        <div>
+          <dt>RH / EPS</dt>
+          <dd>O+ · Nueva EPS</dd>
+        </div>
+        <div>
+          <dt>Estado</dt>
+          <dd><span class="status status-success">Matrícula activa</span></dd>
+        </div>
+      </dl>
+    </div>
+    <div class="modal-foot">
+      <a class="btn btn-secondary" href="index.html">Cerrar</a>
+      <button class="btn btn-primary" type="button" data-demo="Carnet enviado a tu correo (demostración)">
+        <i class="ph ph-download-simple" aria-hidden="true"></i>
+        Descargar carnet
+      </button>
+    </div>
+  </div>
+
+  <script src="assets/js/app.js"></script>
+</body>
+</html>

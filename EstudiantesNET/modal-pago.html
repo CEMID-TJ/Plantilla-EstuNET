@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Plantilla de diseño del portal EstudiantesNET. Vista del modal de pago.">
+  <title>Modal de pago · EstudiantesNET</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body class="modal-backdrop-page">
+  <a class="preview-back" href="cuenta.html"><i class="ph ph-arrow-left" aria-hidden="true"></i> Volver a la cuenta</a>
+
+  <div class="modal-panel" role="dialog" aria-modal="true" aria-labelledby="pagoModalTitle">
+    <div class="modal-head">
+      <div>
+        <h2 class="modal-title" id="pagoModalTitle">Pagar obligación</h2>
+        <p class="modal-sub">Pago seguro · plantilla de demostración.</p>
+      </div>
+      <a class="modal-close" href="cuenta.html" aria-label="Cerrar">
+        <i class="ph ph-x" aria-hidden="true"></i>
+      </a>
+    </div>
+    <div class="modal-body">
+      <div class="alert alert-info">
+        <i class="ph ph-shield-check" aria-hidden="true"></i>
+        <div>
+          <p class="alert-title">Pago protegido</p>
+          <p class="alert-text">Esta es una representación de diseño. No se realizará ningún cobro real.</p>
+        </div>
+      </div>
+
+      <div class="mt-5">
+        <div class="eyebrow">Obligación seleccionada</div>
+        <div class="mt-2 flex items-start justify-between gap-4">
+          <div>
+            <div class="text-[14px] font-semibold">Pensión de noviembre</div>
+            <div class="text-[11px] text-slate-500">Vencida el 20 nov 2026 · incluye mora</div>
+          </div>
+          <div class="text-[18px] font-bold tracking-tight">$620.000</div>
+        </div>
+      </div>
+
+      <div class="mt-5">
+        <span class="label">Medio de pago</span>
+        <div class="grid gap-2">
+          <label class="check-row" style="padding:11px 12px;border:1px solid var(--line);border-radius:9px">
+            <input type="radio" name="medioPago" checked>
+            <span><strong class="text-slate-800">PSE · Débito bancario</strong><br><span class="text-[11px] text-slate-500">Banco Davivienda · cuenta de ahorros</span></span>
+          </label>
+          <label class="check-row" style="padding:11px 12px;border:1px solid var(--line);border-radius:9px">
+            <input type="radio" name="medioPago">
+            <span><strong class="text-slate-800">Tarjeta débito o crédito</strong><br><span class="text-[11px] text-slate-500">Visa, Mastercard o American Express</span></span>
+          </label>
+        </div>
+      </div>
+
+      <label class="check-row mt-5">
+        <input type="checkbox" checked>
+        <span>Acepto los términos y condiciones del pago y autorizo el débito del valor seleccionado.</span>
+      </label>
+    </div>
+    <div class="modal-foot">
+      <a class="btn btn-secondary" href="cuenta.html">Cancelar</a>
+      <button class="btn btn-success" type="button" data-demo="Pago iniciado (demostración)">
+        <i class="ph ph-credit-card" aria-hidden="true"></i>
+        Continuar al pago
+      </button>
+    </div>
+  </div>
+
+  <script src="assets/js/app.js"></script>
+</body>
+</html>

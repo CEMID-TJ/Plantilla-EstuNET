@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Plantilla de diseño del portal EstudiantesNET. Circulares y comunicados.">
+  <title>Circulares y comunicados · EstudiantesNET</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body data-page="circulares">
+  <div id="proto-bar"></div>
+
+  <div class="app-layout">
+    <aside id="sidebar"></aside>
+
+    <div class="app-main">
+      <header id="topbar"></header>
+
+      <main class="page-main">
+        <div class="page-surface">
+          <div id="state-host" hidden></div>
+
+          <div id="page-content">
+            <section class="hero">
+              <div class="hero-row">
+                <div>
+                  <span class="eyebrow">Año escolar 2026 · Comunicación institucional</span>
+                  <h2 class="page-heading">Circulares y comunicados</h2>
+                  <p class="page-subheading">Consulta las comunicaciones enviadas por el colegio, ordenadas por fecha de publicación.</p>
+                </div>
+                <div class="hero-actions">
+                  <button class="btn btn-secondary" type="button" data-demo="Historial descargado (demostración)">
+                    <i class="ph ph-download-simple" aria-hidden="true"></i>
+                    Descargar historial
+                  </button>
+                </div>
+              </div>
+            </section>
+
+            <section class="section section-tight">
+              <div class="alert alert-info" role="note">
+                <i class="ph ph-megaphone" aria-hidden="true"></i>
+                <div>
+                  <p class="alert-title">Comunicados oficiales</p>
+                  <p class="alert-text">Las circulares publicadas aquí corresponden al año lectivo 2026. Si una circular tiene archivo adjunto, puedes abrirlo desde el detalle.</p>
+                </div>
+              </div>
+            </section>
+
+            <section class="section">
+              <div class="section-head">
+                <div>
+                  <h2 class="section-title">Historial de circulares</h2>
+                  <p class="section-sub">La tabla conserva las tres columnas del listado original.</p>
+                </div>
+                <span class="chip">3 columnas</span>
+              </div>
+
+              <form class="filter-bar" role="search" id="filtroCirculares">
+                <div class="field field-grow">
+                  <label class="label" for="cirBuscar">Buscar circular</label>
+                  <div class="search-field">
+                    <i class="ph ph-magnifying-glass" aria-hidden="true"></i>
+                    <input class="input input-sm" id="cirBuscar" type="search" placeholder="Título o asunto" autocomplete="off">
+                  </div>
+                </div>
+                <div class="filter-actions">
+                  <button class="btn btn-secondary btn-sm" type="button" id="cirLimpiar">Limpiar</button>
+                </div>
+              </form>
+
+              <div class="table-wrap">
+                <table class="data-table circulares-table">
+                  <caption class="sr-only">Circulares y comunicados publicados</caption>
+                  <thead>
+                    <tr>
+                      <th scope="col">Fecha</th>
+                      <th scope="col">Título</th>
+                      <th scope="col">Asunto</th>
+                    </tr>
+                  </thead>
+                  <tbody id="cirTbody">
+                    <tr data-text="reunión de padres primer período">
+                      <td class="nowrap">18 feb 2026</td>
+                      <td>
+                        <span class="cell-title">Reunión de padres · Primer período</span>
+                        <button class="btn-link" type="button"
+                          data-circular
+                          data-fecha="18 feb 2026"
+                          data-titulo="Reunión de padres · Primer período"
+                          data-asunto="Entrega de informes y acuerdos de acompañamiento académico."
+                          data-cuerpo="Se convoca a las familias a la reunión de entrega de informes del primer período. Se presentarán los avances académicos, los acuerdos de convivencia y las rutas de acompañamiento para el resto del año.">Leer circular</button>
+                      </td>
+                      <td>Entrega de informes y acuerdos de acompañamiento académico.</td>
+                    </tr>
+                    <tr data-text="simulacro de evacuación seguridad">
+                      <td class="nowrap">05 mar 2026</td>
+                      <td>
+                        <span class="cell-title">Simulacro de evacuación</span>
+                        <button class="btn-link" type="button"
+                          data-circular
+                          data-fecha="05 mar 2026"
+                          data-titulo="Simulacro de evacuación"
+                          data-asunto="Protocolo de seguridad y puntos de encuentro."
+                          data-cuerpo="El próximo viernes se realizará el simulacro de evacuación. Es importante que los estudiantes porten el carnet y sigan las indicaciones de los docentes hacia los puntos de encuentro establecidos.">Leer circular</button>
+                      </td>
+                      <td>Protocolo de seguridad y puntos de encuentro.</td>
+                    </tr>
+                    <tr data-text="semana de la convivencia valores">
+                      <td class="nowrap">22 abr 2026</td>
+                      <td>
+                        <span class="cell-title">Semana de la convivencia</span>
+                        <button class="btn-link" type="button"
+                          data-circular
+                          data-fecha="22 abr 2026"
+                          data-titulo="Semana de la convivencia"
+                          data-asunto="Actividades, horarios y participación de las familias."
+                          data-cuerpo="Durante la semana de la convivencia se desarrollarán actividades de reflexión, deporte y arte. Las familias podrán participar en la jornada de cierre y en los talleres de resolución pacífica de conflictos.">Leer circular</button>
+                      </td>
+                      <td>Actividades, horarios y participación de las familias.</td>
+                    </tr>
+                    <tr data-text="entrega de notas segundo período">
+                      <td class="nowrap">12 jun 2026</td>
+                      <td>
+                        <span class="cell-title">Entrega de notas · Segundo período</span>
+                        <button class="btn-link" type="button"
+                          data-circular
+                          data-fecha="12 jun 2026"
+                          data-titulo="Entrega de notas · Segundo período"
+                          data-asunto="Fecha, horario y recomendaciones para la reunión."
+                          data-cuerpo="La entrega de notas del segundo período se realizará de forma presencial. Se recomienda revisar previamente el informe académico y el observador del alumno en el portal.">Leer circular</button>
+                      </td>
+                      <td>Fecha, horario y recomendaciones para la reunión.</td>
+                    </tr>
+                    <tr data-text="vacaciones mitad de año cronograma">
+                      <td class="nowrap">26 jun 2026</td>
+                      <td>
+                        <span class="cell-title">Cronograma de vacaciones</span>
+                        <button class="btn-link" type="button"
+                          data-circular
+                          data-fecha="26 jun 2026"
+                          data-titulo="Cronograma de vacaciones"
+                          data-asunto="Fechas de receso y reinicio de actividades."
+                          data-cuerpo="Se informa el cronograma de vacaciones de mitad de año y la fecha de reinicio de actividades académicas. Durante el receso, la secretaría atenderá en horario reducido.">Leer circular</button>
+                      </td>
+                      <td>Fechas de receso y reinicio de actividades.</td>
+                    </tr>
+                    <tr data-text="escuela de padres bienestar">
+                      <td class="nowrap">14 ago 2026</td>
+                      <td>
+                        <span class="cell-title">Escuela de padres</span>
+                        <button class="btn-link" type="button"
+                          data-circular
+                          data-fecha="14 ago 2026"
+                          data-titulo="Escuela de padres"
+                          data-asunto="Encuentro sobre hábitos de estudio y bienestar emocional."
+                          data-cuerpo="La escuela de padres del tercer período abordará hábitos de estudio, uso responsable de la tecnología y bienestar emocional. La asistencia se registrará en el sistema institucional.">Leer circular</button>
+                      </td>
+                      <td>Encuentro sobre hábitos de estudio y bienestar emocional.</td>
+                    </tr>
+                    <tr data-text="matrícula año siguiente proceso">
+                      <td class="nowrap">18 sep 2026</td>
+                      <td>
+                        <span class="cell-title">Proceso de matrícula 2027</span>
+                        <button class="btn-link" type="button"
+                          data-circular
+                          data-fecha="18 sep 2026"
+                          data-titulo="Proceso de matrícula 2027"
+                          data-asunto="Fechas, requisitos y documentos necesarios."
+                          data-cuerpo="Se abre el proceso de matrícula para el año 2027. Las familias deben actualizar los datos del estudiante, revisar el estado de cuenta y cargar los documentos solicitados en el portal.">Leer circular</button>
+                      </td>
+                      <td>Fechas, requisitos y documentos necesarios.</td>
+                    </tr>
+                    <tr data-text="jornada de vacunación salud">
+                      <td class="nowrap">03 oct 2026</td>
+                      <td>
+                        <span class="cell-title">Jornada de vacunación</span>
+                        <button class="btn-link" type="button"
+                          data-circular
+                          data-fecha="03 oct 2026"
+                          data-titulo="Jornada de vacunación"
+                          data-asunto="Atención en el colegio y autorización de acudientes."
+                          data-cuerpo="La jornada de vacunación se realizará en la sede principal. Los acudientes deben diligenciar la autorización y presentar el carnet de vacunas del estudiante.">Leer circular</button>
+                      </td>
+                      <td>Atención en el colegio y autorización de acudientes.</td>
+                    </tr>
+                    <tr data-text="cierre año lectivo graduación">
+                      <td class="nowrap">20 nov 2026</td>
+                      <td>
+                        <span class="cell-title">Cierre del año lectivo</span>
+                        <button class="btn-link" type="button"
+                          data-circular
+                          data-fecha="20 nov 2026"
+                          data-titulo="Cierre del año lectivo"
+                          data-asunto="Últimas actividades, evaluaciones y graduación."
+                          data-cuerpo="Se comparte el cronograma de cierre del año lectivo, las fechas de evaluaciones finales, la entrega de informes y los detalles de la ceremonia de graduación.">Leer circular</button>
+                      </td>
+                      <td>Últimas actividades, evaluaciones y graduación.</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <div class="table-footer">
+                <span id="cirResumen">Mostrando 9 circulares</span>
+                <div class="pagination" aria-label="Paginación de circulares">
+                  <button class="page-btn" type="button" disabled aria-label="Página anterior"><i class="ph ph-caret-left" aria-hidden="true"></i></button>
+                  <button class="page-btn is-active" type="button" data-page-btn="1" aria-current="page">1</button>
+                  <button class="page-btn" type="button" data-page-btn="2">2</button>
+                  <button class="page-btn" type="button" disabled aria-label="Página siguiente"><i class="ph ph-caret-right" aria-hidden="true"></i></button>
+                </div>
+              </div>
+            </section>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <div id="mobile-overlay" class="overlay"></div>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <div class="modal" id="circularModal" role="dialog" aria-modal="true" aria-labelledby="circularModalTitle">
+    <div class="modal-panel">
+      <div class="modal-head">
+        <div>
+          <h2 class="modal-title" id="circularModalTitle">Título de la circular</h2>
+          <p class="modal-sub" id="circularModalSub">Fecha · Asunto</p>
+        </div>
+        <button class="modal-close" type="button" data-modal-close aria-label="Cerrar">
+          <i class="ph ph-x" aria-hidden="true"></i>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p class="small muted" id="circularModalFecha">Fecha</p>
+        <p class="ink-soft" id="circularModalCuerpo">Contenido de la circular.</p>
+      </div>
+      <div class="modal-foot">
+        <button class="btn btn-secondary" type="button" data-modal-close>Cerrar</button>
+        <button class="btn btn-primary" type="button" data-demo="Circular descargada en PDF (demostración)">
+          <i class="ph ph-file-pdf" aria-hidden="true"></i>
+          Descargar PDF
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script src="assets/js/app.js"></script>
+  <script>
+    (function () {
+      "use strict";
+
+      var tbody = document.getElementById("cirTbody");
+      var buscar = document.getElementById("cirBuscar");
+      var limpiar = document.getElementById("cirLimpiar");
+      var resumen = document.getElementById("cirResumen");
+
+      function filterRows() {
+        if (!tbody) return;
+        var term = buscar ? buscar.value.trim().toLowerCase() : "";
+        var visible = 0;
+        Array.prototype.forEach.call(tbody.querySelectorAll("tr"), function (row) {
+          var text = row.getAttribute("data-text") || row.textContent.toLowerCase();
+          var show = !term || text.indexOf(term) !== -1;
+          row.hidden = !show;
+          if (show) visible += 1;
+        });
+        if (resumen) resumen.textContent = "Mostrando " + visible + " de " + tbody.querySelectorAll("tr").length + " circulares";
+      }
+
+      if (buscar) buscar.addEventListener("input", filterRows);
+      if (limpiar) limpiar.addEventListener("click", function () {
+        if (buscar) buscar.value = "";
+        filterRows();
+        if (buscar) buscar.focus();
+      });
+
+      if (tbody) {
+        tbody.addEventListener("click", function (event) {
+          var button = event.target.closest("[data-circular]");
+          if (!button) return;
+          var title = document.getElementById("circularModalTitle");
+          var sub = document.getElementById("circularModalSub");
+          var fecha = document.getElementById("circularModalFecha");
+          var cuerpo = document.getElementById("circularModalCuerpo");
+          if (title) title.textContent = button.getAttribute("data-titulo");
+          if (sub) sub.textContent = button.getAttribute("data-asunto");
+          if (fecha) fecha.textContent = "Publicada el " + button.getAttribute("data-fecha");
+          if (cuerpo) cuerpo.textContent = button.getAttribute("data-cuerpo");
+          if (window.EstuNET) window.EstuNET.openModal("circularModal");
+        });
+      }
+
+      filterRows();
+    })();
+  </script>
+</body>
+</html>

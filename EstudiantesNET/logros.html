@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Plantilla de diseño del portal EstudiantesNET. Metas y logros por asignatura y período.">
+  <title>Metas y logros · EstudiantesNET</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body data-page="logros">
+  <div id="proto-bar"></div>
+
+  <div class="app-layout">
+    <aside id="sidebar"></aside>
+
+    <div class="app-main">
+      <header id="topbar"></header>
+
+      <main class="page-main">
+        <div class="page-surface">
+          <div id="state-host" hidden></div>
+
+          <div id="page-content">
+            <section class="hero">
+              <div class="hero-row">
+                <div>
+                  <span class="eyebrow">Año escolar 2026 · Planificador de áreas</span>
+                  <h2 class="page-heading">Metas y logros</h2>
+                  <p class="page-subheading">Cada asignatura tiene un contenedor propio y sus períodos se muestran lado a lado para comparar el avance.</p>
+                </div>
+                <div class="hero-actions">
+                  <a class="btn btn-secondary" href="informe.html">
+                    <i class="ph ph-file-text" aria-hidden="true"></i>
+                    Ver informe académico
+                  </a>
+                  <button class="btn btn-primary" type="button" data-demo="Logros descargados en PDF (demostración)">
+                    <i class="ph ph-download-simple" aria-hidden="true"></i>
+                    Descargar logros
+                  </button>
+                </div>
+              </div>
+            </section>
+
+            <section class="section section-tight">
+              <div class="alert alert-info" role="note">
+                <i class="ph ph-info" aria-hidden="true"></i>
+                <div>
+                  <p class="alert-title">Cómo leer esta vista</p>
+                  <p class="alert-text">Cada bloque corresponde a una asignatura. Dentro del bloque, las columnas son los períodos académicos y cada período conserva sus logros e indicadores.</p>
+                </div>
+              </div>
+            </section>
+
+            <section class="section section-tight">
+              <div class="split">
+                <div>
+                  <div class="avatar-row">
+                    <span class="avatar avatar-lg">LM</span>
+                    <div>
+                      <h3>Laura Sofía Martínez Gómez</h3>
+                      <p>Código 2026-0042 · Curso 10.º A · Jornada mañana</p>
+                    </div>
+                  </div>
+                </div>
+                <aside class="split-aside">
+                  <dl class="detail-list compact">
+                    <div>
+                      <dt>Asignaturas</dt>
+                      <dd class="strong">6 de 22</dd>
+                    </div>
+                    <div>
+                      <dt>Períodos</dt>
+                      <dd class="strong">3</dd>
+                    </div>
+                    <div>
+                      <dt>Logros por período</dt>
+                      <dd>4</dd>
+                    </div>
+                    <div>
+                      <dt>Indicadores por logro</dt>
+                      <dd>Hasta 5</dd>
+                    </div>
+                  </dl>
+                </aside>
+              </div>
+            </section>
+
+            <section class="section">
+              <div class="section-head">
+                <div>
+                  <h2 class="section-title">Logros por asignatura</h2>
+                  <p class="section-sub">Vista de ejemplo con seis asignaturas del plan de estudios.</p>
+                </div>
+                <span class="chip">Períodos lado a lado</span>
+              </div>
+
+              <form class="filter-bar" role="search" id="filtroLogros">
+                <div class="field field-grow">
+                  <label class="label" for="logroBuscar">Buscar asignatura</label>
+                  <div class="search-field">
+                    <i class="ph ph-magnifying-glass" aria-hidden="true"></i>
+                    <input class="input input-sm" id="logroBuscar" type="search" placeholder="Ej. Matemáticas, Inglés, Convivencia" autocomplete="off">
+                  </div>
+                </div>
+                <div class="filter-actions">
+                  <button class="btn btn-secondary btn-sm" type="button" id="logroLimpiar">Limpiar</button>
+                </div>
+              </form>
+
+              <nav class="flex flex-wrap gap-2 py-4" aria-label="Ir a una asignatura" id="logroNav"></nav>
+
+              <div id="logrosContenedor"></div>
+            </section>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <div id="mobile-overlay" class="overlay"></div>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <script src="assets/js/app.js"></script>
+  <script>
+    (function () {
+      "use strict";
+
+      var ASIGNATURAS = [
+        { id: "ciencias-naturales", nombre: "Ciencias Naturales", docente: "Docente de área" },
+        { id: "lengua-castellana", nombre: "Lengua Castellana", docente: "Docente de área" },
+        { id: "matematicas", nombre: "Matemáticas", docente: "Docente de área" },
+        { id: "ciencias-sociales", nombre: "Ciencias Sociales", docente: "Docente de área" },
+        { id: "ingles", nombre: "Inglés", docente: "Docente de área" },
+        { id: "convivencia", nombre: "Convivencia", docente: "Docente de área" }
+      ];
+
+      var LOGROS_BASE = [
+        [
+          "Identifica y describe los conceptos fundamentales de {materia}.",
+          "Aplica procedimientos de {materia} en situaciones del contexto.",
+          "Argumenta sus respuestas con evidencias y lenguaje propio del área.",
+          "Propone soluciones y evalúa resultados en ejercicios de {materia}."
+        ],
+        [
+          "Relaciona los conceptos de {materia} con situaciones de la vida cotidiana.",
+          "Resuelve problemas de {materia} siguiendo procedimientos adecuados.",
+          "Comunica sus ideas con claridad y utiliza el vocabulario del área.",
+          "Trabaja colaborativamente y sustenta sus conclusiones."
+        ],
+        [
+          "Aplica los aprendizajes de {materia} en nuevos contextos.",
+          "Analiza información y establece relaciones entre conceptos.",
+          "Presenta argumentos estructurados y coherentes.",
+          "Evalúa su propio proceso y plantea metas de mejora."
+        ]
+      ];
+
+      var INDICADORES = [
+        "Reconoce y utiliza el vocabulario básico del área.",
+        "Explica con sus palabras los conceptos trabajados.",
+        "Aplica lo aprendido en ejercicios y situaciones cotidianas.",
+        "Sustenta sus respuestas con ejemplos y evidencias."
+      ];
+
+      var INDICADORES_2 = [
+        "Participa activamente en las actividades propuestas.",
+        "Organiza la información y presenta sus trabajos con claridad.",
+        "Escucha y respeta las ideas de sus compañeros.",
+        "Cumple con los acuerdos y tiempos establecidos."
+      ];
+
+      var INDICADORES_3 = [
+        "Relaciona los aprendizajes con otros campos del conocimiento.",
+        "Plantea preguntas y busca información para resolverlas.",
+        "Evalúa sus avances y reconoce sus dificultades.",
+        "Propone acciones concretas para mejorar su desempeño."
+      ];
+
+      function logrosDe(materia, periodo) {
+        return LOGROS_BASE[periodo - 1].map(function (texto) {
+          return texto.replace("{materia}", materia.toLowerCase());
+        });
+      }
+
+      function indicadoresDe(periodo) {
+        if (periodo === 1) return INDICADORES;
+        if (periodo === 2) return INDICADORES_2;
+        return INDICADORES_3;
+      }
+
+      function periodoMarkup(materia, periodo) {
+        var logros = logrosDe(materia, periodo);
+        var indicadores = indicadoresDe(periodo);
+        return '<section class="logro-period" aria-labelledby="periodo-' + materia.toLowerCase().replace(/[^a-z0-9]+/g, "-") + "-" + periodo + '">' +
+          '<div class="logro-period-head">' +
+          '<h4 class="logro-period-title" id="periodo-' + materia.toLowerCase().replace(/[^a-z0-9]+/g, "-") + "-" + periodo + '">Período ' + periodo + "</h4>" +
+          '<span class="chip">4 logros</span>' +
+          "</div>" +
+          logros.map(function (logro, index) {
+            return '<div class="logro-item">' +
+              '<span class="logro-label">Logro ' + (index + 1) + "</span>" +
+              '<p class="logro-text">' + logro + "</p>" +
+              '<ul class="logro-indicators" aria-label="Indicadores del logro ' + (index + 1) + '">' +
+              indicadores.map(function (indicador) { return "<li>" + indicador + "</li>"; }).join("") +
+              "</ul>" +
+              "</div>";
+          }).join("") +
+          "</section>";
+      }
+
+      function asignaturaMarkup(asignatura) {
+        return '<article class="logro-subject" id="logro-' + asignatura.id + '" data-name="' + asignatura.nombre.toLowerCase() + '">' +
+          '<div class="logro-subject-head">' +
+          '<div>' +
+          '<h3 class="logro-subject-title">' + asignatura.nombre + "</h3>" +
+          '<p class="logro-subject-sub">' + asignatura.docente + " · Año 2026</p>" +
+          "</div>" +
+          '<span class="chip chip-accent">3 períodos</span>' +
+          "</div>" +
+          '<div class="logro-periods">' +
+          [1, 2, 3].map(function (periodo) { return periodoMarkup(asignatura.nombre, periodo); }).join("") +
+          "</div>" +
+          "</article>";
+      }
+
+      var contenedor = document.getElementById("logrosContenedor");
+      var nav = document.getElementById("logroNav");
+      var buscar = document.getElementById("logroBuscar");
+      var limpiar = document.getElementById("logroLimpiar");
+
+      if (contenedor) contenedor.innerHTML = ASIGNATURAS.map(asignaturaMarkup).join("");
+      if (nav) {
+        nav.innerHTML = ASIGNATURAS.map(function (asignatura) {
+          return '<a class="chip" href="#logro-' + asignatura.id + '">' + asignatura.nombre + "</a>";
+        }).join("");
+      }
+
+      function filtrar() {
+        var term = buscar ? buscar.value.trim().toLowerCase() : "";
+        Array.prototype.forEach.call(document.querySelectorAll(".logro-subject"), function (subject) {
+          var name = subject.getAttribute("data-name") || "";
+          subject.hidden = term.length > 0 && name.indexOf(term) === -1;
+        });
+        if (nav) nav.hidden = term.length > 0;
+      }
+
+      if (buscar) buscar.addEventListener("input", filtrar);
+      if (limpiar) limpiar.addEventListener("click", function () {
+        if (buscar) buscar.value = "";
+        filtrar();
+        if (buscar) buscar.focus();
+      });
+    })();
+  </script>
+</body>
+</html>
