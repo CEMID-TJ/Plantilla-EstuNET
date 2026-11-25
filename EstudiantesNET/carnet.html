@@ -1,5 +1,5 @@
-<!DOCTYPE html>
-<html lang="es">
+﻿<!DOCTYPE html>
+<html lang="es" data-build="20261124-16">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -10,7 +10,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <script src="https://unpkg.com/@phosphor-icons/web"></script>
   <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="assets/css/styles.css">
+  <link rel="stylesheet" href="assets/css/styles.css?v=20261124-16">
 </head>
 <body data-page="carnet">
   <div id="proto-bar"></div>
@@ -47,7 +47,7 @@
             </section>
 
             <section class="section">
-              <div class="split">
+              <div class="split carnet-split">
                 <div>
                   <div class="section-head">
                     <div>
@@ -57,7 +57,7 @@
                     <span class="status status-success">Matrícula activa</span>
                   </div>
 
-                  <div class="carnet" style="max-width:430px">
+                  <div class="carnet" data-modal-open="carnetFlipModal" role="button" tabindex="0" aria-label="Abrir carnet completo">
                     <div class="carnet-top">
                       <div>
                         <div class="carnet-brand">EstudiantesNET</div>
@@ -65,14 +65,14 @@
                       </div>
                       <span class="carnet-year">2026</span>
                     </div>
-                    <div class="carnet-body" style="padding:22px">
-                      <div class="carnet-photo" style="width:92px;height:116px">Foto<br>3 × 4</div>
+                    <div class="carnet-body">
+                      <div class="carnet-photo">Foto<br>3 × 4</div>
                       <div>
-                        <h3 class="carnet-name" style="font-size:19px">Laura Sofía<br>Martínez Gómez</h3>
+                        <h3 class="carnet-name">Laura Sofía<br>Martínez Gómez</h3>
                         <p class="carnet-meta">Grado 10.º · Aula 2 · Jornada mañana</p>
                         <div class="carnet-details">
                           <span>Código</span>
-                          <strong class="mono" style="font-size:13px">2026-0042</strong>
+                          <strong class="mono">2026-0042</strong>
                           <span>Colegio</span>
                           <strong>Colegio Minuto de Dios</strong>
                           <span>RH / EPS</span>
@@ -80,7 +80,7 @@
                         </div>
                       </div>
                     </div>
-                    <div class="carnet-bottom" style="padding:0 22px 22px">
+                    <div class="carnet-bottom">
                       <div>
                         <div class="carnet-code">Carnet virtual · Año 2026</div>
                         <div class="carnet-code" style="margin-top:3px">Uso personal e intransferible</div>
@@ -135,7 +135,84 @@
   <div id="mobile-overlay" class="overlay"></div>
   <div id="toast" class="toast" role="status" aria-live="polite"></div>
 
-  <script src="assets/js/app.js"></script>
+  <div class="modal" id="carnetFlipModal" role="dialog" aria-modal="true" aria-labelledby="carnetFlipTitle">
+    <div class="modal-panel">
+      <div class="modal-head">
+        <div>
+          <h2 class="modal-title" id="carnetFlipTitle">Carnet virtual interactivo</h2>
+          <p class="modal-sub">Haz clic en el carnet para ver su reverso.</p>
+        </div>
+        <button class="modal-close" type="button" data-modal-close aria-label="Cerrar">
+          <i class="ph ph-x" aria-hidden="true"></i>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="carnet-flip mx-auto" data-flip-card role="button" tabindex="0" aria-pressed="false" aria-label="Girar carnet para ver el reverso">
+          <div class="carnet-flip-inner">
+            <div class="carnet carnet-face carnet-front">
+              <div class="carnet-top">
+                <span class="carnet-brand">EstudiantesNET</span>
+                <span class="carnet-year">2026</span>
+              </div>
+              <div class="carnet-body">
+                <div class="carnet-photo">Foto<br>3 × 4</div>
+                <div>
+                  <h3 class="carnet-name">Laura Sofía<br>Martínez Gómez</h3>
+                  <p class="carnet-meta">Grado 10.º · Aula 2 · Jornada mañana</p>
+                  <div class="carnet-details">
+                    <span>Código</span>
+                    <strong class="mono">2026-0042</strong>
+                    <span>Colegio</span>
+                    <strong>Colegio Minuto de Dios</strong>
+                    <span>RH / EPS</span>
+                    <strong>O+ · Nueva EPS</strong>
+                  </div>
+                </div>
+              </div>
+              <div class="carnet-bottom">
+                <span class="carnet-code">Carnet virtual · Año 2026</span>
+                <span class="qr-frame" aria-label="Elemento decorativo del carnet"></span>
+              </div>
+            </div>
+
+            <div class="carnet carnet-face carnet-back">
+              <div class="carnet-top">
+                <span class="carnet-brand">EstudiantesNET</span>
+                <span class="carnet-year">Reverso</span>
+              </div>
+              <div class="carnet-back-body">
+                <div class="carnet-magnetic" aria-hidden="true"></div>
+                <div class="carnet-signature">
+                  <span>Firma del estudiante</span>
+                  <strong>Laura Sofía Martínez Gómez</strong>
+                </div>
+                <div class="carnet-barcode" aria-label="Código de barras decorativo"></div>
+                <p class="carnet-back-note">Uso personal e intransferible. Presenta este carnet en la entrada del colegio y en las actividades institucionales.</p>
+                <div class="carnet-details">
+                  <span>Código</span>
+                  <strong class="mono">2026-0042</strong>
+                  <span>Colegio</span>
+                  <strong>Colegio Minuto de Dios</strong>
+                  <span>Estado</span>
+                  <strong><span class="status status-success">Matrícula activa</span></strong>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <p class="carnet-flip-help" data-flip-hint><i class="ph ph-arrows-clockwise" aria-hidden="true"></i> Haz clic en el carnet para girarlo</p>
+      </div>
+      <div class="modal-foot">
+        <button class="btn btn-secondary" type="button" data-modal-close>Cerrar</button>
+        <button class="btn btn-primary" type="button" data-demo="Carnet descargado (demostración)">
+          <i class="ph ph-download-simple" aria-hidden="true"></i>
+          Descargar carnet
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script src="assets/js/app.js?v=20261124-16"></script>
   <script>
     document.getElementById("imprimirCarnet").addEventListener("click", function () {
       window.print();

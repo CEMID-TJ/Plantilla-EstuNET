@@ -1,5 +1,5 @@
-<!DOCTYPE html>
-<html lang="es">
+﻿<!DOCTYPE html>
+<html lang="es" data-build="20261124-16">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -10,7 +10,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <script src="https://unpkg.com/@phosphor-icons/web"></script>
   <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="assets/css/styles.css">
+  <link rel="stylesheet" href="assets/css/styles.css?v=20261124-16">
 </head>
 <body data-page="bullying">
   <div id="proto-bar"></div>
@@ -134,7 +134,7 @@
               </div>
             </section>
 
-            <section class="section">
+            <section class="section" id="denunciasPrevias" data-paginate data-per-page="2" data-page-label="Paginación de denuncias">
               <div class="section-head">
                 <div>
                   <h2 class="section-title">Mis denuncias previas</h2>
@@ -154,12 +154,12 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
+                    <tr data-page-item>
                       <td class="nowrap muted">14 ago 2026 · 9:12 a. m.</td>
                       <td><span class="cell-title">Reporté burlas constantes de un compañero durante el descanso.</span></td>
                       <td><span class="status status-success">Respondida</span><span class="cell-sub">Se realizó acompañamiento y se establecieron acuerdos de convivencia.</span></td>
                     </tr>
-                    <tr>
+                    <tr data-page-item>
                       <td class="nowrap muted">03 oct 2026 · 2:40 p. m.</td>
                       <td><span class="cell-title">Reporté mensajes ofensivos en un grupo de chat del curso.</span></td>
                       <td><span class="status status-warning">En revisión</span><span class="cell-sub">Orientación escolar está valorando la situación.</span></td>
@@ -182,7 +182,7 @@
   <div id="mobile-overlay" class="overlay"></div>
   <div id="toast" class="toast" role="status" aria-live="polite"></div>
 
-  <script src="assets/js/app.js"></script>
+  <script src="assets/js/app.js?v=20261124-16"></script>
   <script>
     (function () {
       "use strict";

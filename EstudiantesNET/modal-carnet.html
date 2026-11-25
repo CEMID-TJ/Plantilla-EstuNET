@@ -1,5 +1,5 @@
-<!DOCTYPE html>
-<html lang="es">
+﻿<!DOCTYPE html>
+<html lang="es" data-build="20261124-16">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -10,7 +10,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <script src="https://unpkg.com/@phosphor-icons/web"></script>
   <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="assets/css/styles.css">
+  <link rel="stylesheet" href="assets/css/styles.css?v=20261124-16">
 </head>
 <body class="modal-backdrop-page">
   <a class="preview-back" href="index.html"><i class="ph ph-arrow-left" aria-hidden="true"></i> Volver al portal</a>
@@ -26,31 +26,60 @@
       </a>
     </div>
     <div class="modal-body">
-      <div class="carnet mx-auto">
-        <div class="carnet-top">
-          <span class="carnet-brand">EstudiantesNET</span>
-          <span class="carnet-year">2026</span>
-        </div>
-        <div class="carnet-body">
-          <div class="carnet-photo">Foto<br>3 × 4</div>
-          <div>
-            <h3 class="carnet-name">Laura Sofía<br>Martínez Gómez</h3>
-            <p class="carnet-meta">Grado 10.º · Aula 2 · Jornada mañana</p>
-            <div class="carnet-details">
-              <span>Código</span>
-              <strong class="mono">2026-0042</strong>
-              <span>Colegio</span>
-              <strong>Colegio Minuto de Dios</strong>
-              <span>RH / EPS</span>
-              <strong>O+ · Nueva EPS</strong>
+      <div class="carnet-flip mx-auto" data-flip-card role="button" tabindex="0" aria-pressed="false" aria-label="Girar carnet para ver el reverso">
+        <div class="carnet-flip-inner">
+          <div class="carnet carnet-face carnet-front">
+            <div class="carnet-top">
+              <span class="carnet-brand">EstudiantesNET</span>
+              <span class="carnet-year">2026</span>
+            </div>
+            <div class="carnet-body">
+              <div class="carnet-photo">Foto<br>3 × 4</div>
+              <div>
+                <h3 class="carnet-name">Laura Sofía<br>Martínez Gómez</h3>
+                <p class="carnet-meta">Grado 10.º · Aula 2 · Jornada mañana</p>
+                <div class="carnet-details">
+                  <span>Código</span>
+                  <strong class="mono">2026-0042</strong>
+                  <span>Colegio</span>
+                  <strong>Colegio Minuto de Dios</strong>
+                  <span>RH / EPS</span>
+                  <strong>O+ · Nueva EPS</strong>
+                </div>
+              </div>
+            </div>
+            <div class="carnet-bottom">
+              <span class="carnet-code">Carnet virtual · Año 2026</span>
+              <span class="qr-frame" aria-label="Elemento decorativo del carnet"></span>
+            </div>
+          </div>
+
+          <div class="carnet carnet-face carnet-back">
+            <div class="carnet-top">
+              <span class="carnet-brand">EstudiantesNET</span>
+              <span class="carnet-year">Reverso</span>
+            </div>
+            <div class="carnet-back-body">
+              <div class="carnet-magnetic" aria-hidden="true"></div>
+              <div class="carnet-signature">
+                <span>Firma del estudiante</span>
+                <strong>Laura Sofía Martínez Gómez</strong>
+              </div>
+              <div class="carnet-barcode" aria-label="Código de barras decorativo"></div>
+              <p class="carnet-back-note">Uso personal e intransferible. Presenta este carnet en la entrada del colegio y en las actividades institucionales.</p>
+              <div class="carnet-details">
+                <span>Código</span>
+                <strong class="mono">2026-0042</strong>
+                <span>Colegio</span>
+                <strong>Colegio Minuto de Dios</strong>
+                <span>Estado</span>
+                <strong><span class="status status-success">Matrícula activa</span></strong>
+              </div>
             </div>
           </div>
         </div>
-        <div class="carnet-bottom">
-          <span class="carnet-code">Carnet virtual · Año 2026</span>
-          <span class="qr-frame" aria-label="Elemento decorativo del carnet"></span>
-        </div>
       </div>
+      <p class="carnet-flip-help" data-flip-hint><i class="ph ph-arrows-clockwise" aria-hidden="true"></i> Haz clic en el carnet para girarlo</p>
 
       <dl class="detail-list mt-6">
         <div>
@@ -88,6 +117,6 @@
     </div>
   </div>
 
-  <script src="assets/js/app.js"></script>
+  <script src="assets/js/app.js?v=20261124-16"></script>
 </body>
 </html>

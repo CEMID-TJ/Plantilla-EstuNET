@@ -1,5 +1,5 @@
-<!DOCTYPE html>
-<html lang="es">
+﻿<!DOCTYPE html>
+<html lang="es" data-build="20261124-16">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -10,7 +10,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <script src="https://unpkg.com/@phosphor-icons/web"></script>
   <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="assets/css/styles.css">
+  <link rel="stylesheet" href="assets/css/styles.css?v=20261124-16">
 </head>
 <body data-page="referidos">
   <div id="proto-bar"></div>
@@ -122,7 +122,7 @@
               </div>
             </section>
 
-            <section class="section">
+            <section class="section" id="misReferidos" data-paginate data-per-page="2" data-page-label="Paginación de referidos">
               <div class="section-head">
                 <div>
                   <h2 class="section-title">Mis referidos</h2>
@@ -144,28 +144,28 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
+                    <tr data-page-item>
                       <td class="nowrap muted">10 nov 2026 · 9:24 a. m.</td>
                       <td class="cell-title">Samuel Torres</td>
                       <td>4.º</td>
                       <td><span class="status status-success">PRE-MATRICULADO</span></td>
                       <td><button class="btn-link" type="button" data-demo="Volante descargado en PDF (demostración)"><i class="ph ph-file-pdf" aria-hidden="true"></i> Volante</button></td>
                     </tr>
-                    <tr>
+                    <tr data-page-item>
                       <td class="nowrap muted">28 oct 2026 · 3:10 p. m.</td>
                       <td class="cell-title">Isabela Cárdenas</td>
                       <td>9.º</td>
                       <td><span class="status status-warning">EN PROCESO PRE-MATRICULA</span></td>
                       <td><button class="btn-link" type="button" data-demo="Volante descargado en PDF (demostración)"><i class="ph ph-file-pdf" aria-hidden="true"></i> Volante</button></td>
                     </tr>
-                    <tr>
+                    <tr data-page-item>
                       <td class="nowrap muted">12 oct 2026 · 11:02 a. m.</td>
                       <td class="cell-title">Tomás Rojas</td>
                       <td>6.º</td>
                       <td><span class="status status-info">ACEPTADO NO HA RECOGIDO PAPELES PARA MATRICULA</span></td>
                       <td><button class="btn-link" type="button" data-demo="Volante descargado en PDF (demostración)"><i class="ph ph-file-pdf" aria-hidden="true"></i> Volante</button></td>
                     </tr>
-                    <tr>
+                    <tr data-page-item>
                       <td class="nowrap muted">02 sep 2026 · 8:45 a. m.</td>
                       <td class="cell-title">Valentina Ruiz</td>
                       <td>7.º</td>
@@ -190,7 +190,7 @@
   <div id="mobile-overlay" class="overlay"></div>
   <div id="toast" class="toast" role="status" aria-live="polite"></div>
 
-  <script src="assets/js/app.js"></script>
+  <script src="assets/js/app.js?v=20261124-16"></script>
   <script>
     (function () {
       "use strict";

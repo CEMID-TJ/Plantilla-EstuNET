@@ -41,15 +41,44 @@ El sistema visual principal está en `assets/css/styles.css` y las interacciones
 - `modal-firma.html`
 - `modal-pago.html`
 
-Son vistas aisladas para revisar el diseño de los modales. En las páginas principales los modales se abren como capas sobre el contenido.
+Son vistas aisladas para revisar el diseño de los modales. En las páginas principales los modales se abren como capas sobre el contenido. El carnet giratorio está disponible de dos formas: en `modal-carnet.html` (vista aislada) y desde `carnet.html`, donde la tarjeta abre la modal interactiva; al pasar el mouse (o al enfocarla con el teclado) se oscurece y muestra «Ver carnet completo». En ambos casos el carnet se gira con un clic (o con `Enter`/`Espacio` si tiene el foco) para ver su reverso; el giro usa transformaciones 3D de CSS y no requiere librerías externas.
 
 ## Qué incluye
 
 - Navegación lateral agrupada y adaptable.
 - Barra de estados de prototipo: normal, cargando, vacío y error.
 - Pestañas, filtros, paginación, modales, avisos y estados vacíos.
+- Sistema visual con acentos sutiles: fondo de página ligeramente más frío, botones secundarios con tinte azul, estados en píldoras de color suave, encabezados de tabla tintados, líneas de tabla con mayor definición y barra de acento en los títulos de sección. La paleta sigue siendo contenida para no saturar la interfaz.
+- Paginación unificada con barra fija (`position: fixed`) pegada al borde inferior de la pantalla, a todo el ancho del área de contenido y sin separación inferior. El mismo componente de `assets/js/app.js` se usa en todas las vistas con listas, de modo que la barra siempre está accesible, muestra «Mostrando X–Y de Z», permite navegar con anterior/siguiente y números, y vuelve a la página 1 al aplicar un filtro. En las vistas con pestañas (PQRS) la barra aparece al abrir la pestaña que contiene la lista.
+
+  | Vista | Elementos | Por página | Páginas |
+  | --- | --- | --- | --- |
+  | `tareas.html` | 12 tareas | 4 | 3 |
+  | `logros.html` | 6 asignaturas | 2 | 3 |
+  | `observador.html` | 6 anotaciones | 5 | 2 |
+  | `circulares.html` | 9 circulares | 5 | 2 |
+  | `pqrs.html` | 5 solicitudes | 3 | 2 |
+  | `cuenta.html` | 12 movimientos | 6 | 2 |
+  | `servicio-social.html` | 3 programas | 2 | 2 |
+  | `bullying.html` | 2 denuncias | 2 | 1 |
+  | `referidos.html` | 4 referidos | 2 | 2 |
+
+  Las vistas de ficha o formulario (`index.html`, `alumno.html`, `informe.html`, `matricula.html`, `traslados.html`, `historia-clinica.html`, `carnet.html`) no paginan porque no son listas de registros. `informe.html` es una sábana de notas que se lee completa y `index.html` es un resumen.
+
+  Para paginar una lista nueva basta con marcar el contenedor y sus ítems; la barra se genera sola:
+
+  ```html
+  <section data-paginate data-per-page="5" data-page-label="Paginación de ...">
+    <tr data-page-item>...</tr>
+  </section>
+  ```
+
+  Los filtros deben marcar los ítems con `data-filtered="true"` y llamar a `window.EstuNET.refreshPagination(contenedor)` para reiniciar la página.
+
+  Mientras el diseño está en desarrollo, `app.js` define `BUILD` y las páginas declaran `data-build` en `<html>`; si el navegador conserva una versión anterior, la plantilla se recarga con `?v=BUILD` y reescribe los enlaces internos para evitar caché. Al publicar una nueva versión basta con actualizar el valor de `BUILD` en `assets/js/app.js` y el atributo `data-build` de las páginas.
 - Formularios de demostración con `required`, validación con `checkValidity()` y marcadores claros de campo obligatorio.
-- Diseño responsive para escritorio, tableta y móvil.
+- Estados de carga con esqueletos (skeleton) específicos por vista. `loadingMarkup()` en `app.js` elige el esqueleto según `data-page` del `<body>`: inicio (hero, métricas y tabla), carnet (foto y datos), tareas, informe, observador y cuenta (tablas con distinto número de filas), logros (secciones con tres periodos), circulares (lista), PQRS, bullying, referidos, servicio social, historia clínica, matrícula y traslados (formularios y tarjetas). Los estilos viven en `styles.css` y se adaptan a una columna en móvil. Incluyen `role="status"`, texto accesible y una animación de brillo que respeta `prefers-reduced-motion`.
+- Diseño responsive para escritorio, tableta y móvil: las acciones del encabezado, los filtros, los botones de formulario y la barra fija de paginación se centran en pantallas pequeñas. El carnet se centra y conserva su ancho máximo en tabletas. Las cuadrículas usan `minmax(0, 1fr)` para evitar desbordamientos horizontales.
 - Estilos de impresión para el carnet.
 
 ## Qué no incluye

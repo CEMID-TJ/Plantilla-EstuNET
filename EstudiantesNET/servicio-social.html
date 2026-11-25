@@ -1,5 +1,5 @@
-<!DOCTYPE html>
-<html lang="es">
+﻿<!DOCTYPE html>
+<html lang="es" data-build="20261124-16">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -10,7 +10,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <script src="https://unpkg.com/@phosphor-icons/web"></script>
   <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="assets/css/styles.css">
+  <link rel="stylesheet" href="assets/css/styles.css?v=20261124-16">
 </head>
 <body data-page="servicio">
   <div id="proto-bar"></div>
@@ -59,7 +59,7 @@
               </div>
             </section>
 
-            <section class="section" id="programas">
+            <section class="section" id="programas" data-paginate data-per-page="2" data-page-label="Paginación de programas">
               <div class="section-head">
                 <div>
                   <h2 class="section-title">Programas disponibles</h2>
@@ -114,7 +114,7 @@
                     </tr>
                   </thead>
                   <tbody id="servicioTbody">
-                    <tr data-tipo="ayudantía" data-text="ayudantía apoyo en biblioteca préstamo organización">
+                    <tr data-page-item data-tipo="ayudantía" data-text="ayudantía apoyo en biblioteca préstamo organización">
                       <td class="nowrap">Ayudantía (2026)</td>
                       <td><span class="cell-title">Apoyo en biblioteca</span></td>
                       <td>Apoyo en los servicios de préstamo y organización de la biblioteca escolar.</td>
@@ -129,7 +129,7 @@
                         <button class="btn-link block mt-1" type="button" data-modal-open="firmaModal">Firmar autorización</button>
                       </td>
                     </tr>
-                    <tr data-tipo="proyecto" data-text="proyecto brigada de salud promoción">
+                    <tr data-page-item data-tipo="proyecto" data-text="proyecto brigada de salud promoción">
                       <td class="nowrap">Proyecto (2026)</td>
                       <td><span class="cell-title">Brigada de salud</span></td>
                       <td>Participación en campañas de promoción y prevención de salud.</td>
@@ -143,7 +143,7 @@
                         <button class="btn-link block mt-1" type="button" data-demo="Inscripción registrada (demostración)">Inscribirse</button>
                       </td>
                     </tr>
-                    <tr data-tipo="campamento" data-text="campamento guardabosques cuidado ambiental">
+                    <tr data-page-item data-tipo="campamento" data-text="campamento guardabosques cuidado ambiental">
                       <td class="nowrap">Campamento (2026)</td>
                       <td><span class="cell-title">Guardabosques</span></td>
                       <td>Cuidado y conservación de áreas verdes de la comunidad educativa.</td>
@@ -159,10 +159,6 @@
                     </tr>
                   </tbody>
                 </table>
-              </div>
-
-              <div class="table-footer">
-                <span id="servicioResumen">Mostrando 3 programas</span>
               </div>
 
               <div class="note mt-5">
@@ -332,7 +328,7 @@
     </div>
   </div>
 
-  <script src="assets/js/app.js"></script>
+  <script src="assets/js/app.js?v=20261124-16"></script>
   <script>
     (function () {
       "use strict";
@@ -341,23 +337,21 @@
       var buscar = document.getElementById("buscarServicio");
       var tipo = document.getElementById("filtroTipoServicio");
       var limpiar = document.getElementById("servicioLimpiar");
-      var resumen = document.getElementById("servicioResumen");
+      var root = document.getElementById("programas");
 
       function filtrar() {
         if (!tbody) return;
         var term = buscar ? buscar.value.trim().toLowerCase() : "";
         var tip = tipo ? tipo.value.toLowerCase() : "";
-        var visible = 0;
         Array.prototype.forEach.call(tbody.querySelectorAll("tr"), function (row) {
           var text = row.getAttribute("data-text") || "";
           var rowTipo = row.getAttribute("data-tipo") || "";
           var show = true;
           if (term && text.indexOf(term) === -1) show = false;
           if (tip && rowTipo !== tip) show = false;
-          row.hidden = !show;
-          if (show) visible += 1;
+          row.setAttribute("data-filtered", show ? "false" : "true");
         });
-        if (resumen) resumen.textContent = "Mostrando " + visible + " de " + tbody.querySelectorAll("tr").length + " programas";
+        if (window.EstuNET && root) window.EstuNET.refreshPagination(root);
       }
 
       if (buscar) buscar.addEventListener("input", filtrar);

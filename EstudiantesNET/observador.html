@@ -1,5 +1,5 @@
-<!DOCTYPE html>
-<html lang="es">
+﻿<!DOCTYPE html>
+<html lang="es" data-build="20261124-16">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -10,7 +10,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <script src="https://unpkg.com/@phosphor-icons/web"></script>
   <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="assets/css/styles.css">
+  <link rel="stylesheet" href="assets/css/styles.css?v=20261124-16">
 </head>
 <body data-page="observador">
   <div id="proto-bar"></div>
@@ -90,7 +90,7 @@
               </div>
             </section>
 
-            <section class="section">
+            <section class="section" id="registroObservador" data-paginate data-per-page="5" data-page-label="Paginación de anotaciones">
               <div class="section-head">
                 <div>
                   <h2 class="section-title">Registro de seguimiento</h2>
@@ -155,16 +155,6 @@
                 </table>
               </div>
 
-              <div class="table-footer">
-                <span id="obsResumen">Mostrando 0 anotaciones</span>
-                <div class="pagination" aria-label="Paginación de anotaciones">
-                  <button class="page-btn" type="button" disabled aria-label="Página anterior"><i class="ph ph-caret-left" aria-hidden="true"></i></button>
-                  <button class="page-btn is-active" type="button" data-page-btn="1" aria-current="page">1</button>
-                  <button class="page-btn" type="button" data-page-btn="2">2</button>
-                  <button class="page-btn" type="button" data-page-btn="3">3</button>
-                  <button class="page-btn" type="button" data-page-btn="siguiente" aria-label="Página siguiente"><i class="ph ph-caret-right" aria-hidden="true"></i></button>
-                </div>
-              </div>
             </section>
           </div>
         </div>
@@ -247,7 +237,7 @@
     </div>
   </div>
 
-  <script src="assets/js/app.js"></script>
+  <script src="assets/js/app.js?v=20261124-16"></script>
   <script>
     (function () {
       "use strict";
@@ -322,7 +312,6 @@
       ];
 
       var tbody = document.getElementById("obsTbody");
-      var resumen = document.getElementById("obsResumen");
       var totalAnotaciones = document.getElementById("totalAnotaciones");
       var totalPendientes = document.getElementById("totalPendientes");
       var alerta = document.getElementById("alertaFirmas");
@@ -342,7 +331,7 @@
       }
 
       function rowMarkup(item, index) {
-        return '<tr data-per="' + item.per + '" data-tipo="' + item.tipo.toLowerCase() + '" data-firma="' + (item.acudiente.estado === "firmada" && item.estudiante.estado === "firmada" ? "firmada" : "pendiente") + '" data-text="' + (item.tipo + " " + item.descripcion + " " + item.anota).toLowerCase() + '">' +
+        return '<tr data-page-item data-per="' + item.per + '" data-tipo="' + item.tipo.toLowerCase() + '" data-firma="' + (item.acudiente.estado === "firmada" && item.estudiante.estado === "firmada" ? "firmada" : "pendiente") + '" data-text="' + (item.tipo + " " + item.descripcion + " " + item.anota).toLowerCase() + '">' +
           '<td><span class="chip">Per ' + item.per + "</span></td>" +
           '<td><span class="cell-title">' + item.tipo + '</span><span class="cell-sub">' + item.descripcion + '</span><button class="btn-link" type="button" data-ver="' + index + '">Ver detalle</button></td>' +
           '<td class="nowrap">' + item.fecha + "</td>" +
@@ -375,7 +364,6 @@
       function render() {
         var filtered = getFiltered();
         if (tbody) tbody.innerHTML = filtered.map(function (entry) { return rowMarkup(entry.item, entry.index); }).join("");
-        if (resumen) resumen.textContent = "Mostrando " + filtered.length + " de " + OBSERVACIONES.length + " anotaciones";
         var pendientes = OBSERVACIONES.filter(function (item) {
           return item.acudiente.estado !== "firmada" || item.estudiante.estado !== "firmada";
         }).length;
@@ -387,6 +375,8 @@
             ? "Todas las anotaciones se encuentran firmadas."
             : "Hay " + pendientes + " anotación(es) pendiente(s) de firma. El acudiente y el estudiante deben firmar para oficializar el registro.";
         }
+        var root = document.getElementById("registroObservador");
+        if (window.EstuNET && root) window.EstuNET.refreshPagination(root);
       }
 
       function abrirDetalle(index) {

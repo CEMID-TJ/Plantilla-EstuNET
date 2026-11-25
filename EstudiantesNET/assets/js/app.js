@@ -1,10 +1,14 @@
-/* ============================================================
+﻿/* ============================================================
    EstudiantesNET · Interacciones de la plantilla
    Sin lógica de negocio ni datos reales.
    ============================================================ */
 
 (function () {
   "use strict";
+
+  /* Versión de la plantilla. Se usa para invalidar caché de HTML, CSS y JS
+     mientras el diseño está en desarrollo. */
+  const BUILD = "20261124-16";
 
   const PAGES = {
     inicio: { title: "Inicio", subtitle: "Resumen académico y administrativo · Periodo 2026", role: "Estudiante" },
@@ -87,7 +91,7 @@
     if (!host) return;
     host.className = "proto-bar";
     host.innerHTML =
-      '<span class="proto-label">Plantilla · vista de diseño</span>' +
+      '<span class="proto-label">Plantilla · vista de diseño · v' + BUILD + '</span>' +
       '<div class="proto-actions" role="group" aria-label="Estados de la vista">' +
         '<button class="proto-btn is-active" type="button" data-state-btn="normal" aria-pressed="true">Normal</button>' +
         '<button class="proto-btn" type="button" data-state-btn="loading" aria-pressed="false">Cargando</button>' +
@@ -190,17 +194,110 @@
     document.body.classList.remove("modal-open");
   }
 
-  function loadingMarkup() {
-    return '<div class="stack" aria-busy="true" aria-label="Cargando información">' +
-      '<div class="skeleton skeleton-title" style="margin-top:8px"></div>' +
-      '<div class="skeleton skeleton-line" style="width:72%;margin-bottom:12px"></div>' +
-      '<div class="grid grid-3 gap-4">' +
-        '<div class="skeleton skeleton-block"></div>' +
-        '<div class="skeleton skeleton-block"></div>' +
-        '<div class="skeleton skeleton-block"></div>' +
+  /* --- Piezas reutilizables de los esqueletos de carga --- */
+
+  function skHead() {
+    return '<div class="skeleton-head">' +
+      '<div class="skeleton skeleton-eyebrow"></div>' +
+      '<div class="skeleton skeleton-title"></div>' +
+      '<div class="skeleton skeleton-subtitle"></div>' +
+    "</div>";
+  }
+
+  function skLines(widths) {
+    return widths.map(function (width) {
+      return '<div class="skeleton skeleton-line" style="width:' + width + '"></div>';
+    }).join("");
+  }
+
+  function skStats(count) {
+    let items = "";
+    for (let i = 0; i < (count || 3); i++) {
+      items += '<div class="skeleton-stat"><div class="skeleton skeleton-stat-label"></div><div class="skeleton skeleton-stat-value"></div></div>';
+    }
+    return '<div class="skeleton-stats">' + items + "</div>";
+  }
+
+  function skTable(rows) {
+    let out = '<div class="skeleton-table">' +
+      '<div class="skeleton skeleton-table-head"></div>';
+    for (let i = 0; i < (rows || 4); i++) {
+      out += '<div class="skeleton skeleton-table-row"></div>';
+    }
+    return out + "</div>";
+  }
+
+  function skList(items, itemClass) {
+    let out = '<div class="skeleton-list">';
+    for (let i = 0; i < (items || 4); i++) {
+      out += '<div class="skeleton ' + (itemClass || "skeleton-list-item") + '"></div>';
+    }
+    return out + "</div>";
+  }
+
+  function skCards(items, cardClass) {
+    let out = '<div class="skeleton-cards">';
+    for (let i = 0; i < (items || 3); i++) {
+      out += '<div class="skeleton ' + (cardClass || "skeleton-card") + '"></div>';
+    }
+    return out + "</div>";
+  }
+
+  function skForm(fields, options) {
+    options = options || {};
+    let out = '<div class="skeleton-form">';
+    if (options.intro) out += '<div class="skeleton skeleton-line" style="width:72%"></div>';
+    for (let i = 0; i < (fields || 3); i++) {
+      out += '<div class="skeleton skeleton-field"></div>';
+    }
+    if (options.textarea) out += '<div class="skeleton skeleton-field-lg"></div>';
+    return out + "</div>";
+  }
+
+  function skLogro() {
+    return '<div class="skeleton-logro">' +
+      '<div class="skeleton skeleton-logro-head"></div>' +
+      '<div class="skeleton-logro-periods">' +
+        '<div class="skeleton skeleton-logro-period"></div>' +
+        '<div class="skeleton skeleton-logro-period"></div>' +
+        '<div class="skeleton skeleton-logro-period"></div>' +
       "</div>" +
-      '<div class="skeleton skeleton-block" style="height:210px;margin-top:8px"></div>' +
-      '<div class="skeleton skeleton-line" style="width:58%"></div>' +
+    "</div>";
+  }
+
+  function loadingMarkup() {
+    const page = document.body.dataset.page || "inicio";
+    const skeletons = {
+      inicio: skHead() +
+        '<div class="skeleton-hero">' + skLines(["72%", "54%", "58%"]) + "</div>" +
+        skStats(3) + skTable(4),
+      carnet: skHead() +
+        '<div class="skeleton-carnet-body">' +
+          '<div class="skeleton skeleton-photo"></div>' +
+          '<div class="skeleton-carnet-info">' +
+            '<div class="skeleton skeleton-name"></div>' +
+            '<div class="skeleton-details">' + skLines(["100%", "84%", "92%"]) + "</div>" +
+          "</div>" +
+        "</div>",
+      alumno: skHead() + skForm(3, { intro: true }) + skCards(2, "skeleton-card-md"),
+      tareas: skHead() + skTable(4),
+      informe: skHead() + skTable(6) + skTable(3),
+      logros: skHead() + '<div class="skeleton-logros">' + skLogro() + skLogro() + "</div>",
+      observador: skHead() + skTable(5),
+      circulares: skHead() + skList(5),
+      pqrs: skHead() + skForm(3, { intro: true, textarea: true }),
+      bullying: skHead() + skForm(2, { textarea: true }),
+      referidos: skHead() + skForm(2) + skCards(2, "skeleton-card-md"),
+      servicio: skHead() + skCards(3, "skeleton-card-md"),
+      historia: skHead() + skForm(3, { intro: true }) + skCards(2, "skeleton-card-md"),
+      cuenta: skHead() + skStats(3) + skTable(6),
+      matricula: skHead() + skForm(2) + skTable(3),
+      traslados: skHead() + skForm(2) + skTable(3)
+    };
+
+    return '<div class="skeleton-view skeleton-' + page + '" role="status" aria-live="polite">' +
+      '<span class="sr-only">Cargando información…</span>' +
+      (skeletons[page] || skeletons.inicio) +
     "</div>";
   }
 
@@ -292,6 +389,7 @@
         panels.forEach(function (panel) {
           panel.hidden = panel.dataset.tabPanel !== id;
         });
+        refreshVisiblePaginators();
       }
 
       buttons.forEach(function (button, index) {
@@ -360,11 +458,42 @@
       if (event.target.classList.contains("modal")) closeModal(event.target.id);
     });
 
+    document.querySelectorAll("[data-modal-open][role='button']").forEach(function (opener) {
+      opener.addEventListener("keydown", function (event) {
+        if (event.key === "Enter" || event.key === " " || event.key === "Spacebar") {
+          event.preventDefault();
+          openModal(opener.dataset.modalOpen);
+        }
+      });
+    });
+
     document.addEventListener("keydown", function (event) {
       if (event.key === "Escape") {
         if (document.querySelector(".modal.is-open")) closeModal();
         else closeSidebar();
       }
+    });
+  }
+
+  function initFlipCards() {
+    document.querySelectorAll("[data-flip-card]").forEach(function (card) {
+      function flip() {
+        const flipped = card.classList.toggle("is-flipped");
+        card.setAttribute("aria-pressed", String(flipped));
+        const hint = card.parentElement ? card.parentElement.querySelector("[data-flip-hint]") : null;
+        if (hint) {
+          hint.innerHTML = flipped
+            ? '<i class="ph ph-arrow-counter-clockwise" aria-hidden="true"></i> Haz clic en el carnet para volver al frente'
+            : '<i class="ph ph-arrows-clockwise" aria-hidden="true"></i> Haz clic en el carnet para girarlo';
+        }
+      }
+      card.addEventListener("click", flip);
+      card.addEventListener("keydown", function (event) {
+        if (event.key === "Enter" || event.key === " " || event.key === "Spacebar") {
+          event.preventDefault();
+          flip();
+        }
+      });
     });
   }
 
@@ -393,18 +522,134 @@
       if (demo.tagName === "A" && demo.getAttribute("href") === "#") event.preventDefault();
       showToast(demo.dataset.demo || "Acción de demostración");
     });
+  }
 
-    document.addEventListener("click", function (event) {
-      const pageButton = event.target.closest("[data-page-btn]");
-      if (!pageButton || pageButton.disabled) return;
-      const group = pageButton.closest(".pagination");
-      if (group) {
-        group.querySelectorAll(".page-btn").forEach(function (button) {
-          button.classList.toggle("is-active", button === pageButton);
-        });
+  /* ---------- Paginación unificada ----------
+     Una sola barra fija (siempre accesible) por cada contenedor [data-paginate].
+     El marcado de cada vista solo necesita:
+       <section data-paginate data-per-page="5" data-page-label="...">
+         <tr data-page-item>...</tr>
+       </section>
+  */
+
+  function getPaginationHost() {
+    let host = document.getElementById("pagination-bars");
+    if (!host) {
+      host = document.createElement("div");
+      host.id = "pagination-bars";
+      host.className = "pagination-bars";
+      document.body.appendChild(host);
+    }
+    return host;
+  }
+
+  function paginatorIsVisible(root) {
+    if (!root || root.closest("[hidden]")) return false;
+    const style = window.getComputedStyle(root);
+    if (style.display === "none" || style.visibility === "hidden") return false;
+    return root.getClientRects().length > 0;
+  }
+
+  function setupPaginator(root) {
+    if (root.__paginateReady) return root;
+    root.__paginateReady = true;
+
+    const perPage = Math.max(1, parseInt(root.getAttribute("data-per-page"), 10) || 10);
+    const label = root.getAttribute("data-page-label") || "Paginación";
+    const host = getPaginationHost();
+    let current = 1;
+
+    const bar = document.createElement("div");
+    bar.className = "pagination-bar";
+    bar.setAttribute("data-page-bar", root.id || label);
+    bar.innerHTML =
+      '<span class="pagination-summary" data-page-info></span>' +
+      '<div class="pagination" role="navigation" aria-label="' + label + '">' +
+        '<button class="page-btn" type="button" data-page-prev aria-label="Página anterior"><i class="ph ph-caret-left" aria-hidden="true"></i></button>' +
+        '<span class="pagination-numbers" data-page-numbers></span>' +
+        '<button class="page-btn" type="button" data-page-next aria-label="Página siguiente"><i class="ph ph-caret-right" aria-hidden="true"></i></button>' +
+      '</div>';
+    host.appendChild(bar);
+
+    const info = bar.querySelector("[data-page-info]");
+    const prev = bar.querySelector("[data-page-prev]");
+    const next = bar.querySelector("[data-page-next]");
+    const numbers = bar.querySelector("[data-page-numbers]");
+
+    function getItems() {
+      return Array.from(root.querySelectorAll("[data-page-item]"));
+    }
+
+    function eligible() {
+      return getItems().filter(function (item) {
+        return item.getAttribute("data-filtered") !== "true";
+      });
+    }
+
+    function render() {
+      const list = eligible();
+      const pages = Math.max(1, Math.ceil(list.length / perPage));
+      current = Math.min(Math.max(1, current), pages);
+      const start = (current - 1) * perPage;
+      const slice = list.slice(start, start + perPage);
+      const end = start + slice.length;
+
+      getItems().forEach(function (item) { item.hidden = true; });
+      slice.forEach(function (item) { item.hidden = false; });
+
+      info.textContent = list.length
+        ? "Mostrando " + (start + 1) + "–" + end + " de " + list.length
+        : "Sin resultados";
+      prev.disabled = current <= 1;
+      next.disabled = current >= pages;
+
+      numbers.innerHTML = "";
+      for (let page = 1; page <= pages; page += 1) {
+        const button = document.createElement("button");
+        button.type = "button";
+        button.className = "page-btn" + (page === current ? " is-active" : "");
+        button.setAttribute("data-page-btn", String(page));
+        button.textContent = String(page);
+        if (page === current) button.setAttribute("aria-current", "page");
+        numbers.appendChild(button);
       }
-      showToast("Página " + (pageButton.dataset.pageBtn || "seleccionada") + " · demostración");
+
+      bar.hidden = !paginatorIsVisible(root);
+      const anyVisible = Array.from(host.querySelectorAll(".pagination-bar")).some(function (item) {
+        return !item.hidden;
+      });
+      document.body.classList.toggle("has-pagination", anyVisible);
+    }
+
+    function goTo(page) {
+      const total = Math.max(1, Math.ceil(eligible().length / perPage));
+      current = Math.min(Math.max(1, page), total);
+      render();
+    }
+
+    bar.addEventListener("click", function (event) {
+      const target = event.target.closest("[data-page-btn], [data-page-prev], [data-page-next]");
+      if (!target) return;
+      if (target.hasAttribute("data-page-prev")) goTo(current - 1);
+      else if (target.hasAttribute("data-page-next")) goTo(current + 1);
+      else goTo(parseInt(target.getAttribute("data-page-btn"), 10) || 1);
     });
+
+    root.__paginateGoTo = goTo;
+    root.__paginateRender = render;
+    root.__paginateRefresh = function () { goTo(1); };
+    render();
+    return root;
+  }
+
+  function refreshVisiblePaginators() {
+    document.querySelectorAll("[data-paginate]").forEach(function (root) {
+      if (root.__paginateRender) root.__paginateRender();
+    });
+  }
+
+  function initPagination(scope) {
+    (scope || document).querySelectorAll("[data-paginate]").forEach(setupPaginator);
   }
 
   function initShellEvents() {
@@ -419,7 +664,30 @@
     });
   }
 
+  function ensureBuild() {
+    if (document.documentElement.getAttribute("data-build") === BUILD) return true;
+    const url = new URL(window.location.href);
+    if (url.searchParams.get("v") === BUILD) return true;
+    url.searchParams.set("v", BUILD);
+    window.location.replace(url.href);
+    return false;
+  }
+
+  function bustLinks() {
+    document.querySelectorAll("a[href]").forEach(function (link) {
+      const href = link.getAttribute("href");
+      if (!href || href.charAt(0) === "#") return;
+      if (/^(https?:|mailto:|tel:|javascript:)/i.test(href)) return;
+      if (!/\.html(\?|#|$)/i.test(href)) return;
+      if (/[?&]v=/.test(href)) return;
+      const url = new URL(href, window.location.href);
+      url.searchParams.set("v", BUILD);
+      link.setAttribute("href", url.pathname + url.search + url.hash);
+    });
+  }
+
   function init() {
+    if (!ensureBuild()) return;
     protoBar();
     sidebar();
     topbar();
@@ -429,7 +697,10 @@
     initState();
     initTabs();
     initModals();
+    initFlipCards();
     initDemoActions();
+    initPagination();
+    bustLinks();
     document.documentElement.classList.add("js-ready");
   }
 
@@ -437,7 +708,13 @@
     openModal: openModal,
     closeModal: closeModal,
     showToast: showToast,
-    setState: renderState
+    setState: renderState,
+    initPagination: initPagination,
+    refreshPagination: function (root) {
+      if (!root) { initPagination(); return; }
+      if (!root.__paginateReady) setupPaginator(root);
+      if (root.__paginateRefresh) root.__paginateRefresh();
+    }
   };
 
   if (document.readyState === "loading") {

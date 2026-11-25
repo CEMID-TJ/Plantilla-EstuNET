@@ -1,5 +1,5 @@
-<!DOCTYPE html>
-<html lang="es">
+﻿<!DOCTYPE html>
+<html lang="es" data-build="20261124-16">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -10,7 +10,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <script src="https://unpkg.com/@phosphor-icons/web"></script>
   <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="assets/css/styles.css">
+  <link rel="stylesheet" href="assets/css/styles.css?v=20261124-16">
 </head>
 <body data-page="circulares">
   <div id="proto-bar"></div>
@@ -52,7 +52,7 @@
               </div>
             </section>
 
-            <section class="section">
+            <section class="section" id="historialCirculares" data-paginate data-per-page="5" data-page-label="Paginación de circulares">
               <div class="section-head">
                 <div>
                   <h2 class="section-title">Historial de circulares</h2>
@@ -85,7 +85,7 @@
                     </tr>
                   </thead>
                   <tbody id="cirTbody">
-                    <tr data-text="reunión de padres primer período">
+                    <tr data-page-item data-text="reunión de padres primer período">
                       <td class="nowrap">18 feb 2026</td>
                       <td>
                         <span class="cell-title">Reunión de padres · Primer período</span>
@@ -98,7 +98,7 @@
                       </td>
                       <td>Entrega de informes y acuerdos de acompañamiento académico.</td>
                     </tr>
-                    <tr data-text="simulacro de evacuación seguridad">
+                    <tr data-page-item data-text="simulacro de evacuación seguridad">
                       <td class="nowrap">05 mar 2026</td>
                       <td>
                         <span class="cell-title">Simulacro de evacuación</span>
@@ -111,7 +111,7 @@
                       </td>
                       <td>Protocolo de seguridad y puntos de encuentro.</td>
                     </tr>
-                    <tr data-text="semana de la convivencia valores">
+                    <tr data-page-item data-text="semana de la convivencia valores">
                       <td class="nowrap">22 abr 2026</td>
                       <td>
                         <span class="cell-title">Semana de la convivencia</span>
@@ -124,7 +124,7 @@
                       </td>
                       <td>Actividades, horarios y participación de las familias.</td>
                     </tr>
-                    <tr data-text="entrega de notas segundo período">
+                    <tr data-page-item data-text="entrega de notas segundo período">
                       <td class="nowrap">12 jun 2026</td>
                       <td>
                         <span class="cell-title">Entrega de notas · Segundo período</span>
@@ -137,7 +137,7 @@
                       </td>
                       <td>Fecha, horario y recomendaciones para la reunión.</td>
                     </tr>
-                    <tr data-text="vacaciones mitad de año cronograma">
+                    <tr data-page-item data-text="vacaciones mitad de año cronograma">
                       <td class="nowrap">26 jun 2026</td>
                       <td>
                         <span class="cell-title">Cronograma de vacaciones</span>
@@ -150,7 +150,7 @@
                       </td>
                       <td>Fechas de receso y reinicio de actividades.</td>
                     </tr>
-                    <tr data-text="escuela de padres bienestar">
+                    <tr data-page-item data-text="escuela de padres bienestar">
                       <td class="nowrap">14 ago 2026</td>
                       <td>
                         <span class="cell-title">Escuela de padres</span>
@@ -163,7 +163,7 @@
                       </td>
                       <td>Encuentro sobre hábitos de estudio y bienestar emocional.</td>
                     </tr>
-                    <tr data-text="matrícula año siguiente proceso">
+                    <tr data-page-item data-text="matrícula año siguiente proceso">
                       <td class="nowrap">18 sep 2026</td>
                       <td>
                         <span class="cell-title">Proceso de matrícula 2027</span>
@@ -176,7 +176,7 @@
                       </td>
                       <td>Fechas, requisitos y documentos necesarios.</td>
                     </tr>
-                    <tr data-text="jornada de vacunación salud">
+                    <tr data-page-item data-text="jornada de vacunación salud">
                       <td class="nowrap">03 oct 2026</td>
                       <td>
                         <span class="cell-title">Jornada de vacunación</span>
@@ -189,7 +189,7 @@
                       </td>
                       <td>Atención en el colegio y autorización de acudientes.</td>
                     </tr>
-                    <tr data-text="cierre año lectivo graduación">
+                    <tr data-page-item data-text="cierre año lectivo graduación">
                       <td class="nowrap">20 nov 2026</td>
                       <td>
                         <span class="cell-title">Cierre del año lectivo</span>
@@ -206,15 +206,6 @@
                 </table>
               </div>
 
-              <div class="table-footer">
-                <span id="cirResumen">Mostrando 9 circulares</span>
-                <div class="pagination" aria-label="Paginación de circulares">
-                  <button class="page-btn" type="button" disabled aria-label="Página anterior"><i class="ph ph-caret-left" aria-hidden="true"></i></button>
-                  <button class="page-btn is-active" type="button" data-page-btn="1" aria-current="page">1</button>
-                  <button class="page-btn" type="button" data-page-btn="2">2</button>
-                  <button class="page-btn" type="button" disabled aria-label="Página siguiente"><i class="ph ph-caret-right" aria-hidden="true"></i></button>
-                </div>
-              </div>
             </section>
           </div>
         </div>
@@ -250,7 +241,7 @@
     </div>
   </div>
 
-  <script src="assets/js/app.js"></script>
+  <script src="assets/js/app.js?v=20261124-16"></script>
   <script>
     (function () {
       "use strict";
@@ -258,19 +249,17 @@
       var tbody = document.getElementById("cirTbody");
       var buscar = document.getElementById("cirBuscar");
       var limpiar = document.getElementById("cirLimpiar");
-      var resumen = document.getElementById("cirResumen");
+      var root = document.getElementById("historialCirculares");
 
       function filterRows() {
         if (!tbody) return;
         var term = buscar ? buscar.value.trim().toLowerCase() : "";
-        var visible = 0;
         Array.prototype.forEach.call(tbody.querySelectorAll("tr"), function (row) {
           var text = row.getAttribute("data-text") || row.textContent.toLowerCase();
           var show = !term || text.indexOf(term) !== -1;
-          row.hidden = !show;
-          if (show) visible += 1;
+          row.setAttribute("data-filtered", show ? "false" : "true");
         });
-        if (resumen) resumen.textContent = "Mostrando " + visible + " de " + tbody.querySelectorAll("tr").length + " circulares";
+        if (window.EstuNET && root) window.EstuNET.refreshPagination(root);
       }
 
       if (buscar) buscar.addEventListener("input", filterRows);

@@ -1,5 +1,5 @@
-<!DOCTYPE html>
-<html lang="es">
+﻿<!DOCTYPE html>
+<html lang="es" data-build="20261124-16">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -10,7 +10,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <script src="https://unpkg.com/@phosphor-icons/web"></script>
   <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="assets/css/styles.css">
+  <link rel="stylesheet" href="assets/css/styles.css?v=20261124-16">
 </head>
 <body data-page="tareas">
   <div id="proto-bar"></div>
@@ -55,11 +55,11 @@
               </div>
             </section>
 
-            <section class="section" id="tareas-tabla">
+            <section class="section" id="tareas-tabla" data-paginate data-per-page="4" data-page-label="Paginación de tareas">
               <div class="section-head">
                 <div>
                   <h2 class="section-title">Tareas asignadas</h2>
-                  <p class="section-sub">8 registros · 3 pendientes · 1 vencida</p>
+                  <p class="section-sub">12 registros · 3 pendientes · 1 vencida</p>
                 </div>
                 <div class="section-actions">
                   <span class="status status-warning">3 pendientes</span>
@@ -85,6 +85,10 @@
                     <option value="Biología">Biología</option>
                     <option value="Filosofía">Filosofía</option>
                     <option value="Inglés">Inglés</option>
+                    <option value="Química">Química</option>
+                    <option value="Educación física">Educación física</option>
+                    <option value="Tecnología">Tecnología</option>
+                    <option value="Ética">Ética</option>
                   </select>
                 </div>
                 <div class="field">
@@ -115,7 +119,7 @@
                     </tr>
                   </thead>
                   <tbody id="tareasTbody">
-                    <tr data-materia="lengua castellana" data-tipo="tarea" data-text="taller de análisis literario lengua castellana">
+                    <tr data-page-item data-materia="lengua castellana" data-tipo="tarea" data-text="taller de análisis literario lengua castellana">
                       <td class="nowrap muted">18 nov 2026</td>
                       <td>TAREA</td>
                       <td>Lengua castellana</td>
@@ -126,7 +130,7 @@
                         <button class="btn-link block mt-1" type="button" data-demo="Entrega de tarea (demostración)">Entregar</button>
                       </td>
                     </tr>
-                    <tr data-materia="física" data-tipo="tarea" data-text="laboratorio de cinemática física">
+                    <tr data-page-item data-materia="física" data-tipo="tarea" data-text="laboratorio de cinemática física">
                       <td class="nowrap muted">20 nov 2026</td>
                       <td>TAREA</td>
                       <td>Física</td>
@@ -137,7 +141,7 @@
                         <button class="btn-link block mt-1" type="button" data-demo="Detalle de la tarea (demostración)">Ver</button>
                       </td>
                     </tr>
-                    <tr data-materia="matemáticas" data-tipo="guia-m.trabajo" data-text="guía de derivadas matemáticas">
+                    <tr data-page-item data-materia="matemáticas" data-tipo="guia-m.trabajo" data-text="guía de derivadas matemáticas">
                       <td class="nowrap muted">21 nov 2026</td>
                       <td>GUIA-M.TRABAJO</td>
                       <td>Matemáticas</td>
@@ -148,7 +152,7 @@
                         <button class="btn-link block mt-1" type="button" data-demo="Entrega de tarea (demostración)">Entregar</button>
                       </td>
                     </tr>
-                    <tr data-materia="ciencias sociales" data-tipo="tarea" data-text="mapa político de europa ciencias sociales">
+                    <tr data-page-item data-materia="ciencias sociales" data-tipo="tarea" data-text="mapa político de europa ciencias sociales">
                       <td class="nowrap muted">19 nov 2026</td>
                       <td>TAREA</td>
                       <td>Ciencias sociales</td>
@@ -159,7 +163,7 @@
                         <button class="btn-link block mt-1" type="button" data-demo="Entrega de tarea (demostración)">Entregar</button>
                       </td>
                     </tr>
-                    <tr data-materia="filosofía" data-tipo="recuperacion" data-text="ensayo sobre identidad filosofía">
+                    <tr data-page-item data-materia="filosofía" data-tipo="recuperacion" data-text="ensayo sobre identidad filosofía">
                       <td class="nowrap muted">15 nov 2026</td>
                       <td>RECUPERACION</td>
                       <td>Filosofía</td>
@@ -170,7 +174,7 @@
                         <button class="btn-link block mt-1" type="button" data-demo="Solicitud de prórroga (demostración)">Solicitar prórroga</button>
                       </td>
                     </tr>
-                    <tr data-materia="inglés" data-tipo="requerimien_obs" data-text="listening exercise unit 4 inglés">
+                    <tr data-page-item data-materia="inglés" data-tipo="requerimien_obs" data-text="listening exercise unit 4 inglés">
                       <td class="nowrap muted">17 nov 2026</td>
                       <td>REQUERIMIEN_OBS</td>
                       <td>Inglés</td>
@@ -181,7 +185,7 @@
                         <button class="btn-link block mt-1" type="button" data-demo="Detalle de la tarea (demostración)">Ver</button>
                       </td>
                     </tr>
-                    <tr data-materia="biología" data-tipo="tarea" data-text="maqueta de la célula biología">
+                    <tr data-page-item data-materia="biología" data-tipo="tarea" data-text="maqueta de la célula biología">
                       <td class="nowrap muted">12 nov 2026</td>
                       <td>TAREA</td>
                       <td>Biología</td>
@@ -192,7 +196,7 @@
                         <button class="btn-link block mt-1" type="button" data-demo="Detalle de la tarea (demostración)">Ver</button>
                       </td>
                     </tr>
-                    <tr data-materia="lengua castellana" data-tipo="guia-m.trabajo" data-text="bitácora de lectura unidad 3 lengua castellana">
+                    <tr data-page-item data-materia="lengua castellana" data-tipo="guia-m.trabajo" data-text="bitácora de lectura unidad 3 lengua castellana">
                       <td class="nowrap muted">10 nov 2026</td>
                       <td>GUIA-M.TRABAJO</td>
                       <td>Lengua castellana</td>
@@ -203,19 +207,56 @@
                         <button class="btn-link block mt-1" type="button" data-demo="Detalle de la tarea (demostración)">Ver</button>
                       </td>
                     </tr>
+                    <tr data-page-item data-materia="química" data-tipo="tarea" data-text="práctica de laboratorio soluciones química">
+                      <td class="nowrap muted">23 nov 2026</td>
+                      <td>TAREA</td>
+                      <td>Química</td>
+                      <td class="cell-title">Práctica de laboratorio: soluciones</td>
+                      <td>Informe de laboratorio · adjunto</td>
+                      <td class="nowrap">
+                        <span class="status status-neutral">28 nov · 6:00 p. m.</span>
+                        <button class="btn-link block mt-1" type="button" data-demo="Entrega de tarea (demostración)">Entregar</button>
+                      </td>
+                    </tr>
+                    <tr data-page-item data-materia="educación física" data-tipo="tarea" data-text="rutina de acondicionamiento educación física">
+                      <td class="nowrap muted">22 nov 2026</td>
+                      <td>TAREA</td>
+                      <td>Educación física</td>
+                      <td class="cell-title">Rutina de acondicionamiento</td>
+                      <td>Ficha de seguimiento</td>
+                      <td class="nowrap">
+                        <span class="status status-warning">26 nov · 7:00 a. m.</span>
+                        <button class="btn-link block mt-1" type="button" data-demo="Entrega de tarea (demostración)">Entregar</button>
+                      </td>
+                    </tr>
+                    <tr data-page-item data-materia="tecnología" data-tipo="guia-m.trabajo" data-text="guía de hoja de cálculo tecnología">
+                      <td class="nowrap muted">21 nov 2026</td>
+                      <td>GUIA-M.TRABAJO</td>
+                      <td>Tecnología</td>
+                      <td class="cell-title">Guía de hoja de cálculo</td>
+                      <td>Ejercicios 1 al 10</td>
+                      <td class="nowrap">
+                        <span class="status status-neutral">30 nov · 11:59 p. m.</span>
+                        <button class="btn-link block mt-1" type="button" data-demo="Entrega de tarea (demostración)">Entregar</button>
+                      </td>
+                    </tr>
+                    <tr data-page-item data-materia="ética" data-tipo="requerimien_obs" data-text="reflexión sobre convivencia ética">
+                      <td class="nowrap muted">16 nov 2026</td>
+                      <td>REQUERIMIEN_OBS</td>
+                      <td>Ética</td>
+                      <td class="cell-title">Reflexión sobre convivencia</td>
+                      <td>Texto breve · 1 página</td>
+                      <td class="nowrap">
+                        <span class="status status-success">Entregada · 23 nov</span>
+                        <button class="btn-link block mt-1" type="button" data-demo="Detalle de la tarea (demostración)">Ver</button>
+                      </td>
+                    </tr>
                   </tbody>
                 </table>
               </div>
 
-              <div class="table-footer">
-                <span id="tareasResumen">Mostrando 8 tareas</span>
-                <div class="pagination" aria-label="Paginación de tareas">
-                  <button class="page-btn" type="button" aria-label="Página anterior" disabled><i class="ph ph-caret-left" aria-hidden="true"></i></button>
-                  <button class="page-btn is-active" type="button" data-page-btn="1">1</button>
-                  <button class="page-btn" type="button" data-page-btn="2">2</button>
-                  <button class="page-btn" type="button" data-page-btn="3">3</button>
-                  <button class="page-btn" type="button" aria-label="Página siguiente" data-page-btn="2"><i class="ph ph-caret-right" aria-hidden="true"></i></button>
-                </div>
+              <div class="note mt-4">
+                <strong>Paginación fija:</strong> la barra superior permanece visible mientras recorres la tabla. Los filtros se aplican sobre todas las tareas y reinician la página.
               </div>
             </section>
 
@@ -250,35 +291,33 @@
   <div id="mobile-overlay" class="overlay"></div>
   <div id="toast" class="toast" role="status" aria-live="polite"></div>
 
-  <script src="assets/js/app.js"></script>
+  <script src="assets/js/app.js?v=20261124-16"></script>
   <script>
     (function () {
       "use strict";
+      var root = document.getElementById("tareas-tabla");
       var tbody = document.getElementById("tareasTbody");
       var buscar = document.getElementById("buscarTarea");
       var materia = document.getElementById("filtroMateria");
       var tipo = document.getElementById("filtroTipoTarea");
       var limpiar = document.getElementById("tareasLimpiar");
-      var resumen = document.getElementById("tareasResumen");
 
       function filtrar() {
         if (!tbody) return;
         var term = buscar ? buscar.value.trim().toLowerCase() : "";
         var mat = materia ? materia.value.toLowerCase() : "";
         var tip = tipo ? tipo.value.toLowerCase() : "";
-        var visible = 0;
         Array.prototype.forEach.call(tbody.querySelectorAll("tr"), function (row) {
           var text = row.getAttribute("data-text") || "";
           var rowMat = row.getAttribute("data-materia") || "";
           var rowTip = row.getAttribute("data-tipo") || "";
-          var show = true;
-          if (term && text.indexOf(term) === -1) show = false;
-          if (mat && rowMat !== mat) show = false;
-          if (tip && rowTip !== tip) show = false;
-          row.hidden = !show;
-          if (show) visible += 1;
+          var match = true;
+          if (term && text.indexOf(term) === -1) match = false;
+          if (mat && rowMat !== mat) match = false;
+          if (tip && rowTip !== tip) match = false;
+          row.setAttribute("data-filtered", match ? "false" : "true");
         });
-        if (resumen) resumen.textContent = "Mostrando " + visible + " de " + tbody.querySelectorAll("tr").length + " tareas";
+        if (window.EstuNET) window.EstuNET.refreshPagination(root);
       }
 
       if (buscar) buscar.addEventListener("input", filtrar);
@@ -289,8 +328,10 @@
         if (materia) materia.value = "";
         if (tipo) tipo.value = "";
         filtrar();
+        if (buscar) buscar.focus();
       });
 
+      if (window.EstuNET && window.EstuNET.initPagination) window.EstuNET.initPagination();
       filtrar();
     })();
   </script>

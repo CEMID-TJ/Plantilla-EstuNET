@@ -1,5 +1,5 @@
-<!DOCTYPE html>
-<html lang="es">
+﻿<!DOCTYPE html>
+<html lang="es" data-build="20261124-16">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -10,7 +10,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <script src="https://unpkg.com/@phosphor-icons/web"></script>
   <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="assets/css/styles.css">
+  <link rel="stylesheet" href="assets/css/styles.css?v=20261124-16">
 </head>
 <body data-page="logros">
   <div id="proto-bar"></div>
@@ -90,7 +90,7 @@
               </div>
             </section>
 
-            <section class="section">
+            <section class="section" id="logrosSeccion" data-paginate data-per-page="2" data-page-label="Paginación de asignaturas">
               <div class="section-head">
                 <div>
                   <h2 class="section-title">Logros por asignatura</h2>
@@ -112,8 +112,6 @@
                 </div>
               </form>
 
-              <nav class="flex flex-wrap gap-2 py-4" aria-label="Ir a una asignatura" id="logroNav"></nav>
-
               <div id="logrosContenedor"></div>
             </section>
           </div>
@@ -125,7 +123,7 @@
   <div id="mobile-overlay" class="overlay"></div>
   <div id="toast" class="toast" role="status" aria-live="polite"></div>
 
-  <script src="assets/js/app.js"></script>
+  <script src="assets/js/app.js?v=20261124-16"></script>
   <script>
     (function () {
       "use strict";
@@ -214,7 +212,7 @@
       }
 
       function asignaturaMarkup(asignatura) {
-        return '<article class="logro-subject" id="logro-' + asignatura.id + '" data-name="' + asignatura.nombre.toLowerCase() + '">' +
+        return '<article class="logro-subject" data-page-item id="logro-' + asignatura.id + '" data-name="' + asignatura.nombre.toLowerCase() + '">' +
           '<div class="logro-subject-head">' +
           '<div>' +
           '<h3 class="logro-subject-title">' + asignatura.nombre + "</h3>" +
@@ -228,25 +226,21 @@
           "</article>";
       }
 
+      var seccion = document.getElementById("logrosSeccion");
       var contenedor = document.getElementById("logrosContenedor");
-      var nav = document.getElementById("logroNav");
       var buscar = document.getElementById("logroBuscar");
       var limpiar = document.getElementById("logroLimpiar");
 
       if (contenedor) contenedor.innerHTML = ASIGNATURAS.map(asignaturaMarkup).join("");
-      if (nav) {
-        nav.innerHTML = ASIGNATURAS.map(function (asignatura) {
-          return '<a class="chip" href="#logro-' + asignatura.id + '">' + asignatura.nombre + "</a>";
-        }).join("");
-      }
 
       function filtrar() {
         var term = buscar ? buscar.value.trim().toLowerCase() : "";
         Array.prototype.forEach.call(document.querySelectorAll(".logro-subject"), function (subject) {
           var name = subject.getAttribute("data-name") || "";
-          subject.hidden = term.length > 0 && name.indexOf(term) === -1;
+          var match = term.length === 0 || name.indexOf(term) !== -1;
+          subject.setAttribute("data-filtered", match ? "false" : "true");
         });
-        if (nav) nav.hidden = term.length > 0;
+        if (window.EstuNET) window.EstuNET.refreshPagination(seccion);
       }
 
       if (buscar) buscar.addEventListener("input", filtrar);
@@ -255,6 +249,9 @@
         filtrar();
         if (buscar) buscar.focus();
       });
+
+      if (window.EstuNET && window.EstuNET.initPagination) window.EstuNET.initPagination();
+      filtrar();
     })();
   </script>
 </body>

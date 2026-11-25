@@ -1,5 +1,5 @@
-<!DOCTYPE html>
-<html lang="es">
+﻿<!DOCTYPE html>
+<html lang="es" data-build="20261124-16">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -10,7 +10,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <script src="https://unpkg.com/@phosphor-icons/web"></script>
   <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="assets/css/styles.css">
+  <link rel="stylesheet" href="assets/css/styles.css?v=20261124-16">
 </head>
 <body data-page="cuenta">
   <div id="proto-bar"></div>
@@ -77,7 +77,7 @@
               </div>
             </div>
 
-            <section class="section" id="movimientos">
+            <section class="section" id="movimientos" data-paginate data-per-page="6" data-page-label="Paginación de movimientos">
               <div class="section-head">
                 <div>
                   <h2 class="section-title">Movimientos de la cuenta</h2>
@@ -130,7 +130,7 @@
                     </tr>
                   </thead>
                   <tbody id="cuentaTbody">
-                    <tr data-tipo="pensión" data-text="pensión enero 2026">
+                    <tr data-page-item data-tipo="pensión" data-text="pensión enero 2026">
                       <td class="nowrap muted">ENE</td>
                       <td>Pensión</td>
                       <td><span class="cell-title">Pensión enero 2026</span><button class="btn-link" type="button" data-demo="Comprobante descargado (demostración)">Recibo</button></td>
@@ -139,7 +139,7 @@
                       <td class="num">$620.000</td>
                       <td class="num">$0</td>
                     </tr>
-                    <tr data-tipo="pensión" data-text="pensión febrero 2026">
+                    <tr data-page-item data-tipo="pensión" data-text="pensión febrero 2026">
                       <td class="nowrap muted">FEB</td>
                       <td>Pensión</td>
                       <td><span class="cell-title">Pensión febrero 2026</span><button class="btn-link" type="button" data-demo="Comprobante descargado (demostración)">Recibo</button></td>
@@ -148,7 +148,7 @@
                       <td class="num">$620.000</td>
                       <td class="num">$0</td>
                     </tr>
-                    <tr data-tipo="pensión" data-text="pensión marzo 2026">
+                    <tr data-page-item data-tipo="pensión" data-text="pensión marzo 2026">
                       <td class="nowrap muted">MAR</td>
                       <td>Pensión</td>
                       <td><span class="cell-title">Pensión marzo 2026</span><button class="btn-link" type="button" data-demo="Comprobante descargado (demostración)">Recibo</button></td>
@@ -157,7 +157,7 @@
                       <td class="num">$620.000</td>
                       <td class="num">$0</td>
                     </tr>
-                    <tr data-tipo="pensión" data-text="pensión abril 2026">
+                    <tr data-page-item data-tipo="pensión" data-text="pensión abril 2026">
                       <td class="nowrap muted">ABR</td>
                       <td>Pensión</td>
                       <td><span class="cell-title">Pensión abril 2026</span><button class="btn-link" type="button" data-demo="Comprobante descargado (demostración)">Recibo</button></td>
@@ -166,7 +166,7 @@
                       <td class="num">$620.000</td>
                       <td class="num">$0</td>
                     </tr>
-                    <tr data-tipo="pensión" data-text="pensión mayo 2026">
+                    <tr data-page-item data-tipo="pensión" data-text="pensión mayo 2026">
                       <td class="nowrap muted">MAY</td>
                       <td>Pensión</td>
                       <td><span class="cell-title">Pensión mayo 2026</span><button class="btn-link" type="button" data-demo="Comprobante descargado (demostración)">Recibo</button></td>
@@ -175,7 +175,7 @@
                       <td class="num">$620.000</td>
                       <td class="num">$0</td>
                     </tr>
-                    <tr data-tipo="pensión" data-text="pensión junio 2026">
+                    <tr data-page-item data-tipo="pensión" data-text="pensión junio 2026">
                       <td class="nowrap muted">JUN</td>
                       <td>Pensión</td>
                       <td><span class="cell-title">Pensión junio 2026</span><button class="btn-link" type="button" data-demo="Comprobante descargado (demostración)">Recibo</button></td>
@@ -184,7 +184,7 @@
                       <td class="num">$620.000</td>
                       <td class="num">$0</td>
                     </tr>
-                    <tr data-tipo="pensión" data-text="pensión julio 2026">
+                    <tr data-page-item data-tipo="pensión" data-text="pensión julio 2026">
                       <td class="nowrap muted">JUL</td>
                       <td>Pensión</td>
                       <td><span class="cell-title">Pensión julio 2026</span><button class="btn-link" type="button" data-demo="Comprobante descargado (demostración)">Recibo</button></td>
@@ -193,7 +193,7 @@
                       <td class="num">$620.000</td>
                       <td class="num">$0</td>
                     </tr>
-                    <tr data-tipo="pensión" data-text="pensión agosto 2026">
+                    <tr data-page-item data-tipo="pensión" data-text="pensión agosto 2026">
                       <td class="nowrap muted">AGO</td>
                       <td>Pensión</td>
                       <td><span class="cell-title">Pensión agosto 2026</span><button class="btn-link" type="button" data-demo="Comprobante descargado (demostración)">Recibo</button></td>
@@ -202,7 +202,7 @@
                       <td class="num">$620.000</td>
                       <td class="num">$0</td>
                     </tr>
-                    <tr data-tipo="pensión" data-text="pensión septiembre 2026">
+                    <tr data-page-item data-tipo="pensión" data-text="pensión septiembre 2026">
                       <td class="nowrap muted">SEP</td>
                       <td>Pensión</td>
                       <td><span class="cell-title">Pensión septiembre 2026</span><button class="btn-link" type="button" data-demo="Comprobante descargado (demostración)">Recibo</button></td>
@@ -211,7 +211,7 @@
                       <td class="num">$620.000</td>
                       <td class="num">$0</td>
                     </tr>
-                    <tr data-tipo="pensión" data-text="pensión octubre 2026">
+                    <tr data-page-item data-tipo="pensión" data-text="pensión octubre 2026">
                       <td class="nowrap muted">OCT</td>
                       <td>Pensión</td>
                       <td><span class="cell-title">Pensión octubre 2026</span><button class="btn-link" type="button" data-demo="Comprobante descargado (demostración)">Recibo</button></td>
@@ -220,7 +220,7 @@
                       <td class="num">$620.000</td>
                       <td class="num">$0</td>
                     </tr>
-                    <tr data-tipo="pensión" data-text="pensión noviembre 2026">
+                    <tr data-page-item data-tipo="pensión" data-text="pensión noviembre 2026">
                       <td class="nowrap muted">NOV</td>
                       <td>Pensión</td>
                       <td><span class="cell-title">Pensión noviembre 2026</span><button class="btn-link" type="button" data-modal-open="pagoModal">Pagar</button></td>
@@ -229,7 +229,7 @@
                       <td class="num">$0</td>
                       <td class="num grade-low">$620.000</td>
                     </tr>
-                    <tr data-tipo="pensión" data-text="pensión diciembre 2026">
+                    <tr data-page-item data-tipo="pensión" data-text="pensión diciembre 2026">
                       <td class="nowrap muted">DIC</td>
                       <td>Pensión</td>
                       <td><span class="cell-title">Pensión diciembre 2026</span><button class="btn-link" type="button" data-modal-open="pagoModal">Pagar</button></td>
@@ -254,10 +254,6 @@
                     </tr>
                   </tfoot>
                 </table>
-              </div>
-
-              <div class="table-footer">
-                <span id="cuentaResumen">Mostrando 12 movimientos</span>
               </div>
 
               <div class="note mt-5">
@@ -406,7 +402,7 @@
     </div>
   </div>
 
-  <script src="assets/js/app.js"></script>
+  <script src="assets/js/app.js?v=20261124-16"></script>
   <script>
     (function () {
       "use strict";
@@ -415,23 +411,21 @@
       var buscar = document.getElementById("buscarMovimiento");
       var tipo = document.getElementById("filtroTipoMovimiento");
       var limpiar = document.getElementById("cuentaLimpiar");
-      var resumen = document.getElementById("cuentaResumen");
+      var root = document.getElementById("movimientos");
 
       function filtrar() {
         if (!tbody) return;
         var term = buscar ? buscar.value.trim().toLowerCase() : "";
         var tipoVal = tipo ? tipo.value.toLowerCase() : "";
-        var visible = 0;
         Array.prototype.forEach.call(tbody.querySelectorAll("tr"), function (row) {
           var text = row.getAttribute("data-text") || "";
           var rowTipo = row.getAttribute("data-tipo") || "";
           var show = true;
           if (term && text.indexOf(term) === -1) show = false;
           if (tipoVal && rowTipo !== tipoVal) show = false;
-          row.hidden = !show;
-          if (show) visible += 1;
+          row.setAttribute("data-filtered", show ? "false" : "true");
         });
-        if (resumen) resumen.textContent = "Mostrando " + visible + " de " + tbody.querySelectorAll("tr").length + " movimientos";
+        if (window.EstuNET && root) window.EstuNET.refreshPagination(root);
       }
 
       if (buscar) buscar.addEventListener("input", filtrar);

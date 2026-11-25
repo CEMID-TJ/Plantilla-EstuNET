@@ -1,5 +1,5 @@
-<!DOCTYPE html>
-<html lang="es">
+﻿<!DOCTYPE html>
+<html lang="es" data-build="20261124-16">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -10,7 +10,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <script src="https://unpkg.com/@phosphor-icons/web"></script>
   <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="assets/css/styles.css">
+  <link rel="stylesheet" href="assets/css/styles.css?v=20261124-16">
 </head>
 <body data-page="pqrs">
   <div id="proto-bar"></div>
@@ -144,7 +144,7 @@
                   </div>
                 </div>
 
-                <div class="tab-panel" id="panel-solicitudes" role="tabpanel" aria-labelledby="tab-solicitudes" data-tab-panel="solicitudes" hidden>
+                <div class="tab-panel" id="panel-solicitudes" role="tabpanel" aria-labelledby="tab-solicitudes" data-tab-panel="solicitudes" data-paginate data-per-page="3" data-page-label="Paginación de PQRS" hidden>
                   <div class="section-head">
                     <div>
                       <h2 class="section-title">Mis solicitudes</h2>
@@ -170,7 +170,7 @@
                         </tr>
                       </thead>
                       <tbody>
-                        <tr>
+                        <tr data-page-item>
                           <td class="mono">#1048</td>
                           <td class="nowrap muted">22 nov 2026</td>
                           <td>Petición</td>
@@ -178,7 +178,7 @@
                           <td><span class="status status-warning">En trámite</span></td>
                           <td class="cell-actions"><button class="btn-link" type="button" data-pqrs-ver data-numero="#1048" data-tipo="Petición" data-fecha="22 nov 2026" data-queja="Solicito el certificado de notas del periodo para un trámite externo." data-estado="En trámite" data-respuesta="">Ver</button></td>
                         </tr>
-                        <tr>
+                        <tr data-page-item>
                           <td class="mono">#1031</td>
                           <td class="nowrap muted">14 nov 2026</td>
                           <td>Reclamo</td>
@@ -186,7 +186,7 @@
                           <td><span class="status status-warning">En trámite</span></td>
                           <td class="cell-actions"><button class="btn-link" type="button" data-pqrs-ver data-numero="#1031" data-tipo="Reclamo" data-fecha="14 nov 2026" data-queja="El pago de la pensión de octubre aún no se refleja en el estado de cuenta." data-estado="En trámite" data-respuesta="">Ver</button></td>
                         </tr>
-                        <tr>
+                        <tr data-page-item>
                           <td class="mono">#0994</td>
                           <td class="nowrap muted">28 oct 2026</td>
                           <td>Sugerencia</td>
@@ -194,7 +194,7 @@
                           <td><span class="status status-success">Respondida</span></td>
                           <td class="cell-actions"><button class="btn-link" type="button" data-pqrs-ver data-numero="#0994" data-tipo="Sugerencia" data-fecha="28 oct 2026" data-queja="Propongo ampliar el horario de la biblioteca en la semana de evaluaciones." data-estado="Respondida" data-respuesta="Gracias por la sugerencia. Se amplió el horario de la biblioteca durante la semana de evaluaciones.">Ver</button></td>
                         </tr>
-                        <tr>
+                        <tr data-page-item>
                           <td class="mono">#0952</td>
                           <td class="nowrap muted">10 oct 2026</td>
                           <td>Felicitación</td>
@@ -202,7 +202,7 @@
                           <td><span class="status status-success">Respondida</span></td>
                           <td class="cell-actions"><button class="btn-link" type="button" data-pqrs-ver data-numero="#0952" data-tipo="Felicitación" data-fecha="10 oct 2026" data-queja="Quiero reconocer el acompañamiento del equipo de ciencias en la feria escolar." data-estado="Respondida" data-respuesta="Compartimos tu felicitación con el equipo de ciencias. ¡Gracias por reconocer su trabajo!">Ver</button></td>
                         </tr>
-                        <tr>
+                        <tr data-page-item>
                           <td class="mono">#0887</td>
                           <td class="nowrap muted">02 sep 2026</td>
                           <td>Queja</td>
@@ -214,16 +214,6 @@
                     </table>
                   </div>
 
-                  <div class="table-footer">
-                    <span>Mostrando 1–5 de 12 solicitudes</span>
-                    <div class="pagination" aria-label="Paginación de PQRS">
-                      <button class="page-btn" type="button" aria-label="Página anterior" disabled><i class="ph ph-caret-left" aria-hidden="true"></i></button>
-                      <button class="page-btn is-active" type="button" data-page-btn="1">1</button>
-                      <button class="page-btn" type="button" data-page-btn="2">2</button>
-                      <button class="page-btn" type="button" data-page-btn="3">3</button>
-                      <button class="page-btn" type="button" aria-label="Página siguiente" data-page-btn="2"><i class="ph ph-caret-right" aria-hidden="true"></i></button>
-                    </div>
-                  </div>
                 </div>
               </div>
             </section>
@@ -268,7 +258,7 @@
     </div>
   </div>
 
-  <script src="assets/js/app.js"></script>
+  <script src="assets/js/app.js?v=20261124-16"></script>
   <script>
     (function () {
       "use strict";
