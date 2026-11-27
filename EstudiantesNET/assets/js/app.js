@@ -8,7 +8,7 @@
 
   /* Versión de la plantilla. Se usa para invalidar caché de HTML, CSS y JS
      mientras el diseño está en desarrollo. */
-  const BUILD = "20261124-16";
+  const BUILD = "20261127-26";
 
   const PAGES = {
     inicio: { title: "Inicio", subtitle: "Resumen académico y administrativo · Periodo 2026", role: "Estudiante" },
@@ -181,6 +181,8 @@
     overlay.classList.add("is-open");
     if (button) button.setAttribute("aria-expanded", "true");
     document.body.classList.add("modal-open");
+    const closeButton = document.getElementById("sidebar-close");
+    if (closeButton) setTimeout(function () { closeButton.focus(); }, 50);
   }
 
   function closeSidebar() {
@@ -190,8 +192,140 @@
     if (!side || !overlay) return;
     side.classList.remove("is-open");
     overlay.classList.remove("is-open");
-    if (button) button.setAttribute("aria-expanded", "false");
+    if (button) {
+      button.setAttribute("aria-expanded", "false");
+      if (side.contains(document.activeElement)) button.focus();
+    }
     document.body.classList.remove("modal-open");
+  }
+
+  /* ---------- Menú móvil inferior (hoja accesible) ---------- */
+
+  function openMobileNav() {
+    const sheet = document.getElementById("mobile-nav-sheet");
+    const backdrop = document.getElementById("mobile-nav-backdrop");
+    const fab = document.getElementById("mobile-nav-fab");
+    if (!sheet || !backdrop || !fab || !sheet.hidden) return;
+    closeSidebar();
+    sheet.hidden = false;
+    backdrop.hidden = false;
+    fab.setAttribute("aria-expanded", "true");
+    document.body.classList.add("mobile-nav-open");
+    const navBody = sheet.querySelector(".mobile-nav-body");
+    if (navBody) navBody.scrollTop = 0;
+    const activeLink = sheet.querySelector(".mobile-nav-link.is-active");
+    if (activeLink) activeLink.scrollIntoView({ block: "nearest" });
+    const closeButton = document.getElementById("mobile-nav-close");
+    if (closeButton) setTimeout(function () { closeButton.focus(); }, 30);
+  }
+
+  function closeMobileNav(restoreFocus) {
+    const sheet = document.getElementById("mobile-nav-sheet");
+    const backdrop = document.getElementById("mobile-nav-backdrop");
+    const fab = document.getElementById("mobile-nav-fab");
+    if (!sheet || sheet.hidden) return;
+    const hadFocus = sheet.contains(document.activeElement);
+    sheet.hidden = true;
+    backdrop.hidden = true;
+    if (fab) fab.setAttribute("aria-expanded", "false");
+    document.body.classList.remove("mobile-nav-open");
+    if (restoreFocus !== false && fab && hadFocus && fab.getClientRects().length > 0) {
+      fab.focus();
+    }
+  }
+
+  function mobileNavKeydown(event) {
+    const sheet = document.getElementById("mobile-nav-sheet");
+    if (!sheet || sheet.hidden) return;
+    if (event.key === "Escape") {
+      event.preventDefault();
+      closeMobileNav();
+      return;
+    }
+    if (event.key !== "Tab") return;
+    const focusable = Array.prototype.filter.call(
+      sheet.querySelectorAll(
+        'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])'
+      ),
+      function (element) { return element.offsetParent !== null; }
+    );
+    if (!focusable.length) return;
+    const first = focusable[0];
+    const last = focusable[focusable.length - 1];
+    if (event.shiftKey && document.activeElement === first) {
+      event.preventDefault();
+      last.focus();
+    } else if (!event.shiftKey && document.activeElement === last) {
+      event.preventDefault();
+      first.focus();
+    }
+  }
+
+  function mobileNav() {
+    if (document.getElementById("mobile-nav-fab")) return;
+    if (!document.getElementById("mobile-menu-btn")) return;
+
+    let groupsHtml = "";
+    NAV.forEach(function (group, index) {
+      const links = group.items.map(function (item) {
+        const active = item.page === currentPage;
+        return '<a class="mobile-nav-link' + (active ? " is-active" : "") + '" href="' + item.href + '"' +
+          (active ? ' aria-current="page"' : "") + " data-mobile-nav-close>" +
+          icon(item.icon) + "<span>" + item.label + "</span>" +
+          (active ? '<span class="mobile-nav-badge" aria-hidden="true">Actual</span>' : "") +
+          "</a>";
+      }).join("");
+      groupsHtml +=
+        '<div class="mobile-nav-group">' +
+          '<p class="mobile-nav-group-label" id="mobile-nav-group-' + index + '">' + group.label + "</p>" +
+          '<div class="mobile-nav-links" role="group" aria-labelledby="mobile-nav-group-' + index + '">' + links + "</div>" +
+        "</div>";
+    });
+
+    document.body.insertAdjacentHTML("beforeend",
+      '<div class="mobile-nav-backdrop" id="mobile-nav-backdrop" aria-hidden="true" hidden></div>' +
+      '<section class="mobile-nav-sheet" id="mobile-nav-sheet" role="dialog" aria-modal="true" aria-labelledby="mobile-nav-title" hidden>' +
+        '<div class="mobile-nav-grab" aria-hidden="true"></div>' +
+        '<div class="mobile-nav-head">' +
+          '<div><h2 class="mobile-nav-title" id="mobile-nav-title">Menú</h2><p class="mobile-nav-sub">Navegación principal</p></div>' +
+          '<button class="mobile-nav-close" type="button" id="mobile-nav-close" aria-label="Cerrar menú">' + icon("x") + "</button>" +
+        "</div>" +
+        '<nav class="mobile-nav-body" aria-label="Módulos del portal">' + groupsHtml + "</nav>" +
+        '<div class="mobile-nav-foot">' +
+          '<button class="mobile-nav-logout" type="button" data-mobile-nav-close data-demo="Sesión finalizada (demostración)">' +
+            icon("sign-out") + "<span>Cerrar sesión</span>" +
+          "</button>" +
+        "</div>" +
+      "</section>" +
+      '<button class="mobile-nav-fab" type="button" id="mobile-nav-fab" aria-label="Abrir menú de navegación" aria-controls="mobile-nav-sheet" aria-expanded="false">' +
+        icon("list") + "<span>Menú</span>" +
+      "</button>"
+    );
+
+    const fab = document.getElementById("mobile-nav-fab");
+    const backdrop = document.getElementById("mobile-nav-backdrop");
+    const sheet = document.getElementById("mobile-nav-sheet");
+    const closeButton = document.getElementById("mobile-nav-close");
+    if (!fab || !backdrop || !sheet) return;
+
+    fab.addEventListener("click", openMobileNav);
+    backdrop.addEventListener("click", closeMobileNav);
+    if (closeButton) closeButton.addEventListener("click", closeMobileNav);
+    sheet.querySelectorAll("[data-mobile-nav-close]").forEach(function (element) {
+      element.addEventListener("click", function () { closeMobileNav(); });
+    });
+    document.addEventListener("keydown", mobileNavKeydown);
+
+    const media = window.matchMedia("(max-width: 600px)");
+    if (media.addEventListener) {
+      media.addEventListener("change", function (event) {
+        if (event.matches) return;
+        const wasOpen = sheet && !sheet.hidden;
+        closeMobileNav(false);
+        const menuButton = document.getElementById("mobile-menu-btn");
+        if (wasOpen && menuButton && menuButton.getClientRects().length) menuButton.focus();
+      });
+    }
   }
 
   /* --- Piezas reutilizables de los esqueletos de carga --- */
@@ -426,7 +560,10 @@
   function openModal(id) {
     const modal = document.getElementById(id);
     if (!modal) return;
-    lastFocused = document.activeElement;
+    const mobileSheet = document.getElementById("mobile-nav-sheet");
+    const sheetWasOpen = mobileSheet && !mobileSheet.hidden;
+    closeMobileNav(false);
+    lastFocused = sheetWasOpen ? document.getElementById("mobile-nav-fab") : document.activeElement;
     modal.classList.add("is-open");
     document.body.classList.add("modal-open");
     const focusable = modal.querySelector("[autofocus], button, [href], input, select, textarea");
@@ -575,6 +712,7 @@
     const prev = bar.querySelector("[data-page-prev]");
     const next = bar.querySelector("[data-page-next]");
     const numbers = bar.querySelector("[data-page-numbers]");
+    info.setAttribute("aria-live", "polite");
 
     function getItems() {
       return Array.from(root.querySelectorAll("[data-page-item]"));
@@ -609,6 +747,7 @@
         button.type = "button";
         button.className = "page-btn" + (page === current ? " is-active" : "");
         button.setAttribute("data-page-btn", String(page));
+        button.setAttribute("aria-label", "Página " + page);
         button.textContent = String(page);
         if (page === current) button.setAttribute("aria-current", "page");
         numbers.appendChild(button);
@@ -652,6 +791,77 @@
     (scope || document).querySelectorAll("[data-paginate]").forEach(setupPaginator);
   }
 
+  /* ---------- Adaptación móvil de tablas y bloques desplazables ----------
+     Las tablas de datos se convierten en tarjetas con etiquetas en pantallas
+     pequeñas. Las tablas matriciales (sábana de notas) conservan su estructura
+     y se desplazan horizontalmente con la primera columna fija. */
+
+  function enhanceResponsiveTables() {
+    document.querySelectorAll(".data-table").forEach(function (table) {
+      const mode = table.getAttribute("data-mobile") ||
+        (document.body.dataset.page === "informe" ? "scroll" : "cards");
+      table.setAttribute("data-mobile", mode);
+
+      const headers = Array.from(table.querySelectorAll("thead th")).map(function (th) {
+        return (th.textContent || "").trim();
+      });
+
+      table.querySelectorAll("tbody tr").forEach(function (row) {
+        let column = 0;
+        row.querySelectorAll("td").forEach(function (cell) {
+          const label = headers[column];
+          if (label && !cell.hasAttribute("data-label")) cell.setAttribute("data-label", label);
+          column += parseInt(cell.getAttribute("colspan") || "1", 10);
+        });
+      });
+
+      table.querySelectorAll("tfoot tr").forEach(function (row) {
+        let column = 0;
+        row.querySelectorAll("td").forEach(function (cell) {
+          const span = parseInt(cell.getAttribute("colspan") || "1", 10);
+          const label = headers[column];
+          if (span === 1 && label && !cell.hasAttribute("data-label")) {
+            cell.setAttribute("data-label", label);
+          }
+          column += span;
+        });
+      });
+
+      if (mode === "scroll") {
+        const wrap = table.closest(".table-wrap");
+        if (wrap) wrap.classList.add("is-scrollable");
+      }
+    });
+  }
+
+  function addScrollHints() {
+    const hinted = new Set();
+
+    document.querySelectorAll('.data-table[data-mobile="scroll"]').forEach(function (table) {
+      const wrap = table.closest(".table-wrap");
+      if (!wrap) return;
+      const scope = wrap.closest(".tab-panel") || wrap.closest("section") || wrap.parentElement;
+      if (!scope || hinted.has(scope)) return;
+      if (scope.querySelector(".scroll-hint")) {
+        hinted.add(scope);
+        return;
+      }
+      hinted.add(scope);
+      const hint = document.createElement("p");
+      hint.className = "scroll-hint";
+      hint.innerHTML = icon("arrows-horizontal") + "<span>Desliza para ver todas las columnas</span>";
+      wrap.parentElement.insertBefore(hint, wrap);
+    });
+
+    const periods = document.querySelector(".logro-periods");
+    if (periods && periods.parentElement && !periods.parentElement.querySelector(".scroll-hint")) {
+      const hint = document.createElement("p");
+      hint.className = "scroll-hint";
+      hint.innerHTML = icon("arrows-horizontal") + "<span>Desliza para ver todos los periodos</span>";
+      periods.parentElement.insertBefore(hint, periods);
+    }
+  }
+
   function initShellEvents() {
     const openButton = document.getElementById("mobile-menu-btn");
     const closeButton = document.getElementById("sidebar-close");
@@ -661,6 +871,25 @@
     if (overlay) overlay.addEventListener("click", closeSidebar);
     document.querySelectorAll(".sidebar .nav-link").forEach(function (link) {
       link.addEventListener("click", closeSidebar);
+    });
+
+    document.addEventListener("keydown", function (event) {
+      if (event.key !== "Tab") return;
+      const side = document.getElementById("sidebar");
+      if (!side || !side.classList.contains("is-open")) return;
+      const focusable = side.querySelectorAll(
+        'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])'
+      );
+      if (!focusable.length) return;
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
     });
   }
 
@@ -691,6 +920,7 @@
     protoBar();
     sidebar();
     topbar();
+    mobileNav();
     ensureOverlay();
     initShellEvents();
     initGroups();
@@ -699,6 +929,8 @@
     initModals();
     initFlipCards();
     initDemoActions();
+    enhanceResponsiveTables();
+    addScrollHints();
     initPagination();
     bustLinks();
     document.documentElement.classList.add("js-ready");
